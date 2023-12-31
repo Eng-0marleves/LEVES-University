@@ -1,0 +1,76 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark vh-100" id="sidebar">
+	<div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+		<img src="https://github.com/Eng-0marleves/images/blob/main/logo.png?raw=true" width="50" height="50"
+			alt="user image">
+		<span class="fs-4">LEVES</span>
+	</div>
+	<hr>
+	<ul class="nav nav-pills flex-column mb-auto">
+		<li class="nav-item mb-3">
+			<a routerLink="home" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('home')}"
+				aria-current="page">
+				<i class="fa-solid fa-house bi pe-none me-2"></i> Home
+			</a>
+		</li>
+		<li class="nav-item mb-3">
+			<a routerLink="#" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('#')}"
+				aria-current="page">
+				<i class="fa-brands fa-leanpub bi pe-none me-2"></i> Courses
+			</a>
+		</li>
+		<li class="nav-item mb-3">
+			<a routerLink="#" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('#')}"
+				aria-current="page">
+				<i class="fa-solid fa-users bi pe-none me-2"></i> Users
+			</a>
+		</li>
+		<li class="nav-item mb-3">
+			<a routerLink="#" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('#')}"
+				aria-current="page">
+				<i class="fa-solid fa-table-cells bi pe-none me-2"></i> Registration
+			</a>
+		</li>
+		<li class="nav-item mb-3">
+			<a routerLink="#" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('#')}"
+				aria-current="page">
+				<i class="fa-solid fa-chart-pie bi pe-none me-2"></i> Analysis
+			</a>
+		</li>
+		<li class="nav-item mb-3">
+			<a routerLink="#" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('#')}"
+				aria-current="page">
+				<i class="fas fa-book-open-reader bi pe-none me-2"></i> E-Library
+			</a>
+		</li>
+		<li class="nav-item mb-3">
+			<a routerLink="#" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('#')}"
+				aria-current="page">
+				<i class="fa-solid fa-calendar-days bi pe-none me-2"></i> Exams Schedule
+			</a>
+		</li>
+		<li class="nav-item mb-3">
+			<a routerLink="#" class="nav-link text-white" [ngClass]=" {'active': isCurrentRoute('#')}"
+				aria-current="page">
+				<i class="fa-brands fa-usps bi pe-none me-2"></i> Posts
+			</a>
+		</li>
+	</ul>
+	<hr>
+	<div class="dropdown" id="dropdown" (click)="toggleDropdown()">
+		<button class="d-flex align-items-center text-white text-decoration-none dropdown-toggle bg-dark"
+			data-bs-toggle="dropdown" aria-expanded="false">
+			<img src="https://github.com/Eng-0marleves/images/blob/main/logo.png?raw=true" alt="user image" width="50"
+				height="50" class="rounded-circle me-3">
+			<strong>Ahmed AbdElnaser</strong>
+		</button>
+		<ul class="dropdown-menu dropdown-menu-dark text-small shadow" data-popper-placement="top-start"
+			id="dropdownList">
+			<li><a class="dropdown-item" href="https://www.google.com/">Dashboard</a></li>
+			<li><a class="dropdown-item" href="https://www.google.com/">Profile</a></li>
+			<li>
+				<hr class="dropdown-divider">
+			</li>
+			<li><a class="dropdown-item" href="https://www.google.com/">Sign out</a></li>
+		</ul>
+	</div>
+</div>
