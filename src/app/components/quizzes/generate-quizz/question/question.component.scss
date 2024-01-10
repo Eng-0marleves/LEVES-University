@@ -1,0 +1,20 @@
+.option {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	height: fit-content;
+	gap: 10px;
+
+	.control {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+
+		button {
+			font-size: 32px;
+			cursor: pointer;
+			background: none;
+		}
+	}
+}

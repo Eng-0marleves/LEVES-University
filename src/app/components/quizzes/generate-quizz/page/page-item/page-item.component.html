@@ -1,0 +1,18 @@
+<div class="page" cdkDrag>
+	<nav>
+		<div class="title">{{ title }}</div>
+		<ul>
+			<li><span class="edit-title" (click)="onEditTitleClicked()"><i class="fas fa-edit edit-title"></i></span>
+			</li>
+			<li><span class="delete" (click)="onDeleteClicked()"><i class="fas fa-xmark delete"></i></span></li>
+		</ul>
+	</nav>
+
+	<div class="container">
+		<button class="btn btn-primary" (click)="onAddQuestionClicked()" data-toggle="modal"
+			data-target="#exampleModalCenter" (click)="openModal()">Add Question <i class="fas fa-plus"></i>
+		</button>
+	</div>
+</div>
+
+<app-modal [pageID]="pageId"></app-modal>

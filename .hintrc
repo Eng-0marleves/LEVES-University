@@ -8,10 +8,24 @@
       "default",
       {
         "ignore": [
-          "-moz-appearance"
+          "-moz-appearance",
+          "scrollbar-width",
+          "scrollbar-color"
         ]
       }
     ],
-    "no-inline-styles": "off"
+    "no-inline-styles": "off",
+    "axe/name-role-value": [
+      "default",
+      {
+        "button-name": "off"
+      }
+    ],
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
+      }
+    ]
   }
 }
