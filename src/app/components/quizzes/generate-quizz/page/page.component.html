@@ -1,7 +1,0 @@
-<div cdkDropList class="pages-list" (cdkDropListDropped)="drop($event)">
-	<app-page-item *ngFor="let page of pagesService.getPages(); let i = index" [title]="page.pageTitle"
-		[pageId]="page.pageId" (deleteClicked)="deletePage(page)" (editTitleClicked)="editTitle($event)"
-		(addQuestionClicked)="addQuestionToPage()"></app-page-item>
-</div>
-
-<button type="button" class="btn btn-success mb-4" (click)="addPage()">Add Page <i class="fas fa-plus"></i></button>
