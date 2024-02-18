@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	border: none;
+	background: none;
+	font-family: "Poppins", sans-serif;
+}
+
+:root {
+	/* --primary-color: #0C1E33;
+	--secondary-color: purple; */
+
+	--primary-color: #35495e;
+	--secondary-color: #42b883;
+
+
+	--error-color: crimson;
+
+	--white-color: #fff;
+	--light-white-color: #ffffff5f;
+
+	--bg-color: rgba(24, 103, 192, 1);
+	--Black-color-100: rgba(25, 25, 28, 1);
+	--Black-color-75: rgba(25, 25, 28, 75);
+	--Black-color-50: rgba(25, 25, 28, 50);
+	--Black-color-25: rgba(25, 25, 28, 25);
+	--Black-color-10: rgba(25, 25, 28, 10);
+	--Black-color-5: rgba(25, 25, 28, 5);
+	--Black-color-light: #9696962c;
+
+	--navbar-width: calc(8 * 40px);
+	--header-height: calc(8 * 12px);
+
+	--transition: all .2s ease-in-out;
+}
+
+::-webkit-scrollbar {
+	width: 16px;
+}
+
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #888;
+	transition: var(--transition);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.container::part(bullet-active) {
+	background-color: red !important;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+section {
+	padding: 20px;
+}
+
+body {
+	height: 100vh;
+	padding-left: var(--navbar-width);
+	padding-top: var(--header-height);
+	scroll-behavior: smooth;
+}
+
+body.menuOpen {
+	padding-left: 0;
+}
+
+body.fit {
+	padding-left: 61.96px;
+}
+
+@media (max-width: 768px) {
+	body {
+		padding-left: 0px !important;
+	}
+}

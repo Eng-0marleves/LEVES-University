@@ -1,228 +1,139 @@
 <template>
-	<header class="header" id="header">
-		<nav class="nav">
-
-			<i class="fas fa-bars" @click="toggleMenu"></i>
-
-			<div class="nav-menu" id="nav-menu">
-				<i class="fas fa-close" @click="toggleMenu"></i>
-				<ul class="nav-list">
-					<li class="nav-item">
-						<router-link to="/" class="nav-link active-link">Home</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Courses</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Dashboard</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/" class="nav-link">Posts</router-link>
-					</li>
-				</ul>
-			</div>
-
-			<div class="nav-btns">
-				<p>std.Ahmed</p>
-				<i class="fa-solid fa-user"></i>
-				<span class="bell">
-					<i class="fas fa-bell"></i>
-				</span>
-			</div>
-
-		</nav>
-	</header>
+	<nav class="open">
+		<ul>
+			<li v-for="router in routers" :key="router.route">
+				<router-link :to="router.route" class="router" :class="{ 'active': $route.path === router.route }">
+					<i :class="'fa-solid ' + router.icon"></i>
+					<p class="router-title">{{ router.title }}</p>
+				</router-link>
+			</li>
+			<li>
+				<button @click="logout" class="router" style="cursor: pointer;">
+					<i class="fa-solid fa-arrow-right-from-bracket"></i>
+					<p class="router-title">Logout</p>
+				</button>
+			</li>
+		</ul>
+	</nav>
 </template>
 
 <script>
 export default {
 	name: "NavBar",
-	methods: {
-		handleScroll() {
-			const header = document.querySelector("header");
-			if (header) {
-				header.classList.toggle("scroll-header", window.scrollY > 0);
-			}
-		},
-		toggleMenu(event) {
-			event.stopPropagation();
-			const navMenu = document.getElementById("nav-menu");
-			navMenu.classList.toggle("show-menu");
-			if (navMenu.classList.contains("show-menu")) {
-				document.addEventListener("click", this.handleClickOutside);
-			} else {
-				document.removeEventListener("click", this.handleClickOutside);
-			}
-		},
-		handleClickOutside(event) {
-			const navMenu = document.getElementById("nav-menu");
-			if (!navMenu.contains(event.target)) {
-				navMenu.classList.remove("show-menu");
-				document.removeEventListener("click", this.handleClickOutside);
-			}
+
+	data: () => {
+		return {
+			routers: [
+				{ route: "/home", icon: "fa-house", title: "Home" },
+				{ route: "/courses", icon: "fa-book-open", title: "Courses" },
+				{ route: "/dashboard", icon: "fa-chart-simple", title: "Dashboard" },
+				{ route: "/schedule", icon: "fa-calendar-days", title: "Schedule" },
+				{ route: "/library", icon: "fa-book-open-reader", title: "Library" },
+				{ route: "/news", icon: "fa-newspaper", title: "News" },
+				{ route: "/articals", icon: "fa-atom", title: "Articals" },
+				{ route: "/about", icon: "fa-circle-info", title: "About" },
+				{ route: "/Support", icon: "fa-brands fa-rocketchat", title: "Support" },
+				{ route: "/AI", icon: "fa-robot", title: "AI" },
+			]
 		}
 	},
-	mounted() {
-		window.addEventListener("scroll", this.handleScroll);
-	},
-	beforeUnmount() {
-		window.removeEventListener("scroll", this.handleScroll);
+	methods: {
+		logout() {
+			localStorage.removeItem("user-info");
+			this.$router.push({ name: "Login" });
+		},
 	}
-};
+}
 </script>
 
+
 <style scoped>
-.header {
-	background: transparent;
+nav {
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
-	z-index: var(--z-fixed);
-	padding: 1rem;
-}
-
-.nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	column-gap: 3rem;
-	margin: 0;
-	padding: 0;
-	width: 100% !important;
-	flex: 1;
-}
-
-.nav-menu {
-	color: var(--title-color);
-	align-items: center;
-	margin-bottom: 0;
-}
-
-.nav-btns {
+	height: 100vh;
+	width: var(--navbar-width);
+	color: var(--white-color);
+	padding: 24px 0;
+	background: var(--primary-color);
+	overflow: auto;
+	transition: all .2s ease-in-out;
+	overflow-x: hidden;
+	transform: translateX(-100%);
 	display: flex;
 	align-items: center;
-	column-gap: 2rem;
-	font-size: var(--h2-font-size);
+	flex-direction: column;
+	z-index: 999;
 }
 
-.nav-btns i {
-	cursor: pointer;
+nav.open {
+	transform: translateX(0%);
 	transition: all .2s ease-in-out;
 }
 
-.nav-btns p {
-	margin: 0;
+nav.fit {
+	width: 61.96875px;
+	transition: all .2s ease-in-out;
 }
 
-.nav-btns i:hover {
-	color: var(--main-color);
+nav ul {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 }
 
-.nav-list {
+nav ul li {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+nav ul li .router {
+	width: 90%;
+	padding: 16px;
 	display: flex;
 	align-items: center;
-	column-gap: 1rem;
-	margin: 0;
-	padding: 0;
+	gap: 16px;
+	border-radius: 8px;
+	color: var(--white-color);
+	font-size: 20px;
+	transition: var(--transition);
 }
 
-.nav-link {
-	height: 100%;
-	color: var(--title-color);
-	font-weight: var(--font-medium);
-	font-size: var(--h3-font-size);
-	transition: all 0.2s;
+nav.fit .router {
+	width: fit-content;
 }
 
-.nav-link:hover,
-.fa-bars:hover,
-.fa-close:hover {
-	color: var(--main-color);
+nav ul li .router:hover {
+	background: var(--light-white-color);
+	color: var(--white-color);
 }
 
-#nav-close {
-	font-size: 2rem;
-	position: absolute;
-	top: .9rem;
-	right: 1.25rem;
-	cursor: pointer;
+nav ul li .router.active {
+	border-left: 8px solid var(--secondary-color);
+	background: linear-gradient(to right, #ffffff6f, #ffffff29);
 }
 
-#nav-close,
-.nav-toggle {
+nav.fit ul li .router.active {
+	border-left: 8px solid var(--secondary-color);
+}
+
+.router-title.hidTitle {
 	display: none;
 }
 
-.fa-bars,
-.fa-close {
-	display: none;
-}
-
-.nav-menu.show-menu {
-	left: 0;
-}
-
-.scroll-header {
-	background: var(--body-color);
-	box-shadow: 0 1px 4px var(--shadow);
-}
-
-@media only screen and (max-width: 768px) {
-
-	.fa-bars,
-	.fa-close {
-		display: block;
-		font-size: var(--h1-font-size);
-		cursor: pointer;
+@media (max-width: 768px) {
+	nav.open {
+		transform: translateX(-100%);
 		transition: all .2s ease-in-out;
 	}
 
-	.fa-close {
-		position: absolute;
-		top: 1.25rem;
-		right: .9rem;
-	}
-
-	.nav-menu {
-		background: var(--body-color) !important;
-		width: 60%;
-		height: 100%;
-		position: fixed;
-		top: 0;
-		left: -65%;
-		box-shadow: -6px 1px 20px 20px var(--shadow);
-		z-index: 3;
-		transition: all .3s ease-in-out;
-	}
-
-	.nav-menu .nav-list {
-		height: 100%;
-		flex-direction: column;
-		align-items: center;
-		padding: 6rem 2rem 3.5rem;
-		gap: 2rem;
+	nav {
+		transform: translateX(0%);
+		z-index: 2;
 	}
 }
 </style>

@@ -2,13 +2,16 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-// Import Bootstrap styles
-import 'bootstrap/dist/css/bootstrap.css';
 
-// Import Bootstrap JavaScript (optional, for components that require it)
-import 'bootstrap/dist/js/bootstrap.bundle';
+// Import Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
-import "@/assets/css/style.css"
+import "@/assets/css/main.css"
 
 
-createApp(App).use(router).mount('#app')
+createApp(App)
+	.use(router)
+	.use(bootstrap)
+	.mount('#app')

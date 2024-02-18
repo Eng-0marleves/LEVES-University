@@ -1,0 +1,55 @@
+{
+	"users": [
+		{
+			"id": 12,
+			"name": "Ahmed",
+			"password": "123"
+		}
+	],
+	"courses": [
+		{
+			"id": 1,
+			"name": "Course 1",
+			"img": "https://www.shutterstock.com/image-photo/elearning-education-internet-lessons-online-600nw-2158034833.jpg"
+		},
+		{
+			"id": 2,
+			"name": "Course 2",
+			"img": "https://thesavvyimg.co.uk/wp-content/uploads/2022/08/img-crash-course-gmc-registration-1024x576.png"
+		},
+		{
+			"id": 3,
+			"name": "Course 3",
+			"img": "https://elearning.epsom-sthelier.nhs.uk/pluginfile.php/69878/course/overviewfiles/hospital-ga69fcc0dd_1920.png"
+		},
+		{
+			"id": 4,
+			"name": "Course 4",
+			"img": "https://www.shutterstock.com/image-photo/young-woman-learning-language-during-600nw-2267595915.jpg"
+		},
+		{
+			"id": 5,
+			"name": "Course 5",
+			"img": "https://www.paho.org/sites/default/files/styles/max_1500x1500/public/2022-04/online-learning.jpg?itok=mIH1uN6D"
+		},
+		{
+			"id": 6,
+			"name": "Course 6",
+			"img": "https://guiadoestudante.abril.com.br/wp-content/uploads/sites/4/2021/04/Curso-online.jpg?quality=100&strip=info&w=1024%22"
+		}
+	],
+	"notifications": [
+		{
+			"id": 1,
+			"title": "Notification 1",
+			"message": "This is the first notification",
+			"route": "/home"
+		},
+		{
+			"id": 2,
+			"title": "Notification 2",
+			"message": "This is the second notification",
+			"route": "/home"
+		}
+	]
+}
