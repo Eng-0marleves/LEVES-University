@@ -15,7 +15,7 @@ const routes = [
     path: '/courses',
     name: 'Courses',
     component: CoursesView,
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
   },
   {
     path: '/login',
