@@ -1,5 +1,5 @@
 <template>
-	<nav class="open">
+	<nav class="open small-scrollbar">
 		<ul>
 			<li v-for="router in routers" :key="router.route">
 				<router-link :to="router.route" class="router" :class="{ 'active': $route.path === router.route }">
@@ -31,7 +31,7 @@ export default {
 				{ route: "/library", icon: "fa-book-open-reader", title: "Library" },
 				{ route: "/news", icon: "fa-newspaper", title: "News" },
 				{ route: "/articals", icon: "fa-atom", title: "Articals" },
-				{ route: "/about", icon: "fa-circle-info", title: "About" },
+				// { route: "/about", icon: "fa-circle-info", title: "About" },
 				{ route: "/Support", icon: "fa-brands fa-rocketchat", title: "Support" },
 				{ route: "/AI", icon: "fa-robot", title: "AI" },
 			]
@@ -55,7 +55,7 @@ nav {
 	height: 100vh;
 	width: var(--navbar-width);
 	color: var(--white-color);
-	padding: 24px 0;
+	padding: 16px 0;
 	background: var(--primary-color);
 	overflow: auto;
 	transition: all .2s ease-in-out;
@@ -64,7 +64,7 @@ nav {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	z-index: 999;
+	z-index: 100000;
 }
 
 nav.open {
@@ -93,13 +93,13 @@ nav ul li {
 
 nav ul li .router {
 	width: 90%;
-	padding: 16px;
+	padding: 8px;
 	display: flex;
 	align-items: center;
-	gap: 16px;
-	border-radius: 8px;
+	gap: 8px;
+	border-radius: 4px;
 	color: var(--white-color);
-	font-size: 20px;
+	font-size: 16px;
 	transition: var(--transition);
 }
 
@@ -113,12 +113,8 @@ nav ul li .router:hover {
 }
 
 nav ul li .router.active {
-	border-left: 8px solid var(--secondary-color);
+	border-left: 4px solid var(--secondary-color);
 	background: linear-gradient(to right, #ffffff6f, #ffffff29);
-}
-
-nav.fit ul li .router.active {
-	border-left: 8px solid var(--secondary-color);
 }
 
 .router-title.hidTitle {
@@ -133,7 +129,6 @@ nav.fit ul li .router.active {
 
 	nav {
 		transform: translateX(0%);
-		z-index: 2;
 	}
 }
 </style>

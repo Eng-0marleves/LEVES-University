@@ -1,7 +1,7 @@
 <template>
 	<div class="user-info">
 		<router-link to="/dashboard/profile" class="router">
-			<h3 class="title">std.Ahmed AbdElnaser</h3>
+			<h6 class="title">std.Ahmed AbdElnaser</h6>
 			<img :src="user_img" alt="user profile img">
 		</router-link>
 
@@ -43,7 +43,7 @@ export default {
 .user-info {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: 8px;
 }
 
 .user-info .router {
@@ -53,8 +53,8 @@ export default {
 }
 
 .user-info .router img {
-	width: 64px;
-	height: 64px;
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
 	border: 4px solid var(--primary-color);
 	align-items: center;
@@ -80,8 +80,8 @@ export default {
 }
 
 .notifications-btn i.fa-bell {
-	width: 56px;
-	height: 56px;
+	width: 48px;
+	height: 48px;
 	color: var(--primary-color);
 	transition: var(--transition);
 	border-radius: 50%;
@@ -89,7 +89,7 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 48px !important;
+	font-size: 32px !important;
 }
 
 .notifications-btn .notifications {

@@ -93,13 +93,14 @@ header {
 	top: 0;
 	right: 0;
 	background: #fff !important;
-	padding: 16px;
+	padding: 8px;
 	height: var(--header-height);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 5px solid var(--primary-color);
-	z-index: 99;
+	border-bottom: 2px solid var(--primary-color);
+	z-index: 10000;
+	transition: var(--transition);
 }
 
 header.fit {
