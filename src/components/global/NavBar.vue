@@ -2,7 +2,8 @@
 	<nav class="open small-scrollbar">
 		<ul>
 			<li v-for="router in routers" :key="router.route">
-				<router-link :to="router.route" class="router" :class="{ 'active': $route.path === router.route }">
+				<router-link :to="router.route" class="router"
+					:class="{ 'active': $route.path.includes(router.route) }">
 					<i :class="'fa-solid ' + router.icon"></i>
 					<p class="router-title">{{ router.title }}</p>
 				</router-link>

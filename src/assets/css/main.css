@@ -39,7 +39,8 @@
 }
 
 ::-webkit-scrollbar {
-	width: 16px;
+	width: 10px;
+	height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -69,6 +70,25 @@
 
 .container::part(bullet-active) {
 	background-color: red !important;
+}
+
+.btn.fixed {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 1000;
+	background: var(--primary-color);
+	color: var(--white-color);
+	border-radius: 50%;
+	font-size: 16px;
+	line-height: 24px;
+	transition: var(--transition);
+	box-shadow: 0 0 8px #00000096;
+	z-index: 10000;
+}
+
+.btn.fixed:hover {
+	background: var(--secondary-color);
 }
 
 a {
@@ -137,3 +157,6 @@ body.fit {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
+.offcanvas-backdrop.show {
+	z-index: 1000000000 !important;
+}

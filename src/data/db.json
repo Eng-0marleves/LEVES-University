@@ -9,33 +9,80 @@
 	"courses": [
 		{
 			"id": 1,
-			"name": "Course 1",
-			"img": "https://www.shutterstock.com/image-photo/elearning-education-internet-lessons-online-600nw-2158034833.jpg"
+			"course_name": "Introduction to Computer Science",
+			"course_code": "CSE101",
+			"grades": {
+				"midterm": 20,
+				"assignment": 18,
+				"attendance": 4,
+				"final": 45
+			}
 		},
 		{
 			"id": 2,
-			"name": "Course 2",
-			"img": "https://thesavvyimg.co.uk/wp-content/uploads/2022/08/img-crash-course-gmc-registration-1024x576.png"
+			"course_name": "English Composition",
+			"course_code": "ENG201",
+			"grades": {
+				"midterm": 22,
+				"assignment": 16,
+				"attendance": 5,
+				"final": 48
+			}
 		},
 		{
 			"id": 3,
-			"name": "Course 3",
-			"img": "https://elearning.epsom-sthelier.nhs.uk/pluginfile.php/69878/course/overviewfiles/hospital-ga69fcc0dd_1920.png"
+			"course_name": "Calculus I",
+			"course_code": "MATH301",
+			"grades": {
+				"midterm": 18,
+				"assignment": 20,
+				"attendance": 3,
+				"final": 47
+			}
 		},
 		{
 			"id": 4,
-			"name": "Course 4",
-			"img": "https://www.shutterstock.com/image-photo/young-woman-learning-language-during-600nw-2267595915.jpg"
+			"course_name": "Physics for Engineers",
+			"course_code": "PHY401",
+			"grades": {
+				"midterm": 21,
+				"assignment": 19,
+				"attendance": 4,
+				"final": 46
+			}
 		},
 		{
 			"id": 5,
-			"name": "Course 5",
-			"img": "https://www.paho.org/sites/default/files/styles/max_1500x1500/public/2022-04/online-learning.jpg?itok=mIH1uN6D"
+			"course_name": "Organic Chemistry",
+			"course_code": "CHEM501",
+			"grades": {
+				"midterm": 19,
+				"assignment": 17,
+				"attendance": 4,
+				"final": 43
+			}
 		},
 		{
 			"id": 6,
-			"name": "Course 6",
-			"img": "https://guiadoestudante.abril.com.br/wp-content/uploads/sites/4/2021/04/Curso-online.jpg?quality=100&strip=info&w=1024%22"
+			"course_name": "Introduction to Biology",
+			"course_code": "BIO601",
+			"grades": {
+				"midterm": 23,
+				"assignment": 20,
+				"attendance": 5,
+				"final": 49
+			}
+		},
+		{
+			"id": 7,
+			"course_name": "Artificial Intelligence Fundamentals",
+			"course_code": "AI701",
+			"grades": {
+				"midterm": 24,
+				"assignment": 22,
+				"attendance": 5,
+				"final": 47
+			}
 		}
 	],
 	"notifications": [

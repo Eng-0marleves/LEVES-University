@@ -1,86 +1,88 @@
 <template>
-	<div class="content">
-		<div class="row">
-			<div class="col-md-6 info-container">
-				<h2>Course Information</h2>
-				<div class="course-info">
-					<p><strong>Course Code:</strong> {{ courseCode }}</p>
-					<p><strong>Course Name:</strong> {{ courseName }}</p>
+	<div class="container">
+		<div class="row" v-if="course">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h2 class="card-title">Course Information</h2>
+					</div>
+					<div class="card-body">
+						<p><strong>Course Code:</strong> {{ course.course_code }}</p>
+						<p><strong>Course Name:</strong> {{ course.course_name }}</p>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-6  info-container" info-container>
-				<h2>Course Grades</h2>
-				<div class="course-grades">
-					<p><strong>Midterm:</strong> {{ midtermGrade }}/25</p>
-					<p><strong>Assignment:</strong> {{ assignmentGrade }}/20</p>
-					<p><strong>Attendance:</strong> {{ attendanceGrade }}/5</p>
-					<p><strong>Final:</strong> {{ finalGrade }}/50</p>
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h2 class="card-title">Course Grades</h2>
+					</div>
+					<div class="card-body">
+						<p><strong>Midterm:</strong> {{ course.grades.midterm }}/25</p>
+						<p><strong>Assignment:</strong> {{ course.grades.assignment }}/20</p>
+						<p><strong>Attendance:</strong> {{ course.grades.attendance }}/5</p>
+						<p><strong>Final:</strong> {{ course.grades.final }}/50</p>
+					</div>
 				</div>
 			</div>
+		</div>
+		<div v-else>
+			<p>Loading...</p>
 		</div>
 	</div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-	name: 'HomeContent',
+	name: 'CourseHome',
 	data() {
 		return {
-			courseCode: 'CSE101',
-			courseName: 'Introduction to Computer Science',
-			midtermGrade: 20,
-			assignmentGrade: 18,
-			attendanceGrade: 4,
-			finalGrade: 45,
+			course: null
 		};
 	},
-	methods: {
-		// Your methods here
-	},
-	computed: {
-		// Your computed properties here
-	},
-	mounted() {
-		// Your mounted hook code here
-	},
+	async mounted() {
+		const courseCode = this.$route.params.course_code;
+		try {
+			const response = await axios.get(`http://localhost:3000/courses`);
+			if (response.status === 200) {
+				const courses = response.data;
+				this.course = courses.find(course => course.course_code === courseCode);
+			} else {
+				console.error('Failed to fetch course data:', response.statusText);
+			}
+		} catch (error) {
+			console.error('Error fetching course data:', error);
+		}
+	}
 };
 </script>
 
 <style scoped>
-.info-container {
-	border-left: 2px solid #ccc;
+.container {
+	margin-top: 20px;
 }
 
-h2 {
-	margin-bottom: 16px;
-	position: relative;
+.card {
+	margin-bottom: 20px;
 }
 
-h2::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: -20px;
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	background: var(--primary-color);
+.card-header {
+	background-color: var(--primary-color);
+	color: #fff;
+	padding: 10px;
+}
+
+.card-title {
+	margin: 0;
+}
+
+.card-body {
+	padding: 20px;
 }
 
 p {
-	margin-bottom: 8px;
-	position: relative;
-}
-
-p::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: -16px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: var(--secondary-color);
-	padding: 0px;
+	margin-bottom: 10px;
 }
 </style>

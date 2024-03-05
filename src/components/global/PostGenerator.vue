@@ -12,7 +12,7 @@
 			<div class="modal-dialog modal-dialog-centered-top modal-fullscreen-lg">
 				<div class="modal-content">
 					<div class="modal-body">
-						<TextEditor v-model="postData.content" />
+						<!-- <TextEditor v-model="postData.content" /> -->
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import TextEditor from './TextEditor.vue';
-import axios from 'axios';
+// import TextEditor from './TextEditor.vue';
+// import axios from 'axios';
 
 export default {
 	name: "PostGenerator",
 	components: {
-		TextEditor
+		// TextEditor
 	},
 	data() {
 		return {
@@ -43,9 +43,9 @@ export default {
 	},
 	methods: {
 		handleSave() {
-			axios.post('http://localhost:3000/posts', {
-				content: this.postData.content
-			})
+			// axios.post('http://localhost:3000/posts', {
+			// 	content: this.postData.content
+			// })
 			// .then(response => {
 			// 	console.log('Post successful:', response.data);
 			// })
