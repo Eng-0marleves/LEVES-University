@@ -34,7 +34,7 @@ export default {
 				{ route: "/articals", icon: "fa-atom", title: "Articals" },
 				// { route: "/about", icon: "fa-circle-info", title: "About" },
 				{ route: "/Support", icon: "fa-brands fa-rocketchat", title: "Support" },
-				{ route: "/AI", icon: "fa-robot", title: "AI" },
+				// { route: "/AI", icon: "fa-robot", title: "AI" },
 			]
 		}
 	},

@@ -1,139 +1,28 @@
 {
-	"users": [
-		{
-			"id": 12,
-			"name": "Ahmed",
-			"password": "123"
-		}
-	],
-	"courses": [
-		{
-			"id": 1,
-			"course_name": "Introduction to Computer Science",
-			"course_code": "CSE101",
-			"grades": {
-				"midterm": 20,
-				"assignment": 18,
-				"attendance": 4,
-				"final": 45
-			}
-		},
-		{
-			"id": 2,
-			"course_name": "English Composition",
-			"course_code": "ENG201",
-			"grades": {
-				"midterm": 22,
-				"assignment": 16,
-				"attendance": 5,
-				"final": 48
-			}
-		},
-		{
-			"id": 3,
-			"course_name": "Calculus I",
-			"course_code": "MATH301",
-			"grades": {
-				"midterm": 18,
-				"assignment": 20,
-				"attendance": 3,
-				"final": 47
-			}
-		},
-		{
-			"id": 4,
-			"course_name": "Physics for Engineers",
-			"course_code": "PHY401",
-			"grades": {
-				"midterm": 21,
-				"assignment": 19,
-				"attendance": 4,
-				"final": 46
-			}
-		},
-		{
-			"id": 5,
-			"course_name": "Organic Chemistry",
-			"course_code": "CHEM501",
-			"grades": {
-				"midterm": 19,
-				"assignment": 17,
-				"attendance": 4,
-				"final": 43
-			}
-		},
-		{
-			"id": 6,
-			"course_name": "Introduction to Biology",
-			"course_code": "BIO601",
-			"grades": {
-				"midterm": 23,
-				"assignment": 20,
-				"attendance": 5,
-				"final": 49
-			}
-		},
-		{
-			"id": 7,
-			"course_name": "Artificial Intelligence Fundamentals",
-			"course_code": "AI701",
-			"grades": {
-				"midterm": 24,
-				"assignment": 22,
-				"attendance": 5,
-				"final": 47
-			}
-		}
-	],
-	"notifications": [
-		{
-			"id": 1,
-			"title": "Notification 1",
-			"message": "This is the first notification",
-			"route": "/home"
-		},
-		{
-			"id": 2,
-			"title": "Notification 2",
-			"message": "This is the second notification",
-			"route": "/home"
-		}
-	],
 	"quizzes": [
 		{
-			"quizId": 1,
+			"quizId": "1",
 			"title": "Full Quiz Example",
 			"description": "This is a full example of a quiz with multiple pages and questions.",
 			"courseCode": "CS101",
 			"doctorName": "Dr. Smith",
 			"isPublished": true,
-			"publishDate": "2024-07-03T04:00:00Z",
-			"endDate": "2024-07-03T00:04:00Z",
+			"publishDate": "2022-01-01T00:00:00Z",
+			"endDate": "2022-01-07T00:00:00Z",
 			"duration": "00:30:00",
 			"showFeedback": true,
 			"showResult": true,
 			"totalGrade": 100,
-			"enrolls": [
-				{
-					"stdId": 0,
-					"enroll": 0,
-					"answers": [
-						{
-							"questienId": 1,
-							"answer": "Paris",
-							"grade": 0
-						}
-					]
-				}
-			],
 			"pages": [
 				{
 					"pageId": "1",
+					"pageTime": "00:05:00",
 					"questions": [
 						{
 							"questionId": "1",
 							"type": "multiple_choice",
 							"text": "What is the capital of France?",
+							"questionTime": "00:02:00",
 							"feedback": "Great job!",
 							"grade": 10,
 							"answers": [
@@ -158,6 +47,7 @@
 							"questionId": "2",
 							"type": "text_entry",
 							"text": "Write a paragraph about your favorite food.",
+							"questionTime": "00:03:00",
 							"feedback": "Great job!",
 							"grade": 20
 						}
@@ -165,11 +55,13 @@
 				},
 				{
 					"pageId": "2",
+					"pageTime": "00:05:00",
 					"questions": [
 						{
 							"questionId": "3",
 							"type": "multiple_choice",
 							"text": "What is the largest planet in our solar system?",
+							"questionTime": "00:02:00",
 							"feedback": "Excellent!",
 							"grade": 10,
 							"answers": [
@@ -194,6 +86,7 @@
 							"questionId": "4",
 							"type": "text_entry",
 							"text": "What is the chemical symbol for water?",
+							"questionTime": "00:03:00",
 							"feedback": "Well done!",
 							"grade": 20
 						}
@@ -201,6 +94,7 @@
 				},
 				{
 					"pageId": "3",
+					"pageTime": "00:05:00",
 					"questions": [
 						{
 							"questionId": "5",
@@ -231,6 +125,7 @@
 							"questionId": "6",
 							"type": "text_entry",
 							"text": "Who is known as the father of modern physics?",
+							"questionTime": "00:03:00",
 							"feedback": "Correct!",
 							"grade": 20
 						}
@@ -244,6 +139,7 @@
 							"questionId": "7",
 							"type": "multiple_choice",
 							"text": "What is the chemical symbol for oxygen?",
+							"questionTime": "00:02:00",
 							"feedback": "You got it!",
 							"grade": 10,
 							"answers": [
@@ -268,6 +164,7 @@
 							"questionId": "8",
 							"type": "text_entry",
 							"text": "What is the process of plants making their own food called?",
+							"questionTime": "00:03:00",
 							"feedback": "Fantastic!",
 							"grade": 20
 						}

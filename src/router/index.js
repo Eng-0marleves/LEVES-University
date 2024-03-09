@@ -17,47 +17,47 @@ const routes = [
     meta: { requiresAuth: true },
     children: [
       {
-        path: '',
-        name: 'CoursesHome',
-        component: () => import('../views/courses/CoursesHome.vue')
-      },
-      {
         path: ':course_code',
         name: 'Course',
         component: () => import('../views/courses/CourseHome.vue'),
-        children: [
-          {
-            path: 'CourseMaterials',
-            name: 'CourseMaterials',
-            component: () => import('../views/courses/CourseMaterial.vue')
-          },
-          // {
-          //   path: 'CourseAttendance',
-          //   name: 'CourseAttendance',
-          //   component: () => import('../views/courses/CourseAttendance.vue')
-          // },
-          // {
-          //   path: 'CourseGrades',
-          //   name: 'CourseGrades',
-          //   component: () => import('../views/courses/CourseGrades.vue')
-          // },
-          // {
-          //   path: 'CourseQuizzes',
-          //   name: 'CourseQuizzes',
-          //   component: () => import('../views/courses/CourseQuizzes.vue')
-          // },
-          // {
-          //   path: 'CourseAssigments',
-          //   name: 'CourseAssigments',
-          //   component: () => import('../views/courses/CourseAssigments.vue')
-          // },
-          // {
-          //   path: 'CourseSchedule',
-          //   name: 'CourseSchedule',
-          //   component: () => import('../views/courses/CourseSchedule.vue')
-          // },
-        ]
+      },
+      {
+        path: 'CourseMaterials',
+        name: 'CourseMaterials',
+        component: () => import('../views/courses/CourseMaterial.vue')
+      },
+      // {
+      //   path: 'CourseAttendance',
+      //   name: 'CourseAttendance',
+      //   component: () => import('../views/courses/CourseAttendance.vue')
+      // },
+      // {
+      //   path: 'CourseGrades',
+      //   name: 'CourseGrades',
+      //   component: () => import('../views/courses/CourseGrades.vue')
+      // },
+      {
+        path: ':course_code/CourseQuizzes',
+        component: () => import('../views/courses/CourseQuizzes.vue'),
+      },
+      {
+        path: ':course_code/CourseQuizzes/:quiz_id',
+        component: () => import('../views/courses/CourseQuiz.vue')
+      },
+      {
+        path: ':course_code/CourseQuizzes/quizz_generator',
+        component: () => import('../views/courses/QuizzGenerator.vue')
       }
+      // {`
+      //   path: 'CourseAssigments',
+      //   name: 'CourseAssigments',
+      //   component: () => import('../views/courses/CourseAssigments.vue')
+      // },
+      // {
+      //   path: 'CourseSchedule',
+      //   name: 'CourseSchedule',
+      //   component: () => import('../views/courses/CourseSchedule.vue')
+      // },
     ]
   },
   {

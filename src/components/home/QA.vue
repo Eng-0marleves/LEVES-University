@@ -1,6 +1,8 @@
 <template>
-	<div class="container">
-		<h1>Q&A</h1>
+	<div class="qa-container">
+		<div class="title mb-3">
+			<h3>FREQUENTLY ASKED QUESTIONS</h3>
+		</div>
 		<QA_Item :items="accordionItems" />
 	</div>
 </template>
@@ -28,12 +30,6 @@ export default {
 	align-items: center;
 	flex-wrap: wrap;
 	gap: 64px;
-}
-
-.container h1 {
-	/* width: 50%; */
-	font-size: 96px;
-	text-align: center;
 }
 
 @media (max-width: 768px) {

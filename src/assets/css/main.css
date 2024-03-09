@@ -160,3 +160,16 @@ body.fit {
 .offcanvas-backdrop.show {
 	z-index: 1000000000 !important;
 }
+
+.btn.normal {
+	background: var(--primary-color);
+	color: var(--white-color);
+	border-radius: 4px;
+	font-size: 16px;
+	line-height: 24px;
+	transition: var(--transition);
+}
+
+.btn.normal:hover {
+	opacity: .9;
+}

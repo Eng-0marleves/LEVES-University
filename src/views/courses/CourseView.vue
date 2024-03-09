@@ -4,7 +4,8 @@
 		<!-- <h1>{{ $route.params.course_code }}</h1> -->
 		<!-- <PostGenerator /> -->
 		<!-- <NavTabs /> -->
-		<router-view></router-view>
+		wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+		<!-- <router-view></router-view> -->
 	</section>
 </template>
 
@@ -27,7 +28,7 @@ export default {
 				{ route: `/courses/${this.$route.params.course_code}/course_attendance`, title: "Attendance" },
 				{ route: `/courses/${this.$route.params.course_code}/course_material`, title: "Material" },
 				{ route: `/courses/${this.$route.params.course_code}/course_grades`, title: "Grades" },
-				{ route: `/courses/${this.$route.params.course_code}/course_quizzes`, title: "Quizzes" },
+				{ route: `/courses/${this.$route.params.course_code}/CourseQuizzes`, title: "CourseQuizzes" },
 				{ route: `/courses/${this.$route.params.course_code}/course_assignment`, title: "Assignments" },
 				{ route: `/courses/${this.$route.params.course_code}/course_schedule`, title: "Schedule" },
 				{ route: `/courses/${this.$route.params.course_code}/course_analysis`, title: "Analysis" }

@@ -1,0 +1,9 @@
+@echo off
+echo Adding files...
+git add .
+echo Committing changes...
+git commit -m ""
+echo Pushing changes...
+git push origin master
+echo Done.
+pause

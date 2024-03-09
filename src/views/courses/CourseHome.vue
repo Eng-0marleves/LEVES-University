@@ -39,7 +39,7 @@ export default {
 				},
 				{
 					title: "Quizzes",
-					path: `/courses/${this.$route.params.course_code}/quizzes`,
+					path: `/courses/${this.$route.params.course_code}/CourseQuizzes`,
 				},
 				{
 					title: "Assigmnents",
