@@ -65,7 +65,7 @@ nav {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	z-index: 100000;
+	z-index: 10;
 }
 
 nav.open {

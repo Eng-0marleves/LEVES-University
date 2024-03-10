@@ -99,7 +99,7 @@ header {
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 2px solid var(--primary-color);
-	z-index: 10000;
+	z-index: 10;
 	transition: var(--transition);
 }
 
