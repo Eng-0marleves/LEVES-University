@@ -17,22 +17,27 @@ const routes = [
     meta: { requiresAuth: true },
     children: [
       {
+        path: '',
+        name: 'Courses',
+        component: () => import('../views/courses/CoursesHome.vue'),
+      },
+      {
         path: ':course_code',
         name: 'Course',
         component: () => import('../views/courses/CourseHome.vue'),
       },
       {
-        path: 'CourseMaterials',
+        path: ':course_code/CourseMaterials',
         name: 'CourseMaterials',
         component: () => import('../views/courses/CourseMaterial.vue')
       },
+      {
+        path: ':course_code/CourseAttendance',
+        name: 'CourseAttendance',
+        component: () => import('../views/courses/CourseAttendance.vue')
+      },
       // {
-      //   path: 'CourseAttendance',
-      //   name: 'CourseAttendance',
-      //   component: () => import('../views/courses/CourseAttendance.vue')
-      // },
-      // {
-      //   path: 'CourseGrades',
+      //   path: ':course_code/CourseGrades',
       //   name: 'CourseGrades',
       //   component: () => import('../views/courses/CourseGrades.vue')
       // },

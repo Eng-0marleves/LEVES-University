@@ -92,7 +92,7 @@ header {
 	position: fixed;
 	top: 0;
 	right: 0;
-	background: #fff !important;
+	background: #eee !important;
 	padding: 8px;
 	height: var(--header-height);
 	display: flex;

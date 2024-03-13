@@ -1,28 +1,7 @@
 <template>
 	<div class="material-folders">
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
-		<MaterialFolder />
+		<MaterialFolder v-for="folder in $props.folders" :key="folder.id" :name="folder.name"
+			@click="updateIndex(folder.id)" />
 	</div>
 </template>
 
@@ -34,13 +13,21 @@ export default {
 	components: {
 		MaterialFolder
 	},
+	props: {
+		folders: {
+			type: Array,
+			required: true
+		}
+	},
 	data() {
 		return {
-			// Your data here
+
 		};
 	},
 	methods: {
-		// Your methods here
+		updateIndex(index) {
+			this.$emit('updateIndex', index);
+		}
 	},
 	computed: {
 		// Your computed properties here
@@ -53,7 +40,7 @@ export default {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: 64px;
+	gap: 24px;
 	margin-top: 24px;
 }
 </style>

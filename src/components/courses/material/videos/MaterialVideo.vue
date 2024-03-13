@@ -2,22 +2,22 @@
 	<div class="material-video">
 		<!-- Button trigger modal -->
 		<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-			<div class="card" style="width: 18rem;">
-				<img src="https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg" class="card-img-top"
-					alt="...">
+			<div class="card" style="width: 14rem;">
+				<img :src="$props.cover" class="card-img-top" alt="...">
 				<div class="card-body">
-					<p>Some quick example text to build on the card title and make up the bulk of the
-						card's content.</p>
+					<p>{{ $props.name }}</p>
 				</div>
 			</div>
 		</button>
 
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-dialog modal-dialog-centered modal-lg">
 				<div class="modal-content p-0">
 					<div class="modal-body p-0">
-						<video src="@/assets/videos/video.mp4" width="100%" height="100%" controls></video>
+						<video :src="$props.src" width="100%" height="100%" controls></video>
+
+						<p>{{ $props.name }}</p>
 					</div>
 				</div>
 			</div>
@@ -28,6 +28,24 @@
 <script>
 export default {
 	name: 'MaterialVideo',
+	props: {
+		id: {
+			typeof: 'string',
+			required: true
+		},
+		name: {
+			type: String,
+			required: true
+		},
+		cover: {
+			type: String,
+			required: true
+		},
+		src: {
+			type: String,
+			required: true
+		}
+	},
 	data() {
 		return {
 			video: {
@@ -58,7 +76,7 @@ export default {
 	text-align: left;
 	background: var(--primary-color);
 	color: #fff;
-	font-weight: bold;
+	/* font-weight: bold; */
 	padding: 8px;
 }
 
@@ -66,5 +84,14 @@ export default {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+}
+
+.modal-body {
+	color: var(--white-color);
+	background: var(--primary-color);
+}
+
+.modal-body p {
+	padding: 8px;
 }
 </style>

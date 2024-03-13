@@ -1,6 +1,6 @@
 <template>
 	<div class="material-files">
-		<MaterialFile />
+		<MaterialFile v-for="file in files" :key="file.id" :name="file.name" :src="file.src" :cover="file.cover" />
 	</div>
 </template>
 
@@ -17,8 +17,11 @@ export default {
 			// Your data properties go here
 		};
 	},
-	methods: {
-		// Your methods go here
+	props: {
+		files: {
+			type: Array,
+			required: true
+		}
 	},
 	computed: {
 		// Your computed properties go here
@@ -30,5 +33,11 @@ export default {
 </script>
 
 <style scoped>
-/* Your CSS goes here */
+.material-files {
+	display: flex;
+	/* justify-content: space-between; */
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 16px;
+}
 </style>

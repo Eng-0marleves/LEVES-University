@@ -1,279 +1,620 @@
 {
-	"users": [
-		{
-			"id": 12,
-			"name": "Ahmed",
-			"password": "123"
-		}
-	],
-	"courses": [
-		{
-			"id": 1,
-			"course_name": "Introduction to Computer Science",
-			"course_code": "CSE101",
-			"grades": {
-				"midterm": 20,
-				"assignment": 18,
-				"attendance": 4,
-				"final": 45
-			}
-		},
-		{
-			"id": 2,
-			"course_name": "English Composition",
-			"course_code": "ENG201",
-			"grades": {
-				"midterm": 22,
-				"assignment": 16,
-				"attendance": 5,
-				"final": 48
-			}
-		},
-		{
-			"id": 3,
-			"course_name": "Calculus I",
-			"course_code": "MATH301",
-			"grades": {
-				"midterm": 18,
-				"assignment": 20,
-				"attendance": 3,
-				"final": 47
-			}
-		},
-		{
-			"id": 4,
-			"course_name": "Physics for Engineers",
-			"course_code": "PHY401",
-			"grades": {
-				"midterm": 21,
-				"assignment": 19,
-				"attendance": 4,
-				"final": 46
-			}
-		},
-		{
-			"id": 5,
-			"course_name": "Organic Chemistry",
-			"course_code": "CHEM501",
-			"grades": {
-				"midterm": 19,
-				"assignment": 17,
-				"attendance": 4,
-				"final": 43
-			}
-		},
-		{
-			"id": 6,
-			"course_name": "Introduction to Biology",
-			"course_code": "BIO601",
-			"grades": {
-				"midterm": 23,
-				"assignment": 20,
-				"attendance": 5,
-				"final": 49
-			}
-		},
-		{
-			"id": 7,
-			"course_name": "Artificial Intelligence Fundamentals",
-			"course_code": "AI701",
-			"grades": {
-				"midterm": 24,
-				"assignment": 22,
-				"attendance": 5,
-				"final": 47
-			}
-		}
-	],
-	"notifications": [
-		{
-			"id": 1,
-			"title": "Notification 1",
-			"message": "This is the first notification",
-			"route": "/home"
-		},
-		{
-			"id": 2,
-			"title": "Notification 2",
-			"message": "This is the second notification",
-			"route": "/home"
-		}
-	],
-	"quizzes": [
-		{
-			"quizId": 1,
-			"title": "Full Quiz Example",
-			"description": "This is a full example of a quiz with multiple pages and questions.",
-			"courseCode": "CS101",
-			"doctorName": "Dr. Smith",
-			"isPublished": true,
-			"publishDate": "2024-07-03T04:00:00Z",
-			"endDate": "2024-07-03T00:04:00Z",
-			"duration": "00:30:00",
-			"showFeedback": true,
-			"showResult": true,
-			"totalGrade": 100,
-			"enrolls": [
-				{
-					"stdId": 0,
-					"enroll": 0,
-					"answers": [
-						{
-							"questienId": 1,
-							"answer": "Paris",
-							"grade": 0
-						}
-					]
-				}
-			],
-			"pages": [
-				{
-					"pageId": "1",
-					"questions": [
-						{
-							"questionId": "1",
-							"type": "multiple_choice",
-							"text": "What is the capital of France?",
-							"feedback": "Great job!",
-							"grade": 10,
-							"answers": [
-								{
-									"answerId": "1",
-									"text": "Paris",
-									"isCorrect": true
-								},
-								{
-									"answerId": "2",
-									"text": "Berlin",
-									"isCorrect": false
-								},
-								{
-									"answerId": "3",
-									"text": "London",
-									"isCorrect": false
-								}
-							]
-						},
-						{
-							"questionId": "2",
-							"type": "text_entry",
-							"text": "Write a paragraph about your favorite food.",
-							"feedback": "Great job!",
-							"grade": 20
-						}
-					]
-				},
-				{
-					"pageId": "2",
-					"questions": [
-						{
-							"questionId": "3",
-							"type": "multiple_choice",
-							"text": "What is the largest planet in our solar system?",
-							"feedback": "Excellent!",
-							"grade": 10,
-							"answers": [
-								{
-									"answerId": "1",
-									"text": "Jupiter",
-									"isCorrect": true
-								},
-								{
-									"answerId": "2",
-									"text": "Saturn",
-									"isCorrect": false
-								},
-								{
-									"answerId": "3",
-									"text": "Mars",
-									"isCorrect": false
-								}
-							]
-						},
-						{
-							"questionId": "4",
-							"type": "text_entry",
-							"text": "What is the chemical symbol for water?",
-							"feedback": "Well done!",
-							"grade": 20
-						}
-					]
-				},
-				{
-					"pageId": "3",
-					"questions": [
-						{
-							"questionId": "5",
-							"type": "multiple_choice",
-							"text": "What is the powerhouse of the cell?",
-							"questionTime": "00:02:00",
-							"feedback": "Bravo!",
-							"grade": 10,
-							"answers": [
-								{
-									"answerId": "1",
-									"text": "Mitochondria",
-									"isCorrect": true
-								},
-								{
-									"answerId": "2",
-									"text": "Nucleus",
-									"isCorrect": false
-								},
-								{
-									"answerId": "3",
-									"text": "Ribosome",
-									"isCorrect": false
-								}
-							]
-						},
-						{
-							"questionId": "6",
-							"type": "text_entry",
-							"text": "Who is known as the father of modern physics?",
-							"feedback": "Correct!",
-							"grade": 20
-						}
-					]
-				},
-				{
-					"pageId": "4",
-					"pageTime": "00:05:00",
-					"questions": [
-						{
-							"questionId": "7",
-							"type": "multiple_choice",
-							"text": "What is the chemical symbol for oxygen?",
-							"feedback": "You got it!",
-							"grade": 10,
-							"answers": [
-								{
-									"answerId": "1",
-									"text": "O",
-									"isCorrect": true
-								},
-								{
-									"answerId": "2",
-									"text": "O2",
-									"isCorrect": false
-								},
-								{
-									"answerId": "3",
-									"text": "C",
-									"isCorrect": false
-								}
-							]
-						},
-						{
-							"questionId": "8",
-							"type": "text_entry",
-							"text": "What is the process of plants making their own food called?",
-							"feedback": "Fantastic!",
-							"grade": 20
-						}
-					]
-				}
-			]
-		}
-	]
+  "users": [
+    {
+      "id": "12",
+      "name": "Ahmed",
+      "password": "123"
+    }
+  ],
+  "posts": [
+    {
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "2- edit",
+      "id": "14"
+    },
+    {
+      "id": "13",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+    },
+    {
+      "id": "13",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+    },
+    {
+      "id": "13",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+    },
+    {
+      "id": "13",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
+    },
+    {
+      "id": "13",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "wwwwwwwwwww<div>omar</div>"
+    },
+    {
+      "id": "8ce1",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "1- save&nbsp;"
+    },
+    {
+      "id": "f761",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "post"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "course_name": "Introduction to Computer Science",
+      "course_code": "CSE101",
+      "description": "An introductory course covering fundamental concepts of computer science including algorithms, data structures, and programming.",
+      "grades": {
+        "midterm": 20,
+        "assignment": 18,
+        "attendance": 4,
+        "final": 45
+      }
+    },
+    {
+      "id": "2",
+      "course_name": "English Composition",
+      "course_code": "ENG201",
+      "description": "A writing-intensive course focusing on composition skills, critical thinking, and effective communication.",
+      "grades": {
+        "midterm": 22,
+        "assignment": 16,
+        "attendance": 5,
+        "final": 48
+      }
+    },
+    {
+      "id": "3",
+      "course_name": "Calculus I",
+      "course_code": "MATH301",
+      "description": "An introductory course in calculus covering limits, derivatives, and integration.",
+      "grades": {
+        "midterm": 18,
+        "assignment": 20,
+        "attendance": 3,
+        "final": 47
+      }
+    },
+    {
+      "id": "4",
+      "course_name": "Physics for Engineers",
+      "course_code": "PHY401",
+      "description": "A foundational physics course tailored for engineering students, covering mechanics, thermodynamics, and electromagnetism.",
+      "grades": {
+        "midterm": 21,
+        "assignment": 19,
+        "attendance": 4,
+        "final": 46
+      }
+    },
+    {
+      "id": "5",
+      "course_name": "Organic Chemistry",
+      "course_code": "CHEM501",
+      "description": "An introductory course in organic chemistry focusing on the structure, properties, and reactions of organic compounds.",
+      "grades": {
+        "midterm": 19,
+        "assignment": 17,
+        "attendance": 4,
+        "final": 43
+      }
+    },
+    {
+      "id": "6",
+      "course_name": "Introduction to Biology",
+      "course_code": "BIO601",
+      "description": "An overview of basic biological principles including cell structure, genetics, evolution, and ecology.",
+      "grades": {
+        "midterm": 23,
+        "assignment": 20,
+        "attendance": 5,
+        "final": 49
+      }
+    },
+    {
+      "id": "7",
+      "course_name": "Artificial Intelligence Fundamentals",
+      "course_code": "AI701",
+      "description": "An introductory course exploring the principles and techniques of artificial intelligence, including machine learning, neural networks, and natural language processing.",
+      "grades": {
+        "midterm": 24,
+        "assignment": 22,
+        "attendance": 5,
+        "final": 47
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "id": "1",
+      "title": "Notification 1",
+      "message": "This is the first notification",
+      "route": "/home"
+    },
+    {
+      "id": "2",
+      "title": "Notification 2",
+      "message": "This is the second notification",
+      "route": "/home"
+    }
+  ],
+  "quizzes": [
+    {
+      "quizId": 1,
+      "title": "Full Quiz Example",
+      "description": "This is a full example of a quiz with multiple pages and questions.",
+      "courseCode": "CS101",
+      "doctorName": "Dr. Smith",
+      "isPublished": true,
+      "publishDate": "2024-07-03T04:00:00Z",
+      "endDate": "2024-07-03T00:04:00Z",
+      "duration": "00:30:00",
+      "showFeedback": true,
+      "showResult": true,
+      "totalGrade": 100,
+      "enrolls": [
+        {
+          "stdId": 0,
+          "enroll": 0,
+          "answers": [
+            {
+              "questienId": 1,
+              "answer": "Paris",
+              "grade": 0
+            }
+          ]
+        }
+      ],
+      "pages": [
+        {
+          "pageId": "1",
+          "questions": [
+            {
+              "questionId": "1",
+              "type": "multiple_choice",
+              "text": "What is the capital of France?",
+              "feedback": "Great job!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "1",
+                  "text": "Paris",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "2",
+                  "text": "Berlin",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "3",
+                  "text": "London",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "2",
+              "type": "text_entry",
+              "text": "Write a paragraph about your favorite food.",
+              "feedback": "Great job!",
+              "grade": 20
+            }
+          ]
+        },
+        {
+          "pageId": "2",
+          "questions": [
+            {
+              "questionId": "3",
+              "type": "multiple_choice",
+              "text": "What is the largest planet in our solar system?",
+              "feedback": "Excellent!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "1",
+                  "text": "Jupiter",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "2",
+                  "text": "Saturn",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "3",
+                  "text": "Mars",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "4",
+              "type": "text_entry",
+              "text": "What is the chemical symbol for water?",
+              "feedback": "Well done!",
+              "grade": 20
+            }
+          ]
+        },
+        {
+          "pageId": "3",
+          "questions": [
+            {
+              "questionId": "5",
+              "type": "multiple_choice",
+              "text": "What is the powerhouse of the cell?",
+              "questionTime": "00:02:00",
+              "feedback": "Bravo!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "1",
+                  "text": "Mitochondria",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "2",
+                  "text": "Nucleus",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "3",
+                  "text": "Ribosome",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "6",
+              "type": "text_entry",
+              "text": "Who is known as the father of modern physics?",
+              "feedback": "Correct!",
+              "grade": 20
+            }
+          ]
+        },
+        {
+          "pageId": "4",
+          "pageTime": "00:05:00",
+          "questions": [
+            {
+              "questionId": "7",
+              "type": "multiple_choice",
+              "text": "What is the chemical symbol for oxygen?",
+              "feedback": "You got it!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "1",
+                  "text": "O",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "2",
+                  "text": "O2",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "3",
+                  "text": "C",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "8",
+              "type": "text_entry",
+              "text": "What is the process of plants making their own food called?",
+              "feedback": "Fantastic!",
+              "grade": 20
+            }
+          ]
+        }
+      ],
+      "id": "ab64"
+    }
+  ],
+  "Folders": [
+    {
+      "id": "1",
+      "name": "Folder 1",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "2",
+      "name": "Folder 2",
+      "parent_id": "1",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "3",
+      "name": "Folder 3",
+      "parent_id": "1",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "4",
+      "name": "Folder 4",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "5",
+      "name": "Folder 5",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "6",
+      "name": "Folder 6",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "7",
+      "name": "Folder 7",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "8",
+      "name": "Folder 8",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "9",
+      "name": "Folder 9",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "10",
+      "name": "Folder 10",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "f1a4",
+      "name": "new folder",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "387f",
+      "name": "new folders",
+      "parent_id": "undefined",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "46fe",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "6af6",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    }
+  ],
+  "Videos": [
+    {
+      "id": "1",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 1",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "2",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 2",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "1",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "3",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 3",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "4",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 4",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "5",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 5",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "6",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 6",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "7",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 7",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "8",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 8",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "9",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 9",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "5",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "10",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 10",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "5",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "d1f5",
+      "name": "wwwwww",
+      "src": "wwwwwww",
+      "cover": "wwwwwww",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    }
+  ],
+  "Files": [
+    {
+      "id": "1",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 1",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "2",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 2",
+      "parent_id": "7",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "3",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 3",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "4",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 4",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "5",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 5",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "6",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 6",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "7",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 7",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "8",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 8",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "9",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 9",
+      "parent_id": "5",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    }
+  ]
 }

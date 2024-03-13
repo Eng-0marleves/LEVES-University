@@ -1,23 +1,23 @@
 <template>
 	<div class="course-attendance">
-		<div class="controllers">
-			<QrGenerator />
+		controllers<div class="controllers">
+			<!-- <QrGenerator /> -->
 			<!-- <QrReader /> -->
 		</div>
-		<AttendanceTable />
+		<!-- <AttendanceTable /> -->
 	</div>
 </template>
 
 <script>
-import AttendanceTable from '@/components/courses/attendance/AttendanceTable.vue';
-import QrGenerator from '@/components/courses/attendance/QrGenerator.vue';
+// import AttendanceTable from '@/components/courses/attendance/AttendanceTable.vue';
+// import QrGenerator from '@/components/courses/attendance/QrGenerator.vue';
 // import QrReader from '@/components/courses/attendance/QrReader.vue';
 
 export default {
 	name: 'CourseAttendance',
 	components: {
-		AttendanceTable,
-		QrGenerator,
+		// AttendanceTable,
+		// QrGenerator,
 		// QrReader
 	},
 	data() {

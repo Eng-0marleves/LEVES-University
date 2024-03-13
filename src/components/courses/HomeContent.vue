@@ -1,29 +1,22 @@
 <template>
-	<div class="container">
-		<div class="row" v-if="course">
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-header">
-						<h2 class="card-title">Course Information</h2>
-					</div>
-					<div class="card-body">
-						<p><strong>Course Code:</strong> {{ course.course_code }}</p>
-						<p><strong>Course Name:</strong> {{ course.course_name }}</p>
-					</div>
+	<div class="CourseHome">
+		<div class="content" v-if="course">
+			<div class="about">
+				<div class="left d-flex flex-column gap-3">
+					<p><i class="fa-solid fa-angles-right"></i> Course Code</p>
+					<p><i class="fa-solid fa-angles-right"></i> Course Name</p>
+					<p v-for="(grade, key) in course.grades" :Key="key"><i class="fa-solid fa-angles-right"></i> {{ key
+						}}</p>
+				</div>
+				<div class="right d-flex flex-column gap-3">
+					<p>{{ course.course_code }}</p>
+					<p>{{ course.course_name }}</p>
+					<p v-for="(grade, key) in course.grades" :Key="key">{{ grade }} marks</p>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="card">
-					<div class="card-header">
-						<h2 class="card-title">Course Grades</h2>
-					</div>
-					<div class="card-body">
-						<p><strong>Midterm:</strong> {{ course.grades.midterm }}/25</p>
-						<p><strong>Assignment:</strong> {{ course.grades.assignment }}/20</p>
-						<p><strong>Attendance:</strong> {{ course.grades.attendance }}/5</p>
-						<p><strong>Final:</strong> {{ course.grades.final }}/50</p>
-					</div>
-				</div>
+			<div class="discription">
+				<p class="title mb-1"><i class="fa-solid fa-angles-right"></i> Description</p>
+				<p>{{ course.description }}</p>
 			</div>
 		</div>
 		<div v-else>
@@ -64,25 +57,23 @@ export default {
 	margin-top: 20px;
 }
 
-.card {
-	margin-bottom: 20px;
+.content {
+	width: 100%;
+	padding: 8px;
+	color: var(--white-color);
+	background: var(--primary-color);
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
 }
 
-.card-header {
-	background-color: var(--primary-color);
-	color: #fff;
-	padding: 10px;
+.content .about {
+	display: flex;
+	align-items: center;
+	gap: 40px;
 }
 
-.card-title {
-	margin: 0;
-}
-
-.card-body {
-	padding: 20px;
-}
-
-p {
-	margin-bottom: 10px;
+i {
+	color: var(--secondary-color);
 }
 </style>

@@ -23,7 +23,7 @@
 	--white-color: #fff;
 	--light-white-color: #ffffff5f;
 
-	--bg-color: rgba(24, 103, 192, 1);
+	--bg-color: #35495e16;
 	--Black-color-100: rgba(25, 25, 28, 1);
 	--Black-color-75: rgba(25, 25, 28, 75);
 	--Black-color-50: rgba(25, 25, 28, 50);
@@ -131,6 +131,7 @@ body {
 	padding-top: var(--header-height);
 	scroll-behavior: smooth;
 	transition: var(--transition);
+	background: var(--bg-color);
 }
 
 body.menuOpen {
@@ -172,4 +173,8 @@ body.fit {
 
 .btn.normal:hover {
 	opacity: .9;
+}
+
+.modal {
+	z-index: 100000;
 }

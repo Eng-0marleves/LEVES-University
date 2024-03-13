@@ -108,7 +108,7 @@ export default {
 	height: 312px;
 	margin: 0 auto;
 	padding: 16px;
-	background: #eee;
+	background: var(--white-color);
 	transition: var(--transition);
 	text-overflow: ellipsis;
 	overflow: hidden;

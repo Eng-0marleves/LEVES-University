@@ -1,7 +1,7 @@
 <template>
 	<div class="folder">
 		<i class="fas fa-folder-open"></i>
-		<p>Folder</p>
+		<p>{{ $props.name }}</p>
 	</div>
 </template>
 
@@ -13,8 +13,11 @@ export default {
 			// Your data properties go here
 		};
 	},
-	methods: {
-		// Your methods go here
+	props: {
+		name: {
+			type: String,
+			required: true
+		}
 	},
 	computed: {
 		// Your computed properties go here
@@ -31,9 +34,9 @@ export default {
 	align-items: center;
 	gap: 8px;
 	color: #fff;
-	font-weight: bold;
+	/* font-weight: bold; */
 	background-color: var(--primary-color);
-	width: calc(8 * 22px);
+	width: calc(8 * 24px);
 	padding: 8px;
 	transition: var(--transition);
 	border-radius: 5px;
