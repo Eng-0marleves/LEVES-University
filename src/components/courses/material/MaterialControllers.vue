@@ -1,6 +1,5 @@
 <template>
 	<div class="controllers">
-
 		<button type="button" class="btn normal" data-bs-toggle="modal" data-bs-target="#exampleModal">
 			Add Item
 		</button>
@@ -8,7 +7,6 @@
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-
 					<div class="modal-body">
 						<select v-model="itemType">
 							<option value="Folder" class="add-folder">Folder</option>
@@ -24,36 +22,25 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" ref="cancle" class="btn btn-danger"
-							data-bs-dismiss="modal">Cancle</button>
+						<button type="button" ref="cancel" class="btn btn-danger"
+							data-bs-dismiss="modal">Cancel</button>
 						<button type="button" class="btn btn-success" @click="addItem">Save</button>
 					</div>
-
 				</div>
 			</div>
 		</div>
 
-
-
-
-
-
-
-
 		<div class="path">
-			<router-link class="directory" to="/courses">Courses</router-link>
-			<p>/</p>
-			<router-link class="directory" to="/courses">Courses</router-link>
-			<p>/</p>
-			<router-link class="directory" to="/courses">Courses</router-link>
-			<p>/</p>
-			<router-link class="directory" to="/courses">Courses</router-link>
+			<span v-for="(path, i) in $props.path" :key="i" class="route" @click="changePath(path.index, path.name)">
+				{{ path.name + '/ ' }}
+			</span>
 		</div>
 	</div>
 </template>
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
 	name: 'MaterialControllers',
@@ -69,34 +56,48 @@ export default {
 		currentIndex: {
 			type: String,
 			required: true
+		},
+		path: {
+			type: Array,
+			required: true
 		}
 	},
 	methods: {
 		async addItem() {
 			if (!this.name.trim()) {
-				alert('Please enter a name for the item.');
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please enter a name for the item.'
+				});
 				return;
 			}
 
-			console.log(this.itemType);
+			const count = await this.getItemCount();
+
+			if (count > 0) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'An item with the same name already exists.'
+				});
+				return;
+			}
 
 			if ((this.itemType === 'File' || this.itemType === 'Video') && !this.src.trim()) {
-
-				const res = await axios.post(`http://localhost:3000/${this.itemType}s`, {
+				await axios.post(`http://localhost:3000/${this.itemType}s`, {
 					name: this.name,
 					src: this.src,
 					cover: this.cover,
 					parent_id: this.$props.currentIndex,
-					user_id: "1",
+					user_id: '1',
 					course_code: this.$route.params.course_code
 				});
-				console.log(res.status);
-			}
-			else if (this.itemType === 'Folder') {
+			} else if (this.itemType === 'Folder') {
 				await axios.post(`http://localhost:3000/${this.itemType}s`, {
 					name: this.name,
 					parent_id: this.$props.currentIndex,
-					user_id: "1",
+					user_id: '1',
 					course_code: this.$route.params.course_code
 				});
 			}
@@ -119,17 +120,19 @@ export default {
 			}
 		},
 		closeModal() {
-			this.$refs.cancle.click();
+			this.$refs.cancel.click();
 
 			// Reset input fields
 			this.name = '';
 			this.src = '';
 			this.cover = '';
+		},
+		changePath(index, name) {
+			this.$emit('changePath', index, name);
 		}
 	}
 };
 </script>
-
 
 <style scoped>
 .controllers {
@@ -177,5 +180,20 @@ export default {
 
 input {
 	border-bottom: 2px solid var(--primary-color);
+}
+
+.path {
+	width: 80%;
+	text-align: right;
+	display: flex;
+	justify-content: flex-end;
+	gap: 0px;
+	overflow: hidden;
+}
+
+.route {
+	width: fit-content;
+	flex-wrap: nowrap;
+	cursor: pointer;
 }
 </style>

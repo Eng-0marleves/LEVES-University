@@ -17,8 +17,10 @@
 						<i class="fa-solid fa-ellipsis" @click="toggleMenu(i)"></i>
 						<div class="menu" v-if="showMenu === i">
 							<!-- Add your dropdown menu items here -->
-							<button @click="editPost(post.content, post.id)">Edit</button>
-							<button @click="deletePost(post.id)">Delete</button>
+							<button @click="editPost(post.content, post.id)" class="border-bottom"><i
+									class="fas fa-pen"></i> Edit</button>
+							<button @click="deletePost(post.id)" class="text-danger"><i class="fas fa-trash"></i>
+								Delete</button>
 						</div>
 					</div>
 				</div>
@@ -55,7 +57,7 @@ export default {
 		async save(postContent, id) {
 			if (this.saveType === "new") {
 				const data = {
-					"page": "CSE101",
+					"page": this.$route.params.course_code,
 					"user_id": 123,
 					"content": postContent
 				}
@@ -90,6 +92,7 @@ export default {
 					this.getPosts();
 				}
 			});
+			this.showMenu = false;
 		},
 		editPost(content, id) {
 			Swal.fire({
@@ -108,6 +111,7 @@ export default {
 					document.getElementById("editorOutput").innerHTML = content;
 				}
 			});
+			this.showMenu = false;
 		},
 		async getPosts() {
 			try {
@@ -137,8 +141,14 @@ export default {
 		}
 	},
 	mounted() {
-		this.getPosts()
+		this.getPosts();
 	},
+	watch: {
+		posts: {
+			handler: 'getPosts',
+			deep: true
+		}
+	}
 };
 </script>
 

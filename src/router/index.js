@@ -36,11 +36,11 @@ const routes = [
         name: 'CourseAttendance',
         component: () => import('../views/courses/CourseAttendance.vue')
       },
-      // {
-      //   path: ':course_code/CourseGrades',
-      //   name: 'CourseGrades',
-      //   component: () => import('../views/courses/CourseGrades.vue')
-      // },
+      {
+        path: ':course_code/CourseGrades',
+        name: 'CourseGrades',
+        component: () => import('../views/courses/CourseGrades.vue')
+      },
       {
         path: ':course_code/CourseQuizzes',
         component: () => import('../views/courses/CourseQuizzes.vue'),

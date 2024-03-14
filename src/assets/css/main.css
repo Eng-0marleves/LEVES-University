@@ -178,3 +178,9 @@ body.fit {
 .modal {
 	z-index: 100000;
 }
+
+
+
+.swal2-container {
+	z-index: 100000000000000;
+}

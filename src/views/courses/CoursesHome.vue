@@ -1,6 +1,6 @@
 <template>
 	<div class="courses_home">
-		<SearchBar :onSearch="filterCourses" />
+		<SearchBar class="search" :onSearch="filterCourses" />
 		<CardsContainer :courses="filteredCourses" />
 	</div>
 </template>
@@ -53,3 +53,10 @@ export default {
 	}
 }
 </script>
+
+<style scoped>
+.search {
+	margin: 8px 0;
+	margin-left: auto;
+}
+</style>

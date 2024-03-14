@@ -5,23 +5,32 @@
 		<div class="events-container">
 
 			<div v-for="(event, i) in events" :key="i" class="event mt-4">
-				<div class="image">
-					<img :src="event.imageSrc" alt="">
-				</div>
-				<div class="description">
-					<h4 class="mb-4">{{ event.title }}</h4>
-					<p class="overflow">{{ event.description }}</p>
-				</div>
-				<div class="date">
-					<h5>{{ event.date.day }}</h5>
+
+				<div class="left">
+					<p>{{ event.date.day }}</p>
 					<p>{{ event.date.month }}</p>
 				</div>
+
+				<div class="devide"></div>
+				<div class="right">
+					<div class="about">
+						<router-link to="" class="router">{{ event.title }}</router-link>
+						<p>{{ truncateDescription(event.description) }}</p>
+					</div>
+
+					<div class="location">
+						<p><i class="fas fa-location-dot"></i> {{ event.location }}</p>
+						<p><i class="fas fa-clock"></i> {{ event.time }}</p>
+					</div>
+				</div>
+
 			</div>
 
 		</div>
-		<router-link to="" class="router">See All</router-link>
+		<router-link to="description" class="router">See All</router-link>
 	</div>
 </template>
+
 
 <script>
 export default {
@@ -32,30 +41,38 @@ export default {
 				{
 					title: 'Event 1',
 					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel fringilla libero. Proin ac ligula aliquet, efficitur risus vel, pharetra ligula. Duis sollicitudin magna et ultricies aliquam. Duis dapibus condimentum sapien, nec lobortis purus tempus sit amet. Vivamus a dui nec sapien iaculis tempus. Sed sit amet fermentum velit, vitae laoreet magna. Fusce posuere orci sed erat feugiat suscipit. Vestibulum et ex non leo consectetur pellentesque sit amet eu ex. Vivamus viverra nulla at ultricies venenatis. Ut consequat ante a lorem congue, eu molestie lorem fermentum. Aenean eget lacus tortor. Curabitur lacinia augue sed tellus placerat, a rhoncus turpis aliquam. Nulla facilisi. Aliquam erat volutpat. Donec et orci a magna malesuada tempus.',
-					imageSrc: 'https://le.ac.uk/-/media/uol/images/study/postgraduates/pg-events-banner.jpg?cx=0&cy=0&cw=1400&ch=700&hash=F945E10F4D865E7EC65C3617812AF55C',
-					date: { day: '12', month: 'SEP' }
+					date: { day: '12', month: 'SEP' },
+					time: '10:00 AM',
+					location: 'Location 1'
 				},
 				{
 					title: 'Event 2',
 					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel fringilla libero. Proin ac ligula aliquet, efficitur risus vel, pharetra ligula. Duis sollicitudin magna et ultricies aliquam. Duis dapibus condimentum sapien, nec lobortis purus tempus sit amet. Vivamus a dui nec sapien iaculis tempus. Sed sit amet fermentum velit, vitae laoreet magna. Fusce posuere orci sed erat feugiat suscipit. Vestibulum et ex non leo consectetur pellentesque sit amet eu ex. Vivamus viverra nulla at ultricies venenatis. Ut consequat ante a lorem congue, eu molestie lorem fermentum. Aenean eget lacus tortor. Curabitur lacinia augue sed tellus placerat, a rhoncus turpis aliquam. Nulla facilisi. Aliquam erat volutpat. Donec et orci a magna malesuada tempus.',
-					imageSrc: 'https://oncampusadvertising.com/wp-content/uploads/2019/03/college-event-pic.jpg',
-					date: { day: '15', month: 'SEP' }
+					date: { day: '15', month: 'SEP' },
+					time: '11:30 AM',
+					location: 'Location 2'
 				},
 				{
 					title: 'Event 3',
-					description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel fringilla libero. Proin ac ligula aliquet, efficitur risus vel, pharetra ligula. Duis sollicitudin magna et ultricies aliquam. Duis dapibus condimentum sapien, nec lobortis purus tempus sit amet. Vivamus a dui nec sapien iaculis tempus. Sed sit amet fermentum velit, vitae laoreet magna. Fusce posuere orci sed erat feugiat suscipit. Vestibulum et ex non leo consectetur pellentesque sit amet eu ex. Vivamus viverra nulla at ultricies venenatis. Ut consequat ante a lorem congue, eu molestie lorem fermentum. Aenean eget lacus tortor. Curabitur lacinia augue sed tellus placerat, a rhoncus turpis aliquam. Nulla facilisi. Aliquam erat volutpat. Donec et orci a magna malesuada tempus.',
-					imageSrc: 'https://artsci.washington.edu/sites/default/files/2021-09/NewsAndEvents-main%206.jpg',
-					date: { day: '20', month: 'SEP' }
+					description: 'Lorem ipsum dolor sitefficitur risus volutpat. Donec et orci a magna malesuada tempus.',
+					date: { day: '20', month: 'SEP' },
+					time: '1:00 PM',
+					location: 'Location 3'
 				}
 			]
 		};
 	},
 	methods: {
-		// Your methods go here
-	},
-	computed: {
-		// Your computed properties go here
-	},
+		truncateDescription(description) {
+			const words = description.split(' ');
+			if (words.length > 25) {
+				return words.slice(0, 25).join(' ') + ' ...';
+			} else {
+				return description;
+			}
+		}
+	}
+
 };
 </script>
 
@@ -63,7 +80,7 @@ export default {
 .events-container {
 	display: flex;
 	justify-content: space-around;
-	align-items: center;
+	align-items: stretch;
 	flex-wrap: wrap;
 	gap: 24px;
 }
@@ -72,72 +89,60 @@ export default {
 	position: relative;
 	width: 400px;
 	transition: var(--transition);
-}
-
-.event .image {
-	position: relative;
-	width: 100%;
-	height: 200px;
-}
-
-.event .image img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.event .image::after {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 0%;
-	background: var(--secondary-color);
-	opacity: 0;
-	transition: var(--transition);
-}
-
-.event:hover .image::after {
-	height: 100%;
-	opacity: .4;
-}
-
-.event .description {
-	width: 80%;
-	height: 312px;
-	margin: 0 auto;
+	background: #e3e3e3;
+	border: 2px solid transparent;
 	padding: 16px;
-	background: var(--white-color);
-	transition: var(--transition);
-	text-overflow: ellipsis;
-	overflow: hidden;
-	padding-bottom: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 8px;
+	height: 240px;
+	transition: all .3s ease-in-out;
 }
 
-.event .description p {
-	padding-bottom: 16px;
-	/* white-space: nowrap; */
-	overflow: hidden;
-	text-overflow: ellipsis;
+.event:hover {
+	border-color: var(--secondary-color);
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-.event:hover .description {
-	color: var(--white-color);
-	background: var(--primary-color);
+.event:hover .right .about .router {
+	transition: all .3s ease-in-out;
 }
 
-.event .date {
-	position: absolute;
-	top: -32px;
-	left: calc(50% - 21.44px);
-	padding: 8px;
-	color: var(--white-color);
-	text-align: center;
-	background: var(--primary-color);
-}
-
-.router {
+.event:hover .right .about .router {
 	color: var(--secondary-color);
+}
+
+.event .devide {
+	width: 2px;
+	height: 64px;
+	background: #000;
+}
+
+.event .right {
+	height: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-direction: column;
+}
+
+.event .right .router {
+	color: var(--primary-color);
+	font-size: 24px;
+}
+
+.event .right .location {
+	font-size: 12px;
+	color: #666;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+@media (max-width: 768px) {
+	.event {
+		width: 100%;
+	}
 }
 </style>

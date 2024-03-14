@@ -1,7 +1,7 @@
 <template>
 	<div class="material">
 		<CourseOffCanvas />
-		<MaterialControllers :currentIndex="currentIndex" />
+		<MaterialControllers :currentIndex="currentIndex" :path="path" @changePath="updateIndex" />
 		<div v-if="folders.length != 0" class="title">
 			<h3>Folders</h3>
 			<div class="line"></div>
@@ -42,7 +42,8 @@ export default {
 			folders: [],
 			videos: [],
 			files: [],
-			currentIndex: localStorage.getItem('currentIndex') || '0'
+			currentIndex: localStorage.getItem('currentIndex') || '0',
+			path: JSON.parse(localStorage.getItem('path')) || [{ index: '0', name: "Home" }]
 		};
 	},
 	methods: {
@@ -61,9 +62,11 @@ export default {
 				.then(response => response.data)
 				.catch(error => console.log(error));
 		},
-		updateIndex(index) {
+		updateIndex(index, name) {
 			this.currentIndex = index;
+			this.path.push({ index, name });
 			localStorage.setItem('currentIndex', index);
+			localStorage.setItem('path', JSON.stringify(this.path));
 		}
 	},
 	mounted() {
@@ -82,9 +85,11 @@ export default {
 	},
 	beforeUnmount() {
 		localStorage.removeItem('currentIndex');
+		localStorage.removeItem('path');
 	}
 };
 </script>
+
 
 <style scoped>
 .material {

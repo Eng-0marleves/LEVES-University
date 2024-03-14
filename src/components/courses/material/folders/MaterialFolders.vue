@@ -1,7 +1,7 @@
 <template>
 	<div class="material-folders">
 		<MaterialFolder v-for="folder in $props.folders" :key="folder.id" :name="folder.name"
-			@click="updateIndex(folder.id)" />
+			@click="updateIndex(folder.id, folder.name)" />
 	</div>
 </template>
 
@@ -25,8 +25,8 @@ export default {
 		};
 	},
 	methods: {
-		updateIndex(index) {
-			this.$emit('updateIndex', index);
+		updateIndex(index, name) {
+			this.$emit('updateIndex', index, name);
 		}
 	},
 	computed: {

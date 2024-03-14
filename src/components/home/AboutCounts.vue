@@ -58,6 +58,7 @@ export default {
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
+	flex-wrap: wrap;
 	gap: 16px;
 	text-align: center;
 	color: var(--primary-color);

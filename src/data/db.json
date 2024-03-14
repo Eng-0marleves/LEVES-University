@@ -8,52 +8,16 @@
   ],
   "posts": [
     {
-      "page": "CSE101",
+      "id": "e847",
+      "page": "ENG201",
       "user_id": 123,
-      "content": "2- edit",
-      "id": "14"
+      "content": "in eng"
     },
     {
-      "id": "13",
+      "id": "19c5",
       "page": "CSE101",
       "user_id": 123,
-      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
-    },
-    {
-      "id": "13",
-      "page": "CSE101",
-      "user_id": 123,
-      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
-    },
-    {
-      "id": "13",
-      "page": "CSE101",
-      "user_id": 123,
-      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
-    },
-    {
-      "id": "13",
-      "page": "CSE101",
-      "user_id": 123,
-      "content": "wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
-    },
-    {
-      "id": "13",
-      "page": "CSE101",
-      "user_id": 123,
-      "content": "wwwwwwwwwww<div>omar</div>"
-    },
-    {
-      "id": "8ce1",
-      "page": "CSE101",
-      "user_id": 123,
-      "content": "1- save&nbsp;"
-    },
-    {
-      "id": "f761",
-      "page": "CSE101",
-      "user_id": 123,
-      "content": "post"
+      "content": "watch"
     }
   ],
   "courses": [
@@ -429,6 +393,34 @@
       "id": "6af6",
       "name": "new folder",
       "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "04fd",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "e737",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "741b",
+      "name": "Ahmed",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "323d",
+      "name": "Ahmed 2",
+      "parent_id": "3",
       "user_id": "1",
       "course_code": "CSE101"
     }
