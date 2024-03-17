@@ -29,7 +29,7 @@ export default {
 				},
 				{
 					title: "Grades",
-					path: `/courses/${this.$route.params.course_code}/grades`,
+					path: `/courses/${this.$route.params.course_code}/CourseGrades`,
 				},
 				{
 					title: "Quizzes",
@@ -37,11 +37,11 @@ export default {
 				},
 				{
 					title: "Assigmnents",
-					path: `/courses/${this.$route.params.course_code}/assigmnents`,
+					path: `/courses/${this.$route.params.course_code}/CourseAssigments`,
 				},
 				{
 					title: "Schedule",
-					path: `/courses/${this.$route.params.course_code}/schedule`,
+					path: `/courses/${this.$route.params.course_code}/CourseSchedule`,
 				}
 			]
 		};

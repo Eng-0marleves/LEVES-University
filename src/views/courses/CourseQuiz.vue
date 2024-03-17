@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="quizz">
 		<div class="duration" :style="{ color: durationColor }">
 			{{ formattedDuration }}
 		</div>
@@ -13,18 +13,17 @@
 						<div class="question" v-for="(question, j) in page.questions" :key="j">
 							<h3 class="question-text">{{ question.text }}</h3>
 
-							<div class="answers">
+							<div class="answers d-flex flex-column gap-3">
 								<template v-if="question.type === 'multiple_choice'">
-									<div class="answer" v-for="(answer, k) in question.answers" :key="k">
-										<input type="radio" :id="`answer-${currentPageIndex}-${j}-${k}`"
-											:name="`question-${currentPageIndex}-${j}`" :value="answer.text" />
-										<label :for="`answer-${currentPageIndex}-${j}-${k}`" class="answer-label">{{
-			answer.text }}</label>
+									<div v-for="(answer, k) in question.answers" :key="k" class="answer">
+										<input type="radio" :id="answer.answerId" :name="question.questionId"
+											:value="answer.text" v-model="selectedAnswers[i][j]" />
+										<label :for="answer.answerId" class="radio-label ms-2">{{ answer.text }}</label>
+										<span class="radio-custom"></span>
 									</div>
 								</template>
 								<template v-else-if="question.type === 'text_entry'">
-									<textarea :id="`text-${currentPageIndex}-${j}`"
-										:name="`question-${currentPageIndex}-${j}`" rows="4" cols="50"
+									<textarea :id="`text-${i}-${j}`" :name="`question-${i}-${j}`" rows="4" cols="50"
 										placeholder="Enter your text" class="text-entry"></textarea>
 								</template>
 							</div>
@@ -34,9 +33,30 @@
 			</div>
 
 			<div class="pagination">
-				<button @click="prevPage" :disabled="currentPageIndex === 0">Previous</button>
-				<button @click="nextPage" :disabled="currentPageIndex === totalPages - 1">Next</button>
+				<button class="btn normal" @click="firstPage" :disabled="currentPageIndex === 0">
+					<i class="fa-solid fa-angles-left"></i>
+				</button>
+
+				<button class="btn normal" @click="prevPage" :disabled="currentPageIndex === 0">
+					<i class="fa-solid fa-angle-left"></i>
+				</button>
+
+
+				<p>{{ currentPageIndex + 1 }} / {{ totalPages }}</p>
+
+				<button class="btn normal" @click="nextPage" :disabled="currentPageIndex === totalPages - 1">
+					<i class="fa-solid fa-angle-right"></i>
+				</button>
+
+				<button class="btn normal" @click="lastPage" :disabled="currentPageIndex === totalPages - 1">
+					<i class="fa-solid fa-angles-right"></i>
+				</button>
 			</div>
+		</div>
+
+		<!-- Display the total number of answered questions -->
+		<div class="answered-questions">
+			Total Answered Questions: {{ totalAnsweredQuestions }}
 		</div>
 	</div>
 </template>
@@ -48,13 +68,18 @@ export default {
 	name: 'CourseQuiz',
 	data() {
 		return {
+			selectedAnswers: [], // Initialize selectedAnswers array
 			quizz: {},
+			duration: "00:00:00",
 			formattedDuration: "00:00:00",
 			timer: null,
 			pages: [],
 			currentPageIndex: 0,
-			itemsPerPage: 1
-		}
+			itemsPerPage: 1,
+			totalSeconds: 0,
+			totalDurationInSeconds: 0,
+			elapsedPercentage: 0
+		};
 	},
 	computed: {
 		currentPageQuestions() {
@@ -63,6 +88,10 @@ export default {
 		},
 		totalPages() {
 			return Math.ceil(this.pages.length / this.itemsPerPage);
+		},
+		totalAnsweredQuestions() {
+			// Flatten the selectedAnswers array and count non-empty values
+			return this.selectedAnswers.flat().filter(answer => answer !== "").length;
 		}
 	},
 	methods: {
@@ -79,10 +108,9 @@ export default {
 					const newHours = Math.floor(totalSeconds / 3600);
 					const newMinutes = Math.floor((totalSeconds % 3600) / 60);
 					const newSeconds = totalSeconds % 60;
-					this.formattedDuration = `${newHours.toString().padStart(2, '0')} : ${newMinutes.toString().padStart(2, '0')} : ${newSeconds.toString().padStart(2, '0')}`;
-					if (this.formattedDuration === "00:00:10") {
-						this.$refs.duration.style.color = 'red';
-					}
+					this.formattedDuration = `${newHours.toString().padStart(2, '0')} : ${newMinutes
+						.toString()
+						.padStart(2, '0')} : ${newSeconds.toString().padStart(2, '0')}`;
 				} else {
 					clearInterval(this.timer);
 					this.$router.push(`/courses/${this.quizz.courseCode}/CourseQuizzes`);
@@ -94,19 +122,37 @@ export default {
 				this.currentPageIndex++;
 			}
 		},
+		lastPage() {
+			if (this.currentPageIndex < this.totalPages - 1) {
+				this.currentPageIndex = this.totalPages - 1;
+			}
+		},
 		prevPage() {
 			if (this.currentPageIndex > 0) {
 				this.currentPageIndex--;
 			}
+		},
+		firstPage() {
+			if (this.currentPageIndex > 0) {
+				this.currentPageIndex = 0;
+			}
 		}
 	},
 	async mounted() {
+		document.querySelector("body").classList.add("full");
+		document.querySelector("nav").style.display = "none";
+		document.querySelector("header").style.display = "none";
+
 		try {
 			const response = await axios.get(`http://localhost:3000/quizzes?quizId=${this.$route.params.quiz_id}`);
 			this.quizz = response.data[0];
 			this.pages = this.quizz.pages;
+			this.duration = this.formatDuration(this.quizz.duration);
 			this.formattedDuration = this.formatDuration(this.quizz.duration);
 			this.startTimer();
+
+			// Initialize selectedAnswers array and its nested arrays
+			this.selectedAnswers = new Array(this.pages.length).fill([]).map(() => new Array(this.itemsPerPage).fill(""));
 		} catch (error) {
 			console.error('Error fetching quiz:', error);
 		}
@@ -114,11 +160,23 @@ export default {
 	/* eslint-disable */
 	beforeDestroy() {
 		clearInterval(this.timer);
+	},
+	/* eslint-disable */
+	destroyed() {
+		document.querySelector("body").classList.remove("full");
+		document.querySelector("nav").style.display = "block";
+		document.querySelector("header").style.display = "flex";
 	}
-}
+};
 </script>
 
 <style scoped>
+.quizz {
+	width: 100%;
+	min-height: 100vh;
+	background: var(--white-color) !important;
+}
+
 .duration {
 	font-size: 24px;
 	text-align: center;
@@ -130,13 +188,28 @@ export default {
 	font-size: 20px;
 }
 
-.question-text {
-	font-size: 18px;
-	color: #555;
+.question {
+	border-radius: 8px;
+	box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
 }
 
-.answer-label {
-	margin-left: 10px;
+.question-text {
+	font-size: 18px;
+	color: var(--white-color);
+	background: var(--primary-color);
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	padding: 8px;
+}
+
+.answers {
+	font-size: 18px;
+	font-weight: 500;
+	color: #666;
+	padding: 8px;
+	border: 1px solid var(--primary-color);
+	border-bottom-left-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 .text-entry {
@@ -148,9 +221,11 @@ export default {
 	margin-top: 20px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	gap: 8px;
 }
 
-.pagination button {
+/* .pagination button {
 	margin: 0 5px;
 	padding: 5px 10px;
 	cursor: pointer;
@@ -158,10 +233,10 @@ export default {
 	color: #fff;
 	border: none;
 	border-radius: 5px;
-}
+} */
 
 .pagination button:disabled {
-	background-color: #ccc;
+	opacity: .2;
 	cursor: not-allowed;
 }
 </style>

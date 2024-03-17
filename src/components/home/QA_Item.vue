@@ -1,8 +1,7 @@
 <template>
 	<div class="qa">
-
-		<div v-for="(item, index) in items.slice(0, 5)" :key="index">
-			<div class="item">
+		<div v-for="(item, index) in items" :key="index">
+			<div class="item" :class="{ all: $props.all }">
 				<button class="accordion-btn" @click="toggleAccordion(index)" :class="{ active: item.open }">
 					<p class="header-text">{{ item.header }}</p>
 					<i class="icon fas fa-plus"></i>
@@ -13,7 +12,8 @@
 			</div>
 		</div>
 
-		<router-link class="all" to="">See All</router-link>
+		<router-link v-if="!$props.all" class="all text-center" style="color: var(--secondary-color)" to="/FAQs">See
+			All</router-link>
 	</div>
 </template>
 
@@ -24,6 +24,10 @@ export default {
 		items: {
 			type: Array,
 			required: true
+		},
+		all: {
+			type: Boolean,
+			default: false
 		}
 	},
 	methods: {
@@ -80,6 +84,10 @@ pre {
 	line-height: 20px;
 }
 
+.accordion-btn.active i {
+	transform: rotate(225deg);
+}
+
 .accordion-btn p {
 	margin: 0;
 }
@@ -94,6 +102,10 @@ pre {
 .active,
 .accordion-btn:hover {
 	background-color: var(--secondary-color);
+}
+
+.accordion-btn.all {
+	width: 100%;
 }
 
 .panel {
@@ -116,12 +128,21 @@ pre {
 	transition: var(--transition) !important;
 }
 
-.accordion-btn.active .icon {
-	transform: rotate(225deg);
+.all {
+	width: 100% !important;
 }
 
-.all {
-	text-align: center;
-	color: var(--secondary-color);
+.all .accordion-btn {
+	width: 100% !important;
+}
+
+@media (max-width: 768px) {
+	.item {
+		width: 100% !important;
+	}
+
+	.accordion-btn {
+		width: 100% !important;
+	}
 }
 </style>

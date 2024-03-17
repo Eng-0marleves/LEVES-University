@@ -129,5 +129,17 @@ export default {
 	.about-video {
 		padding: 8px;
 	}
+
+	.content {
+		text-align: center;
+	}
+
+	.intro-btn {
+		width: 100%;
+	}
+
+	.intro-btn img {
+		width: 100%;
+	}
 }
 </style>

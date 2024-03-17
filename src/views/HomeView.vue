@@ -23,6 +23,10 @@
 
     <LatestEvents />
 
+
+
+
+
     <!-- <AboutUniversity /> -->
 
 
@@ -31,8 +35,10 @@
 
 <script>
 import HomeCarousel from '@/components/home/HomeCarousel.vue';
+
 // import AboutUniversity from '@/components/home/AboutUniversity.vue';
 // import HeroPart from '@/components/home/HeroPart.vue';
+
 import OurFutures from '@/components/home/OurFutures.vue';
 import AboutVideo from '@/components/home/AboutVideo.vue';
 import QA from '@/components/home/QA.vue';
@@ -46,8 +52,10 @@ export default {
 
   components: {
     HomeCarousel,
+
     // AboutUniversity,
     // HeroPart,
+
     OurFutures,
     AboutVideo,
     QA,
@@ -73,5 +81,11 @@ export default {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 48px;
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 8px;
+  }
 }
 </style>

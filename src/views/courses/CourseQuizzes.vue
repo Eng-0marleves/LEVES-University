@@ -1,4 +1,5 @@
 <template>
+	<CourseOffCanvas />
 	<section class="CourseQuizzes">
 		<router-link :to="`CourseQuizzes/quizz_generator`" class="btn normal">Quizz Generator</router-link>
 
@@ -25,9 +26,13 @@
 
 <script>
 import axios from 'axios';
+import CourseOffCanvas from '@/components/courses/CourseOffCanvas.vue';
 
 export default {
 	name: 'CourseQuizzes',
+	components: {
+		CourseOffCanvas
+	},
 	data() {
 		return {
 			quizzes: [],

@@ -9,16 +9,22 @@
 
 <script>
 import QA_Item from './QA_Item.vue';
-import accordionData from './QA.json';
-
+// import axios from 'axios';
 export default {
 	components: {
 		QA_Item
 	},
 	data() {
 		return {
-			accordionItems: accordionData
+			accordionItems: []
 		};
+	},
+	methods: {
+		async getFAQs() {
+		}
+	},
+	async mounted() {
+		// this.accordionItems = await axios.get('http://localhost:5062/api/FAQs').data;
 	}
 }
 </script>
@@ -35,6 +41,14 @@ export default {
 @media (max-width: 768px) {
 	.container h1 {
 		flex: 1;
+	}
+
+	.container {
+		width: 300px !important;
+	}
+
+	.qa-container .title h3 {
+		text-align: center !important;
 	}
 }
 </style>

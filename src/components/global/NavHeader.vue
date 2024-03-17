@@ -38,6 +38,9 @@ export default {
 			this.navOpen = !this.navOpen;
 			document.querySelector("nav").classList.toggle("open");
 			this.updateBodyPadding();
+			if (document.getElementById("nav-overlayer")) {
+				document.getElementById("nav-overlayer").classList.toggle("hide");
+			}
 		},
 		toggleTitle() {
 			this.hidTitle = !this.hidTitle;

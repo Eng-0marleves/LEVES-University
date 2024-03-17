@@ -142,7 +142,8 @@ export default {
 
 @media (max-width: 768px) {
 	.event {
-		width: 100%;
+		width: 90%;
+		margin: 0 auto;
 	}
 }
 </style>

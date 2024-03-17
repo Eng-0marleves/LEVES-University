@@ -157,4 +157,23 @@ export default {
 	margin-top: 16px;
 	position: relative !important;
 }
+
+@media (max-width: 768px) {
+	/* .testimonials .testimonials-container {
+		width: 350px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		flex-direction: column;
+	} */
+
+	.testimonials {
+		width: 100%;
+		text-align: center;
+	}
+
+	.testimonials .testimonials-container {
+		width: 100%;
+	}
+}
 </style>

@@ -44,7 +44,7 @@
 }
 
 ::-webkit-scrollbar-track {
-	background: #f1f1f1;
+	background: #99999933;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -145,6 +145,12 @@ body.fit {
 @media (max-width: 768px) {
 	body {
 		padding-left: 0px !important;
+	}
+	body:has(.overlayer) {
+		overflow: hidden;
+	}
+	body:has(.overlayer.hide) {
+		overflow: auto;
 	}
 }
 

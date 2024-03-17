@@ -126,4 +126,10 @@ export default {
 	font-size: 16px;
 	color: #666;
 }
+
+@media (max-width: 768px) {
+	.about-futures .futures .future {
+		width: 100%;
+	}
+}
 </style>

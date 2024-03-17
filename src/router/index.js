@@ -11,6 +11,12 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/FAQs',
+    name: 'FAQs',
+    component: () => import('@/components/home/FAQs.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/courses',
     name: 'Courses',
     component: () => import('../views/courses/CoursesView.vue'),
@@ -52,17 +58,44 @@ const routes = [
       {
         path: ':course_code/CourseQuizzes/quizz_generator',
         component: () => import('../views/courses/QuizzGenerator.vue')
+      },
+      {
+        path: ':course_code/CourseAssigments',
+        name: 'CourseAssigments',
+        component: () => import('../views/courses/CourseAssigments.vue')
+      },
+      {
+        path: ':course_code/CourseSchedule',
+        name: 'CourseSchedule',
+        component: () => import('../views/courses/CourseSchedule.vue')
+      },
+    ]
+  },
+  {
+    path: '/schedule',
+    component: () => import('../views/schedule/ScheduleView.vue'),
+    redirect: '/schedule/home',
+    children: [
+      {
+        path: '/schedule/scheduleHome',
+        component: () => import('../views/schedule/ScheduleHome.vue'),
+      },
+      {
+        path: '/schedule/exams',
+        component: () => import('../views/schedule/ScheduleHome.vue'),
+      },
+      {
+        path: '/schedule/automation',
+        component: () => import('../views/schedule/ScheduleHome.vue'),
+      },
+      {
+        path: '/schedule/times',
+        component: () => import('../views/schedule/ScheduleHome.vue'),
+      },
+      {
+        path: '/schedule/events',
+        component: () => import('../views/schedule/ScheduleHome.vue'),
       }
-      // {`
-      //   path: 'CourseAssigments',
-      //   name: 'CourseAssigments',
-      //   component: () => import('../views/courses/CourseAssigments.vue')
-      // },
-      // {
-      //   path: 'CourseSchedule',
-      //   name: 'CourseSchedule',
-      //   component: () => import('../views/courses/CourseSchedule.vue')
-      // },
     ]
   },
   {
