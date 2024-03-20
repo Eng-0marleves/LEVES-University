@@ -132,12 +132,11 @@
       "title": "Full Quiz Example",
       "description": "This is a full example of a quiz with multiple pages and questions.",
       "courseCode": "CS101",
-      "doctorName": "Dr. Smith",
       "isPublished": true,
       "publishDate": "2024-07-03T04:00:00Z",
-      "endDate": "2024-07-03T00:04:00Z",
+      "From": "2024-07-03T00:04:00Z",
+      "To": "2024-07-03T00:04:00Z",
       "duration": "00:05:00",
-      "showFeedback": true,
       "showResult": true,
       "totalGrade": 100,
       "enrolls": [
@@ -618,6 +617,32 @@
       "user_id": "1",
       "course_code": "CSE101",
       "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    }
+  ],
+  "events": [
+    {
+      "eventName": "Event 1",
+      "eventDate": "2024-04-01",
+      "eventTimeFrom": "10:00 AM",
+      "eventTimeTo": "12:00 PM",
+      "eventLocation": "Location 1",
+      "eventDescription": "Description of Event 1"
+    },
+    {
+      "eventName": "Event 2",
+      "eventDate": "2024-03-20",
+      "eventTimeFrom": "10:00 AM",
+      "eventTimeTo": "12:00 PM",
+      "eventLocation": "Location 2",
+      "eventDescription": "Description of Event 2"
+    },
+    {
+      "eventName": "Event 3",
+      "eventDate": "2024-06-01",
+      "eventTimeFrom": "10:00 AM",
+      "eventTimeTo": "12:00 PM",
+      "eventLocation": "Location 3",
+      "eventDescription": "Description of Event 3"
     }
   ]
 }

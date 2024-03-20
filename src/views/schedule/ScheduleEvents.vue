@@ -1,16 +1,16 @@
 <template>
-	<div class="quizzes-home">
-		wwwwwwwwwwwwwwwwwwwwww
+	<div class="schedule-events">
+
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'QuizzesHome',
+	name: 'ScheduleEvents',
 	data() {
 		return {
 			// Your data goes here
-		};
+		}
 	},
 	methods: {
 		// Your methods go here
@@ -21,9 +21,12 @@ export default {
 	created() {
 		// Code to run when the component is created
 	},
-};
+	mounted() {
+		// Code to run when the component is mounted
+	}
+}
 </script>
 
 <style scoped>
-/* Your styles go here */
+/* Your CSS goes here */
 </style>

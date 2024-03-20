@@ -1,6 +1,7 @@
 
 using Leves_University.Models;
 using Microsoft.EntityFrameworkCore;
+//using Serilog;
 
 namespace Leves_University
 {
@@ -10,10 +11,15 @@ namespace Leves_University
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
+            //    .WriteTo.File("log/Logs.txt", rollingInterval: RollingInterval.Hour).CreateLogger();
+
+            //builder.Host.UseSerilog();
+
             // Add services to the container.
             builder.Services.AddDbContext<LevesEntities>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LevesUniversity")));
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddNewtonsoftJson();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

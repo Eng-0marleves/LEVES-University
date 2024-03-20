@@ -6,7 +6,7 @@
 
 			<div v-for="(event, i) in events" :key="i" class="event mt-4">
 
-				<div class="left">
+				<div class="left text-center">
 					<p>{{ event.date.day }}</p>
 					<p>{{ event.date.month }}</p>
 				</div>
@@ -14,7 +14,7 @@
 				<div class="devide"></div>
 				<div class="right">
 					<div class="about">
-						<router-link to="" class="router">{{ event.title }}</router-link>
+						<p class="router">{{ event.title }}</p>
 						<p>{{ truncateDescription(event.description) }}</p>
 					</div>
 
@@ -27,7 +27,7 @@
 			</div>
 
 		</div>
-		<router-link to="description" class="router">See All</router-link>
+		<router-link to="schedule/scheduleHome" class="router">See All</router-link>
 	</div>
 </template>
 
@@ -127,9 +127,14 @@ export default {
 	flex-direction: column;
 }
 
-.event .right .router {
+.router {
 	color: var(--primary-color);
-	font-size: 24px;
+	font-size: 20px;
+	transition: var(--transition);
+}
+
+.router:hover {
+	color: var(--secondary-color);
 }
 
 .event .right .location {

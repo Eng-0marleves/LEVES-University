@@ -1,23 +1,29 @@
 <template>
 	<CourseOffCanvas />
-	<section class="CourseQuizzes">
-		<router-link :to="`CourseQuizzes/quizz_generator`" class="btn normal">Quizz Generator</router-link>
+	<section class="CourseQuizzes d-flex flex-column gap-4">
+		<router-link :to="`CourseQuizzes/quizz_generator`" class="btn normal generator">Quizz Generator</router-link>
 
 		<div class="card" v-for="quiz in quizzes" :key="quiz.quizId">
-			<div class="card-header">
-				{{ quiz.title }}
-			</div>
-			<div class="card-body d-flex flex-column gap-2">
-				<h6>Dr: {{ quiz.doctorName }}</h6>
-				<h6>Grades: {{ quiz.totalGrade }}</h6>
-				<h6>Duration: {{ quiz.duration }}</h6>
-				<h6>Start Date: {{ formatDate(quiz.publishDate) }}</h6>
-				<h6>End Date: {{ formatDate(quiz.endDate) }}</h6>
-				<div class="controllers d-flex flex-row flex-wrap gap-2">
-					<router-link :to="`CourseQuizzes/${quiz.quizId}`" v-if="!isPastDate(quiz.endDate)"
-						class="btn normal">Start</router-link>
-					<a href="#" class="btn normal">Result</a>
-					<a href="#" class="btn normal">Analysis</a>
+			<div class="card-body">
+				<h6>{{ quiz.title }}</h6>
+
+				<div class="controllers d-flex flex-row flex-wrap gap-2 align-items-center">
+					<div class="status me-3">{{ quiz.isPublished ? 'Open' : 'In Design' }}</div>
+					<router-link :to="`CourseQuizzes/quizzDetails/${quiz.quizId}`" class="action-btn">Open</router-link>
+					<router-link to="" class="action-btn" v-if="!quiz.isPublished">Preview</router-link>
+					<router-link to="" class="action-btn" v-if="quiz.showResult">Result</router-link>
+					<router-link to="" class="action-btn" v-if="!quiz.isPublished">Analysis</router-link>
+
+					<a class="action-btn dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+						aria-expanded="false">
+						Action
+					</a>
+
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="#">Edit</a></li>
+						<li><a class="dropdown-item" href="#">Delete</a></li>
+						<li><a class="dropdown-item" href="#">Rename</a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -79,13 +85,29 @@ export default {
 	padding: 16px;
 }
 
-.card-header {
-	background: var(--primary-color);
-	color: var(--white-color);
+.card-body {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .loading {
 	text-align: center;
 	padding: 20px;
+}
+
+.CourseQuizzes .generator {
+	margin: 0 auto;
+}
+
+.action-btn {
+	color: var(--white-color);
+	background: var(--primary-color);
+	padding: 4px 8px;
+	transition: var(--transition);
+}
+
+.action-btn:hover {
+	opacity: 0.9;
 }
 </style>

@@ -52,7 +52,12 @@ const routes = [
         component: () => import('../views/courses/CourseQuizzes.vue'),
       },
       {
+        path: ':course_code/CourseQuizzes/quizzDetails/:quiz_id',
+        component: () => import('@/components/courses/quizzes/QuizzDetails.vue')
+      },
+      {
         path: ':course_code/CourseQuizzes/:quiz_id',
+        name: 'quizz',
         component: () => import('../views/courses/CourseQuiz.vue')
       },
       {
@@ -74,7 +79,7 @@ const routes = [
   {
     path: '/schedule',
     component: () => import('../views/schedule/ScheduleView.vue'),
-    redirect: '/schedule/home',
+    redirect: '/schedule/scheduleHome',
     children: [
       {
         path: '/schedule/scheduleHome',
@@ -94,7 +99,7 @@ const routes = [
       },
       {
         path: '/schedule/events',
-        component: () => import('../views/schedule/ScheduleHome.vue'),
+        component: () => import('../views/schedule/ScheduleEvents.vue'),
       }
     ]
   },

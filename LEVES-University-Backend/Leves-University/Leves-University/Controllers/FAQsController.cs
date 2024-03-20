@@ -1,5 +1,7 @@
-﻿using Leves_University.Models;
+﻿using Azure;
+using Leves_University.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -10,16 +12,19 @@ namespace Leves_University.Controllers
     public class FAQsController : ControllerBase
     {
         private readonly LevesEntities context;
+        private readonly ILogger<LevesEntities> _logger;
 
-        public FAQsController(LevesEntities context)
+        public FAQsController(LevesEntities context,ILogger<LevesEntities> logger)
         {
             this.context = context;
+            this._logger = logger;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<IEnumerable<FAQs>> GetAll()
         {
+            _logger.LogInformation("GetAll");
             var FAQsList = context.FAQs.ToList();
             return Ok(FAQsList);
         }
@@ -103,6 +108,30 @@ namespace Leves_University.Controllers
             }
             faq.Header = faq_i.Header;
             faq.Content = faq_i.Content;
+            return NoContent();
+        }
+    
+        [HttpPatch("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public ActionResult UpdateTitle(int id, JsonPatchDocument<FAQs> patch_faq)
+        {
+            if (patch_faq == null || id == 0)
+            {
+                return BadRequest();
+            }
+
+            var faq = context.FAQs.FirstOrDefault(f => f.ID ==  id);
+            if (faq == null)
+            {
+                return BadRequest();
+            }
+
+            patch_faq.ApplyTo(faq, ModelState);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             return NoContent();
         }
     }

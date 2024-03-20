@@ -5,9 +5,9 @@ import { Month } from '@syncfusion/ej2-vue-schedule';
 			<div class="left">
 				<div ref="calender" class="calender">
 					<div class="month">
-						<i ref="prev" class="fas fa-angle-left prev"></i>
+						<i ref="prev" class="fas fa-angle-left prev" @click="prevMonth"></i>
 						<div ref="date" class="date">{{ months[month] + " " + year }}</div>
-						<i ref="next" class="fas fa-angle-right next"></i>
+						<i ref="next" class="fas fa-angle-right next" @click="nextMonth"></i>
 					</div>
 
 					<div class="weekdays">
@@ -21,19 +21,38 @@ import { Month } from '@syncfusion/ej2-vue-schedule';
 					</div>
 
 					<div ref="days" class="days">
-						<div v-for="i in day" :key="i" class="day prev-date">{{ prevDays - i }}</div>
-						<div v-for="i in lastDate" :key="i" class="day" :class="{ 'today': i == new Date().getDate() }">
+						<div v-for="i in day" :key="i" class="day prev-date">{{ prevDays - day + i
+							}}</div>
+						<div v-for="i in lastDate" :key="i" class="day"
+							:class="{ 'today': i == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear(), 'event': checkDate(i) }"
+							@click="selectDeta(i)">
 							{{ i }}</div>
+						<div v-for="i in nextDays" :key="i" class="day next-date">{{ i }}</div>
 					</div>
 
 					<div class="goto-day">
 						<div claa="goto bg-success">
-							<input type="text" placeholder="mm/yyyy" class="date-input">
-							<button class="goto-btn">go</button>
+							<input type="text" placeholder="mm/yyyy" class="date-input" v-model="gotoDate">
+							<button class="goto-btn" @click="goToDate">go</button>
 						</div>
-						<button class="today-btn">today</button>
+						<button class="today-btn" @click="today">today</button>
 					</div>
 
+				</div>
+			</div>
+			<div class="right">
+				<div class="today-date">
+					<div class="event-day">{{ selectedDay }}</div>
+					<div class="event-date">{{ selectedDate }}</div>
+				</div>
+				<div class="events">
+					<div class="event">
+						<div class="title">
+							<i class="fas fa-circle"></i>
+							<h3 class="event-title">Event 1</h3>
+						</div>
+						<div class="event-time">10:00AM - 12:00PM</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -41,6 +60,7 @@ import { Month } from '@syncfusion/ej2-vue-schedule';
 </template>
 
 <script>
+import axios from 'axios';
 export default {
 	name: 'ScheduleHome',
 	data() {
@@ -58,27 +78,121 @@ export default {
 			lastDate: null,
 			day: null,
 			nextDays: null,
-			monthYearText: null
+			monthYearText: null,
+			gotoDate: '',
+
+			daysOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+			selectedDate: this,
+			selectedDay: null,
+
+			events: [],
+			eventsDates: [],
+
+			eventsList: []
 		};
 	},
 	methods: {
-		initData() {
+		initData(month, year) {
 			const today = new Date();
-			this.month = today.getMonth();
-			this.year = today.getFullYear();
+			this.month = month || today.getMonth();
+			this.year = year || today.getFullYear();
 			this.firstDay = new Date(this.year, this.month, 1);
 			this.lastDay = new Date(this.year, this.month + 1, 0);
 			this.prevLastDay = new Date(this.year, this.month, 0);
 			this.prevDays = this.prevLastDay.getDate();
 			this.lastDate = this.lastDay.getDate();
-			this.day = this.firstDay.getDate();
+			this.day = this.firstDay.getDay();
 			this.nextDays = 7 - this.lastDay.getDay() - 1;
 			this.monthYearText = this.months[this.month] + " " + this.year;
+		},
+
+		selectDeta(day) {
+			this.selectedDate = day + " " + this.months[this.month] + " " + this.year;
+			this.selectedDay = this.daysOfWeek[new Date(this.selectedDate).getDay()];
+			this.getEventsList(day)
+		},
+
+		nextMonth() {
+			this.month++;
+			if (this.month > 11) {
+				this.month = 0;
+				this.year++;
+			}
+			this.initData(this.month, this.year);
+		},
+		prevMonth() {
+			this.month--;
+			if (this.month < 0) {
+				this.month = 11;
+				this.year--;
+			}
+			this.initData(this.month, this.year);
+		},
+		today() {
+			this.initData();
+			this.selectDeta(new Date().toDateString().split(' ')[2]);
+		},
+		goToDate() {
+			const [enteredMonth, enteredYear] = this.gotoDate.split('/');
+			if (enteredMonth && enteredYear) {
+				const parsedMonth = parseInt(enteredMonth) - 1; // Subtract 1 because JavaScript months are zero-based
+				const parsedYear = parseInt(enteredYear);
+				if (!isNaN(parsedMonth) && !isNaN(parsedYear)) {
+					this.initData(parsedMonth, parsedYear);
+					this.gotoDate = ''; // Clear input after successfully setting the date
+				} else {
+					alert('Please enter a valid month and year (mm/yyyy)');
+				}
+			} else {
+				alert('Please enter both month and year (mm/yyyy)');
+			}
+		},
+		async getEvents() {
+			try {
+				const response = await axios.get('http://localhost:3000/events');
+				if (response.status) {
+					this.events = response.data;
+					this.getEventsDates();
+				}
+			} catch (e) {
+				console.error(e)
+			}
+		},
+		getEventsDates() {
+			if (this.events) {
+				this.events.forEach(e => {
+					let event = e.eventDate;
+					let year = event.split('-')[0];
+					let month = event.split('-')[1];
+					let day = event.split('-')[2];
+					this.eventsDates.push({
+						year: Number(year),
+						month: Number(month),
+						day: Number(day)
+					})
+				});
+			}
+		},
+		checkDate(day) {
+			let found = false;
+
+			this.eventsDates.forEach(e => {
+				if (e.year === this.year && e.month === (this.month + 1) && e.day === day) {
+					found = true;
+				}
+			});
+
+			return found;
+		},
+		getEventsList(day) {
+			console.log(day);
 		}
 	},
 	created() {
 		this.initData();
-	}
+		this.selectDeta(new Date().toDateString().split(' ')[2]);
+		this.getEvents();
+	},
 };
 </script>
 
@@ -99,13 +213,15 @@ export default {
 	padding: 8px;
 	color: var(--white-color);
 	display: flex;
+	flex-wrap: wrap;
+	/* gap: 16px; */
 	border-radius: 12px;
 	background: var(--primary-color);
 }
 
 .left {
 	width: 60%;
-	padding: 24px;
+	padding: 20px;
 }
 
 .calender {
@@ -116,6 +232,7 @@ export default {
 	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	align-items: center;
 	color: #333;
 	border-radius: 8px;
 	background: var(--white-color);
@@ -155,6 +272,10 @@ export default {
 	text-transform: capitalize;
 }
 
+.month i {
+	cursor: pointer;
+}
+
 .weekdays {
 	width: 100%;
 	height: 80px;
@@ -189,7 +310,7 @@ export default {
 .days .day {
 	position: relative;
 	width: 14.28%;
-	height: 88px;
+	height: 44px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -203,13 +324,13 @@ export default {
 	background: var(--secondary-color);
 }
 
-.days .day .prev-date,
-.days .day .next-date {
+.days .day.prev-date,
+.days .day.next-date {
 	color: #b3b3b3;
 }
 
 .days .day.today {
-	font-size: 2rem;
+	font-size: 1.4rem;
 	color: var(--secondary-color);
 }
 
@@ -236,7 +357,7 @@ export default {
 	bottom: 8%;
 	left: 12%;
 	width: 76%;
-	height: 8px;
+	height: 4px;
 	border-radius: 32px;
 	/* transform: translateX(35%); */
 	background: var(--secondary-color);
@@ -294,5 +415,136 @@ div.goto-day>div>input {
 .goto-day .goto button:hover {
 	color: var(--white-color);
 	background: var(--secondary-color);
+}
+
+/* right */
+
+.right {
+	position: relative;
+	width: 40%;
+	min-height: 100%;
+	padding: 20px;
+}
+
+.right .today-date {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	/* padding: 0 40px; */
+	/* padding-left: 70px; */
+	/* margin-top: 50px; */
+	margin-bottom: 20px;
+	text-transform: capitalize;
+}
+
+.right .today-date .event-day {
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.right .today-date .event-date {
+	font-size: 1rem;
+	font-weight: 400;
+	color: #d1d3e0;
+}
+
+.events {
+	width: 100%;
+	height: 100%;
+	max-height: 400px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.events .event {
+	position: relative;
+	width: 95%;
+	min-height: 70px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	gap: 8px;
+	/* padding: 0 20px; */
+	padding-left: 8px;
+	color: var(--white-color);
+	cursor: pointer;
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), var(--primary-color));
+}
+
+.events .event:nth-child(even) {
+	background: transparent;
+}
+
+.events .event .title {
+	display: flex;
+	align-items: center;
+	pointer-events: none;
+}
+
+.events .event .title .event-title {
+	font-size: 1rem;
+	font-weight: 400;
+	margin-left: 8px;
+}
+
+.events .event .title i {
+	font-size: 12px;
+	color: var(--secondary-color);
+}
+
+.events .event:hover {
+	background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+}
+
+.events .event:hover .title i,
+.events .event:hover .event-time {
+	color: var(--white-color);
+}
+
+.events .event .event-time {
+	font-size: 0.8rem;
+	font-weight: 400;
+	color: #d1d3e0;
+	margin-left: 12px;
+	pointer-events: none;
+}
+
+.events .event::after {
+	content: "✓";
+	position: absolute;
+	top: 50%;
+	right: 0;
+	font-size: 2.4rem;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	opacity: 0.8;
+	color: var(--secondary-color);
+	transform: translateY(-50%);
+}
+
+.events .event:hover::after {
+	display: flex;
+}
+
+@media (max-width: 768px) {
+	.container {
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.left {
+		width: 100%;
+	}
+
+	.right {
+		width: 100%;
+	}
 }
 </style>

@@ -1,8 +1,6 @@
 <template>
 	<div class="quizz">
-		<div class="duration" :style="{ color: durationColor }">
-			{{ formattedDuration }}
-		</div>
+		<h2 class="title">{{ quizz.title }}</h2>
 
 		<div class="course-quiz p-3">
 			<div class="pages d-flex flex-column gap-5">
@@ -54,9 +52,13 @@
 			</div>
 		</div>
 
-		<!-- Display the total number of answered questions -->
-		<div class="answered-questions">
-			Total Answered Questions: {{ totalAnsweredQuestions }}
+		<div class="footer d-flex justify-content-between align-items-center">
+			<div class="duration" :style="{ color: durationColor }">
+				{{ formattedDuration }}
+			</div>
+			<div class="answered-questions">
+				Total Answered Questions: {{ totalAnsweredQuestions }}
+			</div>
 		</div>
 	</div>
 </template>
@@ -177,6 +179,13 @@ export default {
 	background: var(--white-color) !important;
 }
 
+.title {
+	width: 100%;
+	padding: 16px;
+	background: var(--primary-color);
+	color: var(--white-color);
+}
+
 .duration {
 	font-size: 24px;
 	text-align: center;
@@ -238,5 +247,15 @@ export default {
 .pagination button:disabled {
 	opacity: .2;
 	cursor: not-allowed;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	color: var(--primary-color);
+	background: #e7e6e6a7;
+	padding: 10px 20px;
 }
 </style>

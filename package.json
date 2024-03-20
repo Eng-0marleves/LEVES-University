@@ -20,7 +20,8 @@
     "swiper": "^11.0.6",
     "vue-qrcode-reader": "^5.5.3",
     "vue-quill-editor": "^3.0.6",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

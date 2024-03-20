@@ -1,0 +1,20 @@
+{
+	"quizId": 1,
+	"title": "",
+	"description": "",
+	"courseCode": "",
+	"isPublished": false,
+	"publishDate": "",
+	"From": "",
+	"To": "",
+	"duration": "",
+	"showResult": true,
+	"totalGrade": 100,
+	"enrolls": [],
+	"pages": [
+		{
+			"pageId": "1",
+			"questions": []
+		}
+	]
+}
