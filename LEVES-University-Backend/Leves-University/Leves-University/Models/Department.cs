@@ -5,10 +5,13 @@ namespace Leves_University.Models
 {
     public class Department
     {
+        [Key]
         public int Id { get; set; }
+
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
+
         [Required]
         [ForeignKey("College")]
         public int CollegeId { get; set; }

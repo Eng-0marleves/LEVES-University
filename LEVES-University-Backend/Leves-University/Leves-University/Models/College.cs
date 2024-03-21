@@ -5,13 +5,14 @@ namespace Leves_University.Models
 {
     public class College
     {
+        [Key]
         public int Id { get; set; }
+
         [Required]
         [MaxLength(255)]
         public string Name { get; set; }
 
-        [Required]
-        [ForeignKey("User")]
+        [ForeignKey("Manager")]
         public int? ManagerId { get; set; }
         public User Manager { get; set; }
     }

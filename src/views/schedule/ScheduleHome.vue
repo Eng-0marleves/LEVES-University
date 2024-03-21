@@ -24,9 +24,10 @@ import { Month } from '@syncfusion/ej2-vue-schedule';
 						<div v-for="i in day" :key="i" class="day prev-date">{{ prevDays - day + i
 							}}</div>
 						<div v-for="i in lastDate" :key="i" class="day"
-							:class="{ 'today': i == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear(), 'event': checkDate(i) }"
-							@click="selectDeta(i)">
-							{{ i }}</div>
+							:class="{ 'today': i == new Date().getDate() && month == new Date().getMonth() && year == new Date().getFullYear(), 'event': checkDate(i), 'active': activeDay === i }"
+							@click="selectDeta(i); getEventsList(i)">
+							{{ i }}
+						</div>
 						<div v-for="i in nextDays" :key="i" class="day next-date">{{ i }}</div>
 					</div>
 
@@ -46,12 +47,18 @@ import { Month } from '@syncfusion/ej2-vue-schedule';
 					<div class="event-date">{{ selectedDate }}</div>
 				</div>
 				<div class="events">
-					<div class="event">
+					<div v-for="(e, i) in eventsList" :key="i" class="event">
 						<div class="title">
 							<i class="fas fa-circle"></i>
-							<h3 class="event-title">Event 1</h3>
+							<h3 class="event-title">{{ e.eventName }}</h3>
 						</div>
-						<div class="event-time">10:00AM - 12:00PM</div>
+						<div class="event-time">
+							{{ e.eventTimeFrom }} - {{ e.eventTimeTo }}
+						</div>
+						<div class="event-time">
+							<i class="fa-solid fa-location-dot"></i>
+							{{ e.eventLocation }}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -80,6 +87,7 @@ export default {
 			nextDays: null,
 			monthYearText: null,
 			gotoDate: '',
+			activeDay: null,
 
 			daysOfWeek: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
 			selectedDate: this,
@@ -88,7 +96,7 @@ export default {
 			events: [],
 			eventsDates: [],
 
-			eventsList: []
+			eventsList: [],
 		};
 	},
 	methods: {
@@ -107,9 +115,9 @@ export default {
 		},
 
 		selectDeta(day) {
+			this.activeDay = day;
 			this.selectedDate = day + " " + this.months[this.month] + " " + this.year;
 			this.selectedDay = this.daysOfWeek[new Date(this.selectedDate).getDay()];
-			this.getEventsList(day)
 		},
 
 		nextMonth() {
@@ -119,7 +127,13 @@ export default {
 				this.year++;
 			}
 			this.initData(this.month, this.year);
+			const activeDayElement = document.querySelector(".day.active");
+			if (activeDayElement) {
+				activeDayElement.classList.remove("active");
+			}
+			this.activeDay = null; // Also reset the activeDay state
 		},
+
 		prevMonth() {
 			this.month--;
 			if (this.month < 0) {
@@ -127,11 +141,18 @@ export default {
 				this.year--;
 			}
 			this.initData(this.month, this.year);
+			const activeDayElement = document.querySelector(".day.active");
+			if (activeDayElement) {
+				activeDayElement.classList.remove("active");
+			}
+			this.activeDay = null; // Also reset the activeDay state
 		},
+
 		today() {
 			this.initData();
 			this.selectDeta(new Date().toDateString().split(' ')[2]);
 		},
+
 		goToDate() {
 			const [enteredMonth, enteredYear] = this.gotoDate.split('/');
 			if (enteredMonth && enteredYear) {
@@ -147,17 +168,23 @@ export default {
 				alert('Please enter both month and year (mm/yyyy)');
 			}
 		},
+
 		async getEvents() {
 			try {
 				const response = await axios.get('http://localhost:3000/events');
 				if (response.status) {
 					this.events = response.data;
 					this.getEventsDates();
+
+					const today = new Date();
+					const dayOfMonth = today.getDate();
+					this.getEventsList(dayOfMonth);
 				}
 			} catch (e) {
 				console.error(e)
 			}
 		},
+
 		getEventsDates() {
 			if (this.events) {
 				this.events.forEach(e => {
@@ -168,11 +195,16 @@ export default {
 					this.eventsDates.push({
 						year: Number(year),
 						month: Number(month),
-						day: Number(day)
+						day: Number(day),
+						eventName: e.eventName,
+						eventTimeFrom: e.eventTimeFrom,
+						eventTimeTo: e.eventTimeTo,
+						eventLocation: e.eventLocation
 					})
 				});
 			}
 		},
+
 		checkDate(day) {
 			let found = false;
 
@@ -184,8 +216,21 @@ export default {
 
 			return found;
 		},
+
 		getEventsList(day) {
-			console.log(day);
+			this.eventsList = [];
+			this.eventsDates.forEach(e => {
+				if (e.year === this.year && e.month === (this.month + 1) && e.day === day) {
+					this.eventsList.push({
+						eventName: e.eventName,
+						eventTimeFrom: e.eventTimeFrom,
+						eventTimeTo: e.eventTimeTo,
+						eventLocation: e.eventLocation
+					})
+				}
+			});
+
+			console.log(this.eventsDates);
 		}
 	},
 	created() {
@@ -193,6 +238,8 @@ export default {
 		this.selectDeta(new Date().toDateString().split(' ')[2]);
 		this.getEvents();
 	},
+	mounted() {
+	}
 };
 </script>
 
@@ -336,7 +383,7 @@ export default {
 
 .days .day.active {
 	position: relative;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	color: var(--white-color);
 	background: var(--secondary-color);
 }

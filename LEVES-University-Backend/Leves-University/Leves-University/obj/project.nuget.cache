@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mmHnQigs8A+Jf1GHEr7S7LZQKD3+gVU6nUaIxtah1a69Pn8SVeNjGEIFT+xA5udG1lQzLgXMIPJI9cqwL3EVkA==",
+  "dgSpecHash": "bqsVmjmbw02d6/i8j2JDdVlm8eoYWGzyj8XomOgMBpcaIghM3fz1KJWdE8iqoDf8DMXOGhGb30CtEoMDjggIxw==",
   "success": true,
   "projectFilePath": "D:\\Omar Data\\Programing\\WEB\\projects\\Graduation Project\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Omar\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Omar\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\Omar\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Omar\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Omar\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\8.0.3\\microsoft.aspnetcore.jsonpatch.8.0.3.nupkg.sha512",
     "C:\\Users\\Omar\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\8.0.3\\microsoft.aspnetcore.mvc.newtonsoftjson.8.0.3.nupkg.sha512",

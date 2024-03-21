@@ -1,6 +1,8 @@
 
 using Leves_University.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 //using Serilog;
 
 namespace Leves_University
@@ -18,6 +20,24 @@ namespace Leves_University
 
             // Add services to the container.
             builder.Services.AddDbContext<LevesEntities>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LevesUniversity")));
+
+
+            //builder.Services.
+            //    AddIdentityCore<LevesEntities>()
+            //    .AddDefaultTokenProviders();
+
+
+            //builder.Services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Password.RequiredLength = 8;
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequireLowercase = false;
+            //    options.Password.RequireUppercase = false;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //});
+
+
+
 
             builder.Services.AddControllers().AddNewtonsoftJson();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
