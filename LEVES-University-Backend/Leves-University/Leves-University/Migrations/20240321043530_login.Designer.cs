@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Leves_University.Migrations
 {
     [DbContext(typeof(LevesEntities))]
-    [Migration("20240321042746_login")]
+    [Migration("20240321043530_login")]
     partial class login
     {
         /// <inheritdoc />

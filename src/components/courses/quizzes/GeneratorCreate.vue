@@ -3,7 +3,7 @@
 		<div class="pages" ref="pagesContainer"> <!-- Add ref attribute to the container div -->
 			<GeneratorPage :draggable="isDraggable" v-for="(page, index) in pages" :key="index" :page="page"
 				:pageNumber="index + 1" @delete-page="deletePage(index)" @edit-page="editPage(index)"
-				@move-page="movePage($event)" />
+				@move-page="movePage($event)" @save-page="handleSavePage" />
 		</div>
 		<button class="btn normal" @click="addPage">Add Page</button>
 	</div>
@@ -29,9 +29,14 @@ export default {
 		GeneratorPage
 	},
 	methods: {
+		generatePageId() {
+			const timestamp = Date.now().toString(36); // Convert timestamp to base 36 string
+			const randomSuffix = Math.random().toString(36).substring(2, 8); // Generate a random string
+			return `${timestamp}-${randomSuffix}`;
+		},
 		addPage() {
 			this.pages.push({
-				pageId: String(this.pages.length + 1),
+				pageId: this.generatePageId(),
 				questions: []
 			});
 		},
@@ -69,7 +74,21 @@ export default {
 			}
 
 			pagesList.addEventListener("dragover", (e) => sortedPages(e));
-		}
+		},
+		handleSavePage(pageData) {
+			// this.pages.forEach(e => {
+			// 	// if (e.pageId === pageData.pageId) {
+			// 	// 	for (let i of pageData.questions) {
+			// 	// 		e.questions.push(i)
+			// 	// 	}
+			// 	// }
+
+			// 	e
+			// })
+
+			console.log(this.pages);
+			console.log(pageData);
+		},
 	},
 	computed: {
 		// Your computed properties go here

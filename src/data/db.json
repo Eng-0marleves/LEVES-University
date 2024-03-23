@@ -24,6 +24,12 @@
       "page": "CSE101",
       "user_id": 123,
       "content": "wwwwwwwwwwwwwwwww"
+    },
+    {
+      "id": "a94e",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "<div style=\"color: rgb(204, 204, 204); background-color: rgb(31, 31, 31); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 13.3963px; line-height: 18px; white-space: pre;\"><span style=\"color: #9cdcfe;\">ContentGenerator</span></div>"
     }
   ],
   "courses": [
@@ -643,6 +649,51 @@
       "eventTimeTo": "12:00 PM",
       "eventLocation": "Location 3",
       "eventDescription": "Description of Event 3"
+    },
+    {
+      "id": "9ad4",
+      "eventName": "Test",
+      "eventDate": "2024-03-21",
+      "eventTimeFrom": "11:00",
+      "eventTimeTo": "11:59",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "9a39",
+      "eventName": "Event",
+      "eventDate": "2024-03-22",
+      "eventTimeFrom": "10:30",
+      "eventTimeTo": "11:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "9179",
+      "eventName": "Test",
+      "eventDate": "2024-03-23",
+      "eventTimeFrom": "13:00",
+      "eventTimeTo": "14:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "a45a",
+      "eventName": "Test",
+      "eventDate": "2024-03-24",
+      "eventTimeFrom": "13:00",
+      "eventTimeTo": "13:55",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "994e",
+      "eventName": "Test\\",
+      "eventDate": "2024-03-25",
+      "eventTimeFrom": "00:00",
+      "eventTimeTo": "13:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
     }
   ]
 }

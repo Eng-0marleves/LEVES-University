@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Leves-University")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e81b07646d93e3cb4ded4825969c729536ba45a0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Leves-University")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Leves-University")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

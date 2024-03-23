@@ -104,6 +104,21 @@ const routes = [
     ]
   },
   {
+    path: '/Support',
+    component: () => import('../views/support/SupportChat.vue'),
+    redirect: '/Support/inpox',
+    children: [
+      {
+        path: '/Support/inpox',
+        component: () => import('../views/support/ChatInbox.vue'),
+      },
+      {
+        path: '/Support/chat',
+        component: () => import('../views/support/ChatApp.vue'),
+      },
+    ]
+  },
+  {
     path: '/login',
     name: 'Login',
     component: LoginView

@@ -36,28 +36,53 @@ import { Month } from '@syncfusion/ej2-vue-schedule';
 							<input type="text" placeholder="mm/yyyy" class="date-input" v-model="gotoDate">
 							<button class="goto-btn" @click="goToDate">go</button>
 						</div>
-						<button class="today-btn" @click="today">today</button>
+						<div
+							class="controllers d-flex justify-content-center align-items-center flex-wrap gap-1 border-0">
+							<button class="today-btn" @click="today">Today</button>
+							<button class="today-btn" @click="displayAddEvent">Add Event</button>
+						</div>
 					</div>
 
 				</div>
 			</div>
 			<div class="right">
-				<div class="today-date">
-					<div class="event-day">{{ selectedDay }}</div>
-					<div class="event-date">{{ selectedDate }}</div>
+				<div class="add-event">
+					<div class="header d-flex justify-content-between align-items-center mb-4">
+						<h3>Add Event</h3>
+						<i class="fas fa-times" @click="hideAddEvent"></i>
+					</div>
+					<form @submit.prevent="submitForm" class="inputs d-flex flex-column gap-4">
+						<input type="text" ref="eventName" required name="eventName" placeholder="Event Name" />
+						<input type="date" ref="eventDate" required name="eventDate" placeholder="Event Date" />
+						<input type="time" ref="eventTimeFrom" required name="eventTimeFrom" placeholder="Time From" />
+						<input type="time" ref="eventTimeTo" required name="eventTimeTo" placeholder="Time To" />
+						<input type="text" ref="eventLocation" required name="eventLocation"
+							placeholder="Event Location" />
+						<input type="text" ref="eventDescription" required name="eventDescription"
+							placeholder="Event Description" />
+						<input type="submit" class="btn btn-success ms-auto me-auto border-none"
+							style="width: fit-content;" />
+					</form>
 				</div>
-				<div class="events">
-					<div v-for="(e, i) in eventsList" :key="i" class="event">
-						<div class="title">
-							<i class="fas fa-circle"></i>
-							<h3 class="event-title">{{ e.eventName }}</h3>
-						</div>
-						<div class="event-time">
-							{{ e.eventTimeFrom }} - {{ e.eventTimeTo }}
-						</div>
-						<div class="event-time">
-							<i class="fa-solid fa-location-dot"></i>
-							{{ e.eventLocation }}
+
+				<div class="events-container active">
+					<div class="today-date">
+						<div class="event-day">{{ selectedDay }}</div>
+						<div class="event-date">{{ selectedDate }}</div>
+					</div>
+					<div class="events">
+						<div v-for="(e, i) in eventsList" :key="i" class="event mt-2">
+							<div class="title">
+								<i class="fas fa-circle"></i>
+								<h3 class="event-title">{{ e.eventName }}</h3>
+							</div>
+							<div class="event-time">
+								{{ e.eventTimeFrom }} - {{ e.eventTimeTo }}
+							</div>
+							<div class="event-time">
+								<i class="fa-solid fa-location-dot"></i>
+								{{ e.eventLocation }}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -153,6 +178,51 @@ export default {
 			this.selectDeta(new Date().toDateString().split(' ')[2]);
 		},
 
+		displayAddEvent() {
+			const addEvent = document.querySelector('.add-event');
+			addEvent.classList.add('active');
+
+			const eventsContainer = document.querySelector('.events-container');
+			eventsContainer.classList.remove('active');
+		},
+
+		hideAddEvent() {
+			const addEvent = document.querySelector('.add-event');
+			addEvent.classList.remove('active');
+
+			const eventsContainer = document.querySelector('.events-container');
+			eventsContainer.classList.add('active');
+		},
+
+		async submitForm() {
+			const formData = {
+				eventName: this.$refs.eventName.value,
+				eventDate: this.$refs.eventDate.value,
+				eventTimeFrom: this.$refs.eventTimeFrom.value,
+				eventTimeTo: this.$refs.eventTimeTo.value,
+				eventLocation: this.$refs.eventLocation.value,
+				eventDescription: this.$refs.eventDescription.value,
+			};
+
+			try {
+				const response = await axios.post('http://localhost:3000/events', formData);
+				if (response.status === 201 || response.status === 200) {
+					this.getEvents();
+
+					this.$refs.eventName.value = '';
+					this.$refs.eventDate.value = '';
+					this.$refs.eventTimeFrom.value = '';
+					this.$refs.eventTimeTo.value = '';
+					this.$refs.eventLocation.value = '';
+					this.$refs.eventDescription.value = '';
+
+					this.hideAddEvent();
+				}
+			} catch (error) {
+				console.error('Error submitting form:', error);
+			}
+		},
+
 		goToDate() {
 			const [enteredMonth, enteredYear] = this.gotoDate.split('/');
 			if (enteredMonth && enteredYear) {
@@ -229,8 +299,6 @@ export default {
 					})
 				}
 			});
-
-			console.log(this.eventsDates);
 		}
 	},
 	created() {
@@ -424,6 +492,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	gap: 4px;
 	padding: 0 20px;
 	margin-bottom: 20px;
@@ -439,7 +508,7 @@ div.goto-day>div {
 }
 
 div.goto-day>div>input {
-	width: 100%;
+	width: 120px;
 	height: 30x;
 	border-radius: 4px;
 	padding: 0 20px;
@@ -471,6 +540,54 @@ div.goto-day>div>input {
 	width: 40%;
 	min-height: 100%;
 	padding: 20px;
+	overflow: hidden;
+	display: flex;
+	align-items: flex-start;
+}
+
+
+.right .events-container {
+	display: none;
+	transition: var(--transition);
+}
+
+.right .add-event {
+	display: none;
+}
+
+.right .add-event.active {
+	display: block;
+}
+
+.right .add-event {
+	width: 100%;
+	min-height: 100%;
+	background: var(--primary-color);
+	transition: var(--transition);
+}
+
+.right .add-event .header i {
+	cursor: pointer;
+}
+
+.right .add-event .inputs input:not(:last-child) {
+	width: 100%;
+	height: 40px;
+	/* padding: 0 20px; */
+	border: none;
+	/* background: var(--white-color); */
+	border-bottom: 1px solid var(--secondary-color);
+	color: var(--white-color);
+}
+
+.right .add-event .inputs input::placeholder {
+	color: #ddd;
+
+}
+
+.right .events-container.active {
+	width: 100%;
+	display: block;
 }
 
 .right .today-date {

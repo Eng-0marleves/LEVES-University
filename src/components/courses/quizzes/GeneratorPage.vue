@@ -40,7 +40,7 @@
 							<div class="modal-body">
 
 
-								<GeneratorQuestion />
+								<GeneratorQuestion @save-question="handleSaveQuestion" />
 
 							</div>
 							<div class="modal-footer">
@@ -73,7 +73,8 @@ export default {
 	data() {
 		return {
 			editingTitle: false,
-			editedTitle: ''
+			editedTitle: '',
+			Page: this.$props.page
 		};
 	},
 	computed: {
@@ -100,7 +101,12 @@ export default {
 		},
 		movePage() {
 			this.$emit('move-page');
-		}
+		},
+		handleSaveQuestion(questionData) {
+			this.Page.questions.push(questionData);
+			this.$emit('save-page', this.Page);
+		},
+
 	},
 	mounted() {
 		// Code to run when the component is mounted

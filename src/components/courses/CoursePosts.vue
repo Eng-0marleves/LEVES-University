@@ -1,7 +1,8 @@
 <template>
 	<div class="course-posts">
 		<div class="controlers">
-			<TextEditor ref="editor" class="editor" btnText="New Post" @save="save" @cancle="cancle" :id="postId" />
+			<ContentGenerator ref="editor" class="editor" btnText="New Post" @save="save" @cancle="cancle"
+				:id="postId" />
 			<SearchBar @search="handleSearch" />
 		</div>
 		<div class="posts d-flex flex-column gap-4 mt-3">
@@ -33,7 +34,7 @@
 </template>
 
 <script>
-import TextEditor from '@/components/global/TextEditor.vue';
+import ContentGenerator from '@/components/global/ContentGenerator.vue';
 import SearchBar from '../global/SearchBar.vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -41,7 +42,7 @@ import Swal from 'sweetalert2';
 export default {
 	name: 'CoursePosts',
 	components: {
-		TextEditor,
+		ContentGenerator,
 		SearchBar
 	},
 	data() {
