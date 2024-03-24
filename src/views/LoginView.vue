@@ -33,22 +33,34 @@ export default {
 	},
 	methods: {
 		async login() {
-			try {
-				const response = await axios.get(`http://localhost:3000/users?id=${this.id}&password=${this.password}`)
-				if (response.status === 200 && response.data.length > 0) {
-					alert("Login successful")
-					localStorage.setItem("user-info", JSON.stringify(response.data[0]))
-					this.$router.push({ name: "Home" })
+			const loginData = {
+				id: this.id,
+				password: this.password,
+			};
 
+			try {
+				const response = await axios.post(`http://localhost:5062/api/Auth/login`, loginData);
+
+				// Safely access the token using optional chaining
+				const token = response?.data?.token;
+
+				if (response.status === 200 && token) {
+					alert("Login successful");
+					localStorage.setItem("auth-token", token); // Store the token
+					this.$router.push({ name: "Home" });
+
+					// Update the UI as necessary
 					document.querySelector("body").classList.remove("full");
 					document.querySelector("nav").style.display = "block";
 					document.querySelector("header").style.display = "flex";
 				} else {
-					alert("Invalid credentials")
+					console.log(response.data)
+					console.log(token)
+					alert("Invalid credentials");
 				}
 			} catch (error) {
-				console.error("An error occurred during login:", error)
-				alert("An error occurred during login")
+				console.error("An error occurred during login:", error);
+				alert("Invalid credentials");
 			}
 		}
 	},

@@ -148,3 +148,6 @@ D:\Omar Data\Programing\WEB\projects\Graduation Project\Project\LEVES-University
 D:\Omar Data\Programing\WEB\projects\Graduation Project\Project\LEVES-University\LEVES-University-Backend\Leves-University\Leves-University\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 D:\Omar Data\Programing\WEB\projects\Graduation Project\Project\LEVES-University\LEVES-University-Backend\Leves-University\Leves-University\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 D:\Omar Data\Programing\WEB\projects\Graduation Project\Project\LEVES-University\LEVES-University-Backend\Leves-University\Leves-University\bin\Debug\net8.0\Serilog.Sinks.File.dll
+D:\Omar Data\Programing\WEB\projects\Graduation Project\Project\LEVES-University\LEVES-University-Backend\Leves-University\Leves-University\bin\Debug\net8.0\BCrypt.Net-Next.dll
+D:\Omar Data\Programing\WEB\projects\Graduation Project\Project\LEVES-University\LEVES-University-Backend\Leves-University\Leves-University\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\Omar Data\Programing\WEB\projects\Graduation Project\Project\LEVES-University\LEVES-University-Backend\Leves-University\Leves-University\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

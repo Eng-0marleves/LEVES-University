@@ -26,7 +26,8 @@ namespace Leves_University.Controllers
         {
             _logger.LogInformation("GetAll");
             var FAQsList = context.FAQs.ToList();
-            return Ok(FAQsList);
+            var reversedFAQsList = FAQsList.OrderByDescending(faq => faq.ID).ToList();
+            return Ok(reversedFAQsList);
         }
 
         [HttpGet("{id:int}")]

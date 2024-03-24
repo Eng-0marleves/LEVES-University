@@ -9,7 +9,8 @@
 
 <script>
 import QA_Item from './QA_Item.vue';
-// import axios from 'axios';
+import axios from 'axios';
+
 export default {
 	components: {
 		QA_Item
@@ -23,8 +24,12 @@ export default {
 		async getFAQs() {
 		}
 	},
-	async mounted() {
-		// this.accordionItems = await axios.get('http://localhost:5062/api/FAQs').data;
+	async created() {
+		console.log('Getting FAQs');
+		const res = await axios.get('http://localhost:5062/api/FAQs');
+		if (res.status == 200) {
+			this.accordionItems = res.data.slice(0, 5);
+		}
 	}
 }
 </script>
