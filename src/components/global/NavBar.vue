@@ -40,7 +40,7 @@ export default {
 	},
 	methods: {
 		logout() {
-			localStorage.removeItem("user-info");
+			localStorage.removeItem("auth-token");
 			this.$router.push({ name: "Login" });
 		},
 	}

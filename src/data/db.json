@@ -24,12 +24,6 @@
       "page": "CSE101",
       "user_id": 123,
       "content": "wwwwwwwwwwwwwwwww"
-    },
-    {
-      "id": "a94e",
-      "page": "CSE101",
-      "user_id": 123,
-      "content": "<div style=\"color: rgb(204, 204, 204); background-color: rgb(31, 31, 31); font-family: Consolas, &quot;Courier New&quot;, monospace; font-size: 13.3963px; line-height: 18px; white-space: pre;\"><span style=\"color: #9cdcfe;\">ContentGenerator</span></div>"
     }
   ],
   "courses": [
@@ -632,7 +626,8 @@
       "eventTimeFrom": "10:00 AM",
       "eventTimeTo": "12:00 PM",
       "eventLocation": "Location 1",
-      "eventDescription": "Description of Event 1"
+      "eventDescription": "Description of Event 1",
+      "id": "23c3"
     },
     {
       "eventName": "Event 2",
@@ -640,7 +635,8 @@
       "eventTimeFrom": "10:00 AM",
       "eventTimeTo": "12:00 PM",
       "eventLocation": "Location 2",
-      "eventDescription": "Description of Event 2"
+      "eventDescription": "Description of Event 2",
+      "id": "d041"
     },
     {
       "eventName": "Event 3",
@@ -648,7 +644,8 @@
       "eventTimeFrom": "10:00 AM",
       "eventTimeTo": "12:00 PM",
       "eventLocation": "Location 3",
-      "eventDescription": "Description of Event 3"
+      "eventDescription": "Description of Event 3",
+      "id": "b9b5"
     },
     {
       "id": "9ad4",

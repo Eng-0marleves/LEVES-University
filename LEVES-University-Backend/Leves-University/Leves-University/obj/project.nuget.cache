@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V4eAx8O0wpZCnZwLdv+ATkszpu2ptYnDxRhdYnFV7LODdf3GVj2531oVcCrP7TmInrTnFEutTfF7VWJ4c1LN1g==",
+  "dgSpecHash": "4LlpVAcO30seluKxj/PDlOMZgi1Hi71KEswPm5o5aGAvUc9Orgh8/GGmT26j/v53TcnhIOOkYBCzqqVXBU18Dg==",
   "success": true,
-  "projectFilePath": "D:\\Omar Data\\Programing\\WEB\\projects\\Graduation Project\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
+  "projectFilePath": "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Omar\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Omar\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

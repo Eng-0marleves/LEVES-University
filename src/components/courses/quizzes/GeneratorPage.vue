@@ -2,7 +2,7 @@
 	<div class="page">
 		<div class="header">
 			<div class="title">
-				<p v-if="!editingTitle">{{ pageTitle }}</p>
+				<p v-if="!editingTitle">{{ page.title }}</p>
 				<input v-else type="text" v-model="editedTitle" @keydown.enter="saveTitle" @blur="saveTitle"
 					autofocus />
 			</div>
@@ -18,6 +18,10 @@
 					<i class="fa-solid fa-xmark"></i>
 				</button>
 			</div>
+		</div>
+
+		<div class="content">
+			{{ page }}
 		</div>
 
 		<div class="body">
@@ -40,13 +44,14 @@
 							<div class="modal-body">
 
 
-								<GeneratorQuestion @save-question="handleSaveQuestion" />
+								<GeneratorQuestion ref="generatorQuestionRef" @save-question="handleSaveQuestion" />
 
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancle</button>
+								<button type="button" class="btn btn-danger" ref="cancle"
+									data-bs-dismiss="modal">Cancle</button>
 								<button type="button" class="btn btn-success">Save and Add Another</button>
-								<button type="button" class="btn btn-success">Save</button>
+								<button type="button" class="btn btn-success" @click="handleSaveQuestion">Save</button>
 							</div>
 						</div>
 					</div>
@@ -92,8 +97,7 @@ export default {
 				this.$emit('edit-page', this.page.pageId, this.editedTitle);
 				this.editingTitle = false;
 			} else {
-				this.editedTitle = this.page.title || '';
-				this.editingTitle = false;
+				this.editingTitle = false; // Maybe reset to original title if necessary
 			}
 		},
 		deletePage() {
@@ -102,9 +106,13 @@ export default {
 		movePage() {
 			this.$emit('move-page');
 		},
-		handleSaveQuestion(questionData) {
+		handleSaveQuestion() {
+			const questionData = this.$refs.generatorQuestionRef.saveQuestion();
 			this.Page.questions.push(questionData);
-			this.$emit('save-page', this.Page);
+			this.$refs.cancle.click();
+			// this.$emit('save-page', this.Page);
+			console.log(this.Page);
+
 		},
 
 	},
@@ -131,6 +139,10 @@ export default {
 
 .page .header .controllers button i {
 	color: var(--white-color);
+}
+
+.content {
+	padding: 8px;
 }
 
 .body {

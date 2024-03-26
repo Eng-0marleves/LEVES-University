@@ -2,7 +2,7 @@
 	<div class="create pb-3">
 		<div class="pages" ref="pagesContainer"> <!-- Add ref attribute to the container div -->
 			<GeneratorPage :draggable="isDraggable" v-for="(page, index) in pages" :key="index" :page="page"
-				:pageNumber="index + 1" @delete-page="deletePage(index)" @edit-page="editPage(index)"
+				:pageNumber="index + 1" @delete-page="deletePage(index)" @edit-page="editPage"
 				@move-page="movePage($event)" @save-page="handleSavePage" />
 		</div>
 		<button class="btn normal" @click="addPage">Add Page</button>
@@ -16,9 +16,11 @@ export default {
 	name: 'GeneratorCreate',
 	data() {
 		return {
+			nextPageNumber: 2,
 			pages: [
 				{
-					pageId: "1",
+					pageId: this.generateUniqueId(8),
+					title: `Page 1`,
 					questions: []
 				}
 			],
@@ -36,16 +38,30 @@ export default {
 		},
 		addPage() {
 			this.pages.push({
-				pageId: this.generatePageId(),
+				pageId: this.generateUniqueId(8),
+				title: `Page ${this.nextPageNumber}`,
 				questions: []
 			});
+			this.nextPageNumber++;
+		},
+		generateUniqueId(length) {
+			let result = '';
+			const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+			const charactersLength = characters.length;
+			for (let i = 0; i < length; i++) {
+				result += characters.charAt(Math.floor(Math.random() * charactersLength));
+			}
+			return result;
 		},
 		deletePage(index) {
 			this.pages.splice(index, 1);
+			this.nextPageNumber--;
 		},
-		editPage(index, editedTitle) {
-			this.pages[index].title = editedTitle;
-			console.log('Edit page', index, 'with new title:', editedTitle);
+		editPage(pageId, newTitle) {
+			const pageIndex = this.pages.findIndex(page => page.pageId === pageId);
+			if (pageIndex !== -1) {
+				this.pages[pageIndex].title = newTitle;
+			}
 		},
 		movePage() {
 			this.isDraggable = true;

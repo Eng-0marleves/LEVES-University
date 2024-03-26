@@ -92,7 +92,7 @@
 		</div>
 
 
-		<button @click="saveQuestion">test</button>
+		<!-- <button @click="saveQuestion">test</button> -->
 	</div>
 </template>
 
@@ -121,8 +121,9 @@ export default {
 	},
 	methods: {
 		addOption() {
+			const newOptionId = this.generateUniqueId(8);
 			this.options.push({
-				id: this.generateUniqueId(5),
+				id: newOptionId,
 				text: '',
 				correct: false
 			});
@@ -143,6 +144,7 @@ export default {
 			// this.incorrectFeedbackContent = this.isShowSeparateFeedback ? this.$refs.incorrectFeedback.innerHTML || '' : '';
 
 			const questionData = {
+				questionId: this.generateUniqueId(8),
 				type: this.questionType,
 				points: this.points,
 				questionContent: this.questionContent,
@@ -152,7 +154,8 @@ export default {
 				options: this.options,
 			};
 
-			this.$emit('save-question', questionData);
+			// this.$emit('save-question', questionData);
+			return questionData;
 		}
 	},
 	mounted() {

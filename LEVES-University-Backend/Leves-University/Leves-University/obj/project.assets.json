@@ -5172,11 +5172,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Omar Data\\Programing\\WEB\\projects\\Graduation Project\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
+      "projectUniqueName": "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
       "projectName": "Leves-University",
-      "projectPath": "D:\\Omar Data\\Programing\\WEB\\projects\\Graduation Project\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
+      "projectPath": "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
       "packagesPath": "C:\\Users\\Omar\\.nuget\\packages\\",
-      "outputPath": "D:\\Omar Data\\Programing\\WEB\\projects\\Graduation Project\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\obj\\",
+      "outputPath": "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Omar\\AppData\\Roaming\\NuGet\\NuGet.Config",

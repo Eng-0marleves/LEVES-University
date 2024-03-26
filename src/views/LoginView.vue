@@ -22,6 +22,7 @@
 
 <script>
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default {
 	name: "LoginView",
@@ -39,28 +40,30 @@ export default {
 			};
 
 			try {
-				const response = await axios.post(`http://localhost:5062/api/Auth/login`, loginData);
-
-				// Safely access the token using optional chaining
+				const response = await axios.post("http://localhost:5062/api/Auth/login", loginData);
 				const token = response?.data?.token;
 
 				if (response.status === 200 && token) {
-					alert("Login successful");
-					localStorage.setItem("auth-token", token); // Store the token
+					localStorage.setItem("auth-token", token);
 					this.$router.push({ name: "Home" });
 
-					// Update the UI as necessary
 					document.querySelector("body").classList.remove("full");
 					document.querySelector("nav").style.display = "block";
 					document.querySelector("header").style.display = "flex";
 				} else {
-					console.log(response.data)
-					console.log(token)
-					alert("Invalid credentials");
+					Swal.fire({
+						icon: 'error',
+						title: 'Oops...',
+						text: 'Invalid credentials',
+					});
 				}
 			} catch (error) {
 				console.error("An error occurred during login:", error);
-				alert("Invalid credentials");
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Invalid credentials',
+				});
 			}
 		}
 	},
