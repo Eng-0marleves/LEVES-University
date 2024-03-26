@@ -21,7 +21,17 @@
 		</div>
 
 		<div class="content">
-			{{ page }}
+			<h3>Questions</h3>
+			<div v-for="(question, qIndex) in page.questions" :key="question.questionId" class="question">
+				<div class="question-content">
+					<p>{{ qIndex + 1 }}. {{ question.questionContent }}</p>
+				</div>
+				<ul>
+					<li v-for="(option, oIndex) in question.options" :key="option.id" class="option">
+						{{ oIndex + 1 }}. {{ option.text }} - Correct: {{ option.correct ? 'Yes' : 'No' }}
+					</li>
+				</ul>
+			</div>
 		</div>
 
 		<div class="body">
@@ -125,6 +135,7 @@ export default {
 <style scoped>
 .page {
 	width: 100%;
+	border: 1px solid var(--primary-color);
 }
 
 .page .header {
@@ -143,13 +154,13 @@ export default {
 
 .content {
 	padding: 8px;
+	background: var(--white-color);
 }
 
 .body {
 	width: 100%;
 	padding: 8px;
 	background: var(--white-color);
-	border: 1px solid var(--primary-color);
 	border-top: none;
 }
 
