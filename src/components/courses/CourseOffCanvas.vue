@@ -37,7 +37,7 @@ export default {
 				},
 				{
 					title: "Assigmnents",
-					path: `/courses/${this.$route.params.course_code}/CourseAssigments`,
+					path: `/courses/${this.$route.params.course_code}/CourseAssignments`,
 				},
 				{
 					title: "Schedule",

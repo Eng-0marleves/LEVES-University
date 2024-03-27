@@ -65,14 +65,44 @@ const routes = [
         component: () => import('../views/courses/QuizzGenerator.vue')
       },
       {
-        path: ':course_code/CourseAssigments',
-        name: 'CourseAssigments',
-        component: () => import('../views/courses/CourseAssigments.vue')
+        path: ':course_code/CourseAssignments',
+        component: () => import('../views/courses/assignments/AssignmentsHome.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Assignments',
+            component: () => import('../views/courses/assignments/CourseAssignments.vue')
+          },
+          // {
+          //   path: 'assignmentDetails/:assignment_id',
+          //   name: 'AssignmentDetails',
+          //   component: () => import('../views/courses/assignments/AssignmentDetails.vue')
+          // }
+        ]
       },
       {
         path: ':course_code/CourseSchedule',
         name: 'CourseSchedule',
         component: () => import('../views/courses/CourseSchedule.vue')
+      },
+    ]
+  },
+  {
+    path: '/dashboard/',
+    component: () => import('../views/dashboard/DashboardHome.vue'),
+    redirect: '/dashboard/profile',
+    children: [
+      {
+        path: '/dashboard/profile',
+        component: () => import('../views/dashboard/DashboardProfile.vue'),
+      },
+      {
+        path: '/dashboard/time_table',
+        component: () => import('../views/dashboard/DashboardTimeTable.vue'),
+      },
+      {
+        path: '/dashboard/register',
+        component: () => import('../views/dashboard/DashboardRegister.vue'),
       },
     ]
   },
