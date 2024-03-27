@@ -134,7 +134,16 @@ const routes = [
     ]
   },
   {
-    path: '/Support',
+    path: '/articals',
+    component: () => import('../views/articals/ArticalsHone.vue'),
+  },
+  {
+    path: '/articals/:id',
+    props: true,
+    component: () => import('../views/articals/ArticleDetail.vue'),
+  },
+  {
+    path: '/support',
     component: () => import('../views/support/SupportChat.vue'),
     redirect: '/Support/inpox',
     children: [

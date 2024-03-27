@@ -200,3 +200,7 @@ body.fit {
 	background: var(--primary-color);
 	color: var(--white-color);
 }
+
+.modal {
+	z-index: 100000000000000000000000000;
+}

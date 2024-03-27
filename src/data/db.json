@@ -692,5 +692,99 @@
       "eventLocation": "location",
       "eventDescription": "Description"
     }
+  ],
+  "articles": [
+    {
+      "id": "1",
+      "title": "Article 1",
+      "content": "Content of Article 1",
+      "author": "Author 1",
+      "date": "2024-04-01",
+      "coverImage": "https://www.w3schools.com/css/paris.jpg",
+      "categories": [
+        "Technology",
+        "Innovation"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Article 2",
+      "content": "Content of Article 2",
+      "author": "Author 2",
+      "date": "2024-03-20",
+      "coverImage": "https://media.istockphoto.com/id/1208738316/photo/abstract-geometric-network-polygon-globe-graphic-background.webp?b=1&s=170667a&w=0&k=20&c=Ewa2JDeA8E9k9ch3IYWkSYdEkTEhyaMNfNLkClag-j4=",
+      "categories": [
+        "Health",
+        "Well-being"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Article 3",
+      "content": "Content of Article 3",
+      "author": "Author 3",
+      "date": "2024-06-01",
+      "coverImage": "https://i.stack.imgur.com/cEz3G.jpg",
+      "categories": [
+        "Science",
+        "Space"
+      ]
+    },
+    {
+      "id": "9a4d",
+      "title": "Article 4",
+      "content": "Content of Article 4",
+      "author": "Author 4",
+      "coverImage": "https://i.ytimg.com/vi/G74eoORiAJg/maxresdefault.jpg",
+      "categories": [
+        "Lifestyle",
+        "Travel"
+      ]
+    },
+    {
+      "id": "9a3a",
+      "title": "Article 5",
+      "content": "Content of Article 5",
+      "author": "Author 5",
+      "date": "2024-03-22",
+      "coverImage": "https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg",
+      "categories": [
+        "Education",
+        "Learning"
+      ]
+    },
+    {
+      "id": "9180",
+      "title": "Article 6",
+      "content": "Content of Article 6",
+      "author": "Author 6",
+      "coverImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQifaZa0uUO0GsK7XeqTtJhcNgtdc4zOHZjwYlUTCRwzr3sswBNEQ1-quCCLseU4uxkI8U&usqp=CAU",
+      "categories": [
+        "Sports",
+        "Fitness"
+      ]
+    },
+    {
+      "id": "a45b",
+      "title": "Article 7",
+      "content": "Content of Article 7",
+      "author": "Author 7",
+      "coverImage": "https://media.macphun.com/img/uploads/macphun/blog/625/visiting-site-photo-frame.jpg?q=75&w=1710&h=906&resize=cover",
+      "categories": [
+        "Entertainment",
+        "Movies"
+      ]
+    },
+    {
+      "id": "994f",
+      "title": "Article 8",
+      "content": "Content of Article 8",
+      "author": "Author 8",
+      "coverImage": "https://thumbs.dreamstime.com/b/winter-landscape-sunset-17985792.jpg",
+      "categories": [
+        "Business",
+        "Finance"
+      ]
+    }
   ]
 }
