@@ -4,6 +4,7 @@ using Leves_University.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Leves_University.Migrations
 {
     [DbContext(typeof(LevesEntities))]
-    partial class LevesEntitiesModelSnapshot : ModelSnapshot
+    [Migration("20240327233449_UpdateUsersModel")]
+    partial class UpdateUsersModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,23 +61,6 @@ namespace Leves_University.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Login");
-                });
-
-            modelBuilder.Entity("Leves_University.Models.Test", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Test");
                 });
 
             modelBuilder.Entity("Leves_University.Models.Users", b =>
