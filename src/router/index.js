@@ -146,6 +146,10 @@ const routes = [
     ]
   },
   {
+    path: '/library',
+    component: () => import('../views/library/LibraryHome.vue'),
+  },
+  {
     path: '/news',
     name: 'news',
     component: () => import('../views/NewsPage.vue'),
