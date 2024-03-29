@@ -1,40 +1,45 @@
 <template>
-	<div class="dashboard-student-analysis">
-		<h2>Student Performance Analysis</h2>
-		<grade-distribution-chart :chartData="chartData" :chartOptions="chartOptions"></grade-distribution-chart>
+	<div>
+		<canvas ref="chart"></canvas>
 	</div>
 </template>
 
 <script>
-import GradeDistributionChart from '@/components/dashboard/analysis/GradeDistributionChart.vue'
-import { ref } from 'vue'
+// import { Chart, registerables } from 'chart.js';
+// import { ref, onMounted } from 'vue';
 
 export default {
-	name: 'DashboardStudentAnalysis',
-	components: {
-		GradeDistributionChart
-	},
-	setup() {
-		const chartData = ref({
-			labels: ['A', 'B', 'C', 'D', 'F'],
-			datasets: [{
-				label: 'Grade Distribution',
-				backgroundColor: ['#f87979', '#45aaf2', '#fd9644', '#a55eea', '#d1d8e0'],
-				data: [10, 20, 30, 10, 5]
-			}]
-		})
+	name: 'GradeDistributionChart',
+	// setup() {
+	// 	const chartRef = ref(null);
 
-		const chartOptions = ref({
-			responsive: true,
-			maintainAspectRatio: false
-		})
+	// 	onMounted(() => {
+	// 		// Register the components globally before using them
+	// 		Chart.register(...registerables);
 
-		return {
-			chartData,
-			chartOptions
-		}
-	}
-}
+	// 		const context = chartRef.value.getContext('2d');
+	// 		new Chart(context, {
+	// 			type: 'bar', // Or any other type
+	// 			data: {
+	// 				labels: ['A', 'B', 'C', 'D', 'F'],
+	// 				datasets: [{
+	// 					label: 'Grade Distribution',
+	// 					backgroundColor: ['#f87979', '#45aaf2', '#fd9644', '#a55eea', '#d1d8e0'],
+	// 					data: [10, 20, 30, 10, 5]
+	// 				}]
+	// 			},
+	// 			options: {
+	// 				responsive: true,
+	// 				maintainAspectRatio: false
+	// 			}
+	// 		});
+	// 	});
+
+	// 	return {
+	// 		chartRef
+	// 	};
+	// }
+};
 </script>
 
 <style scoped>

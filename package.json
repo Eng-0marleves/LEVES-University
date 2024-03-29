@@ -21,6 +21,7 @@
     "qrcode.vue": "^3.4.1",
     "sweetalert2": "^11.10.6",
     "swiper": "^11.0.6",
+    "vue-chartjs": "^3.5.1",
     "vue-qrcode-reader": "^5.5.3",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^4.3.0",

@@ -37,16 +37,16 @@ export default {
 				},
 				{
 					title: "Analysis",
-					path: `/dashboard/`,
+					path: `/dashboard/analysis`,
 				},
-				{
-					title: "Tasks",
-					path: `/dashboard/`,
-				},
-				{
-					title: "Notes",
-					path: `/dashboard/`,
-				}
+				// {
+				// 	title: "Tasks",
+				// 	path: `/dashboard/`,
+				// },
+				// {
+				// 	title: "Notes",
+				// 	path: `/dashboard/`,
+				// }
 			]
 		};
 	},
