@@ -38,6 +38,9 @@ export default {
 			this.navOpen = !this.navOpen;
 			document.querySelector("nav").classList.toggle("open");
 			this.updateBodyPadding();
+			if (document.getElementById("nav-overlayer")) {
+				document.getElementById("nav-overlayer").classList.toggle("hide");
+			}
 		},
 		toggleTitle() {
 			this.hidTitle = !this.hidTitle;
@@ -92,14 +95,15 @@ header {
 	position: fixed;
 	top: 0;
 	right: 0;
-	background: #fff !important;
-	padding: 16px;
+	background: #eee !important;
+	padding: 8px;
 	height: var(--header-height);
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 5px solid var(--primary-color);
-	z-index: 99;
+	border-bottom: 2px solid var(--primary-color);
+	z-index: 10;
+	transition: var(--transition);
 }
 
 header.fit {

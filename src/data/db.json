@@ -1,55 +1,790 @@
 {
-	"users": [
-		{
-			"id": 12,
-			"name": "Ahmed",
-			"password": "123"
-		}
-	],
-	"courses": [
-		{
-			"id": 1,
-			"name": "Course 1",
-			"img": "https://www.shutterstock.com/image-photo/elearning-education-internet-lessons-online-600nw-2158034833.jpg"
-		},
-		{
-			"id": 2,
-			"name": "Course 2",
-			"img": "https://thesavvyimg.co.uk/wp-content/uploads/2022/08/img-crash-course-gmc-registration-1024x576.png"
-		},
-		{
-			"id": 3,
-			"name": "Course 3",
-			"img": "https://elearning.epsom-sthelier.nhs.uk/pluginfile.php/69878/course/overviewfiles/hospital-ga69fcc0dd_1920.png"
-		},
-		{
-			"id": 4,
-			"name": "Course 4",
-			"img": "https://www.shutterstock.com/image-photo/young-woman-learning-language-during-600nw-2267595915.jpg"
-		},
-		{
-			"id": 5,
-			"name": "Course 5",
-			"img": "https://www.paho.org/sites/default/files/styles/max_1500x1500/public/2022-04/online-learning.jpg?itok=mIH1uN6D"
-		},
-		{
-			"id": 6,
-			"name": "Course 6",
-			"img": "https://guiadoestudante.abril.com.br/wp-content/uploads/sites/4/2021/04/Curso-online.jpg?quality=100&strip=info&w=1024%22"
-		}
-	],
-	"notifications": [
-		{
-			"id": 1,
-			"title": "Notification 1",
-			"message": "This is the first notification",
-			"route": "/home"
-		},
-		{
-			"id": 2,
-			"title": "Notification 2",
-			"message": "This is the second notification",
-			"route": "/home"
-		}
-	]
+  "users": [
+    {
+      "id": "12",
+      "name": "Ahmed",
+      "password": "123"
+    }
+  ],
+  "posts": [
+    {
+      "id": "e847",
+      "page": "ENG201",
+      "user_id": 123,
+      "content": "in eng"
+    },
+    {
+      "id": "19c5",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "watch"
+    },
+    {
+      "id": "2553",
+      "page": "CSE101",
+      "user_id": 123,
+      "content": "wwwwwwwwwwwwwwwww"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "course_name": "Introduction to Computer Science",
+      "course_code": "CSE101",
+      "description": "An introductory course covering fundamental concepts of computer science including algorithms, data structures, and programming.",
+      "grades": {
+        "midterm": 20,
+        "assignment": 18,
+        "attendance": 4,
+        "final": 45
+      }
+    },
+    {
+      "id": "2",
+      "course_name": "English Composition",
+      "course_code": "ENG201",
+      "description": "A writing-intensive course focusing on composition skills, critical thinking, and effective communication.",
+      "grades": {
+        "midterm": 22,
+        "assignment": 16,
+        "attendance": 5,
+        "final": 48
+      }
+    },
+    {
+      "id": "3",
+      "course_name": "Calculus I",
+      "course_code": "MATH301",
+      "description": "An introductory course in calculus covering limits, derivatives, and integration.",
+      "grades": {
+        "midterm": 18,
+        "assignment": 20,
+        "attendance": 3,
+        "final": 47
+      }
+    },
+    {
+      "id": "4",
+      "course_name": "Physics for Engineers",
+      "course_code": "PHY401",
+      "description": "A foundational physics course tailored for engineering students, covering mechanics, thermodynamics, and electromagnetism.",
+      "grades": {
+        "midterm": 21,
+        "assignment": 19,
+        "attendance": 4,
+        "final": 46
+      }
+    },
+    {
+      "id": "5",
+      "course_name": "Organic Chemistry",
+      "course_code": "CHEM501",
+      "description": "An introductory course in organic chemistry focusing on the structure, properties, and reactions of organic compounds.",
+      "grades": {
+        "midterm": 19,
+        "assignment": 17,
+        "attendance": 4,
+        "final": 43
+      }
+    },
+    {
+      "id": "6",
+      "course_name": "Introduction to Biology",
+      "course_code": "BIO601",
+      "description": "An overview of basic biological principles including cell structure, genetics, evolution, and ecology.",
+      "grades": {
+        "midterm": 23,
+        "assignment": 20,
+        "attendance": 5,
+        "final": 49
+      }
+    },
+    {
+      "id": "7",
+      "course_name": "Artificial Intelligence Fundamentals",
+      "course_code": "AI701",
+      "description": "An introductory course exploring the principles and techniques of artificial intelligence, including machine learning, neural networks, and natural language processing.",
+      "grades": {
+        "midterm": 24,
+        "assignment": 22,
+        "attendance": 5,
+        "final": 47
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "id": "1",
+      "title": "Notification 1",
+      "message": "This is the first notification",
+      "route": "/home"
+    },
+    {
+      "id": "2",
+      "title": "Notification 2",
+      "message": "This is the second notification",
+      "route": "/home"
+    }
+  ],
+  "quizzes": [
+    {
+      "quizId": 1,
+      "title": "Full Quiz Example",
+      "description": "This is a full example of a quiz with multiple pages and questions.",
+      "courseCode": "CS101",
+      "isPublished": true,
+      "publishDate": "2024-07-03T04:00:00Z",
+      "From": "2024-07-03T00:04:00Z",
+      "To": "2024-07-03T00:04:00Z",
+      "duration": "00:05:00",
+      "showResult": true,
+      "totalGrade": 100,
+      "enrolls": [
+        {
+          "stdId": 0,
+          "enroll": 0,
+          "answers": [
+            {
+              "questienId": 1,
+              "answer": "Paris",
+              "grade": 0
+            }
+          ]
+        }
+      ],
+      "pages": [
+        {
+          "pageId": "1",
+          "questions": [
+            {
+              "questionId": "1",
+              "type": "multiple_choice",
+              "text": "What is the capital of France?",
+              "feedback": "Great job!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "11",
+                  "text": "Paris",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "12",
+                  "text": "Berlin",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "13",
+                  "text": "London",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "2",
+              "type": "text_entry",
+              "text": "Write a paragraph about your favorite food.",
+              "feedback": "Great job!",
+              "grade": 20
+            }
+          ]
+        },
+        {
+          "pageId": "2",
+          "questions": [
+            {
+              "questionId": "3",
+              "type": "multiple_choice",
+              "text": "What is the largest planet in our solar system?",
+              "feedback": "Excellent!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "14",
+                  "text": "Jupiter",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "20",
+                  "text": "Jupiter",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "15",
+                  "text": "Saturn",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "16",
+                  "text": "Mars",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "4",
+              "type": "text_entry",
+              "text": "What is the chemical symbol for water?",
+              "feedback": "Well done!",
+              "grade": 20
+            }
+          ]
+        },
+        {
+          "pageId": "3",
+          "questions": [
+            {
+              "questionId": "5",
+              "type": "multiple_choice",
+              "text": "What is the powerhouse of the cell?",
+              "questionTime": "00:02:00",
+              "feedback": "Bravo!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "17",
+                  "text": "Mitochondria",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "18",
+                  "text": "Nucleus",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "19",
+                  "text": "Ribosome",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "6",
+              "type": "text_entry",
+              "text": "Who is known as the father of modern physics?",
+              "feedback": "Correct!",
+              "grade": 20
+            }
+          ]
+        },
+        {
+          "pageId": "4",
+          "pageTime": "00:05:00",
+          "questions": [
+            {
+              "questionId": "7",
+              "type": "multiple_choice",
+              "text": "What is the chemical symbol for oxygen?",
+              "feedback": "You got it!",
+              "grade": 10,
+              "answers": [
+                {
+                  "answerId": "19",
+                  "text": "O",
+                  "isCorrect": true
+                },
+                {
+                  "answerId": "20",
+                  "text": "O2",
+                  "isCorrect": false
+                },
+                {
+                  "answerId": "21",
+                  "text": "C",
+                  "isCorrect": false
+                }
+              ]
+            },
+            {
+              "questionId": "8",
+              "type": "text_entry",
+              "text": "What is the process of plants making their own food called?",
+              "feedback": "Fantastic!",
+              "grade": 20
+            }
+          ]
+        }
+      ],
+      "id": "96bb"
+    }
+  ],
+  "Folders": [
+    {
+      "id": "1",
+      "name": "Folder 1",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "2",
+      "name": "Folder 2",
+      "parent_id": "1",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "3",
+      "name": "Folder 3",
+      "parent_id": "1",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "4",
+      "name": "Folder 4",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "5",
+      "name": "Folder 5",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "6",
+      "name": "Folder 6",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "7",
+      "name": "Folder 7",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "8",
+      "name": "Folder 8",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "9",
+      "name": "Folder 9",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "10",
+      "name": "Folder 10",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "f1a4",
+      "name": "new folder",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "387f",
+      "name": "new folders",
+      "parent_id": "undefined",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "46fe",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "6af6",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "04fd",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "e737",
+      "name": "new folder",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "741b",
+      "name": "Ahmed",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "323d",
+      "name": "Ahmed 2",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    }
+  ],
+  "Videos": [
+    {
+      "id": "1",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 1",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "2",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 2",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "1",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "3",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 3",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "4",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 4",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "5",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 5",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "6",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 6",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "7",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 7",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "8",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 8",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "9",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 9",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "5",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "10",
+      "src": "@/assets/videos/video.mp4",
+      "name": "Video 10",
+      "cover": "https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg",
+      "parent_id": "5",
+      "user_id": "1",
+      "course_code": "CSE101"
+    },
+    {
+      "id": "d1f5",
+      "name": "wwwwww",
+      "src": "wwwwwww",
+      "cover": "wwwwwww",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
+    }
+  ],
+  "Files": [
+    {
+      "id": "1",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 1",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "2",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 2",
+      "parent_id": "7",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "3",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 3",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "4",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 4",
+      "parent_id": "2",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "5",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 5",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "6",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 6",
+      "parent_id": "3",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "7",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 7",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "8",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 8",
+      "parent_id": "4",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    },
+    {
+      "id": "9",
+      "src": "@/assets/files/file.pdf",
+      "name": "File 9",
+      "parent_id": "5",
+      "user_id": "1",
+      "course_code": "CSE101",
+      "cover": "https://cdn-icons-png.flaticon.com/512/124/124837.png"
+    }
+  ],
+  "events": [
+    {
+      "eventName": "Event 1",
+      "eventDate": "2024-04-01",
+      "eventTimeFrom": "10:00 AM",
+      "eventTimeTo": "12:00 PM",
+      "eventLocation": "Location 1",
+      "eventDescription": "Description of Event 1",
+      "id": "23c3"
+    },
+    {
+      "eventName": "Event 2",
+      "eventDate": "2024-03-20",
+      "eventTimeFrom": "10:00 AM",
+      "eventTimeTo": "12:00 PM",
+      "eventLocation": "Location 2",
+      "eventDescription": "Description of Event 2",
+      "id": "d041"
+    },
+    {
+      "eventName": "Event 3",
+      "eventDate": "2024-06-01",
+      "eventTimeFrom": "10:00 AM",
+      "eventTimeTo": "12:00 PM",
+      "eventLocation": "Location 3",
+      "eventDescription": "Description of Event 3",
+      "id": "b9b5"
+    },
+    {
+      "id": "9ad4",
+      "eventName": "Test",
+      "eventDate": "2024-03-21",
+      "eventTimeFrom": "11:00",
+      "eventTimeTo": "11:59",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "9a39",
+      "eventName": "Event",
+      "eventDate": "2024-03-22",
+      "eventTimeFrom": "10:30",
+      "eventTimeTo": "11:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "9179",
+      "eventName": "Test",
+      "eventDate": "2024-03-23",
+      "eventTimeFrom": "13:00",
+      "eventTimeTo": "14:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "a45a",
+      "eventName": "Test",
+      "eventDate": "2024-03-24",
+      "eventTimeFrom": "13:00",
+      "eventTimeTo": "13:55",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "994e",
+      "eventName": "Test\\",
+      "eventDate": "2024-03-25",
+      "eventTimeFrom": "00:00",
+      "eventTimeTo": "13:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    }
+  ],
+  "articles": [
+    {
+      "id": "1",
+      "title": "Article 1",
+      "content": "Content of Article 1",
+      "author": "Author 1",
+      "date": "2024-04-01",
+      "coverImage": "https://www.w3schools.com/css/paris.jpg",
+      "categories": [
+        "Technology",
+        "Innovation"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Article 2",
+      "content": "Content of Article 2",
+      "author": "Author 2",
+      "date": "2024-03-20",
+      "coverImage": "https://media.istockphoto.com/id/1208738316/photo/abstract-geometric-network-polygon-globe-graphic-background.webp?b=1&s=170667a&w=0&k=20&c=Ewa2JDeA8E9k9ch3IYWkSYdEkTEhyaMNfNLkClag-j4=",
+      "categories": [
+        "Health",
+        "Well-being"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Article 3",
+      "content": "Content of Article 3",
+      "author": "Author 3",
+      "date": "2024-06-01",
+      "coverImage": "https://i.stack.imgur.com/cEz3G.jpg",
+      "categories": [
+        "Science",
+        "Space"
+      ]
+    },
+    {
+      "id": "9a4d",
+      "title": "Article 4",
+      "content": "Content of Article 4",
+      "author": "Author 4",
+      "coverImage": "https://i.ytimg.com/vi/G74eoORiAJg/maxresdefault.jpg",
+      "categories": [
+        "Lifestyle",
+        "Travel"
+      ]
+    },
+    {
+      "id": "9a3a",
+      "title": "Article 5",
+      "content": "Content of Article 5",
+      "author": "Author 5",
+      "date": "2024-03-22",
+      "coverImage": "https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg",
+      "categories": [
+        "Education",
+        "Learning"
+      ]
+    },
+    {
+      "id": "9180",
+      "title": "Article 6",
+      "content": "Content of Article 6",
+      "author": "Author 6",
+      "coverImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQifaZa0uUO0GsK7XeqTtJhcNgtdc4zOHZjwYlUTCRwzr3sswBNEQ1-quCCLseU4uxkI8U&usqp=CAU",
+      "categories": [
+        "Sports",
+        "Fitness"
+      ]
+    },
+    {
+      "id": "a45b",
+      "title": "Article 7",
+      "content": "Content of Article 7",
+      "author": "Author 7",
+      "coverImage": "https://media.macphun.com/img/uploads/macphun/blog/625/visiting-site-photo-frame.jpg?q=75&w=1710&h=906&resize=cover",
+      "categories": [
+        "Entertainment",
+        "Movies"
+      ]
+    },
+    {
+      "id": "994f",
+      "title": "Article 8",
+      "content": "Content of Article 8",
+      "author": "Author 8",
+      "coverImage": "https://thumbs.dreamstime.com/b/winter-landscape-sunset-17985792.jpg",
+      "categories": [
+        "Business",
+        "Finance"
+      ]
+    }
+  ]
 }

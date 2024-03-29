@@ -1,24 +1,20 @@
 <template>
 	<div class="container">
-		<button class="btn btn-fixed" type="button" data-toggle="tooltip" rel="tooltip" title="Menu"
-			data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-			<i class="fas fa-bars"></i>
-		</button>
-
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
 			aria-labelledby="offcanvasExampleLabel">
-			<!-- <div class="offcanvas-header">
-				<button type="button" class="btn-close close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-		</div> -->
+			<button type="button" ref="close" data-bs-dismiss="offcanvas"></button>
 			<button ref="close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-			<div class="offcanvas-body w-90 pt-3">
-				<router-link v-for="router in routers_" :key="router.route" :to="router.route" class="router"
-					:class="{ 'active': $route.path === router.route }" @click="handleRouterClick">
+			<div class="offcanvas-body w-90 pt-3" v-if="routers_">
+				<router-link v-for="router in routers_" :key="router.path" :to="router.path" class="router"
+					:class="{ 'active': $route.path === router.path }" @click="handleRouterClick">
 					{{ router.title }}
-
 				</router-link>
 			</div>
 		</div>
+		<button class="btn fixed" type="button" data-toggle="tooltip" rel="tooltip" title="Menu"
+			data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+			<i class="fas fa-bars"></i>
+		</button>
 	</div>
 </template>
 
@@ -33,18 +29,34 @@ export default {
 	},
 	data() {
 		return {
-			routers_: this.routers
+			routers_: null
 		};
+	},
+	watch: {
+		routers: {
+			immediate: true,
+			handler(newVal) {
+				this.routers_ = newVal;
+			}
+		}
 	},
 	methods: {
 		handleRouterClick() {
 			this.$refs.close.click();
 		}
 	}
-}
+};
 </script>
 
 <style scoped>
+.offcanvas {
+	z-index: 10000000000000;
+}
+
+.btn.fixed {
+	z-index: 1000000000000000 !important;
+}
+
 .offcanvas-body {
 	display: flex;
 	flex-direction: column;

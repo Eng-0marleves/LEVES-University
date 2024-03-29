@@ -1,0 +1,176 @@
+{
+	"quizzes": [
+		{
+			"quizId": "1",
+			"title": "Full Quiz Example",
+			"description": "This is a full example of a quiz with multiple pages and questions.",
+			"courseCode": "CS101",
+			"doctorName": "Dr. Smith",
+			"isPublished": true,
+			"publishDate": "2022-01-01T00:00:00Z",
+			"endDate": "2022-01-07T00:00:00Z",
+			"duration": "00:30:00",
+			"showFeedback": true,
+			"showResult": true,
+			"totalGrade": 100,
+			"pages": [
+				{
+					"pageId": "1",
+					"pageTime": "00:05:00",
+					"questions": [
+						{
+							"questionId": "1",
+							"type": "multiple_choice",
+							"text": "What is the capital of France?",
+							"questionTime": "00:02:00",
+							"feedback": "Great job!",
+							"grade": 10,
+							"answers": [
+								{
+									"answerId": "1",
+									"text": "Paris",
+									"isCorrect": true
+								},
+								{
+									"answerId": "2",
+									"text": "Berlin",
+									"isCorrect": false
+								},
+								{
+									"answerId": "3",
+									"text": "London",
+									"isCorrect": false
+								}
+							]
+						},
+						{
+							"questionId": "2",
+							"type": "text_entry",
+							"text": "Write a paragraph about your favorite food.",
+							"questionTime": "00:03:00",
+							"feedback": "Great job!",
+							"grade": 20
+						}
+					]
+				},
+				{
+					"pageId": "2",
+					"pageTime": "00:05:00",
+					"questions": [
+						{
+							"questionId": "3",
+							"type": "multiple_choice",
+							"text": "What is the largest planet in our solar system?",
+							"questionTime": "00:02:00",
+							"feedback": "Excellent!",
+							"grade": 10,
+							"answers": [
+								{
+									"answerId": "1",
+									"text": "Jupiter",
+									"isCorrect": true
+								},
+								{
+									"answerId": "2",
+									"text": "Saturn",
+									"isCorrect": false
+								},
+								{
+									"answerId": "3",
+									"text": "Mars",
+									"isCorrect": false
+								}
+							]
+						},
+						{
+							"questionId": "4",
+							"type": "text_entry",
+							"text": "What is the chemical symbol for water?",
+							"questionTime": "00:03:00",
+							"feedback": "Well done!",
+							"grade": 20
+						}
+					]
+				},
+				{
+					"pageId": "3",
+					"pageTime": "00:05:00",
+					"questions": [
+						{
+							"questionId": "5",
+							"type": "multiple_choice",
+							"text": "What is the powerhouse of the cell?",
+							"questionTime": "00:02:00",
+							"feedback": "Bravo!",
+							"grade": 10,
+							"answers": [
+								{
+									"answerId": "1",
+									"text": "Mitochondria",
+									"isCorrect": true
+								},
+								{
+									"answerId": "2",
+									"text": "Nucleus",
+									"isCorrect": false
+								},
+								{
+									"answerId": "3",
+									"text": "Ribosome",
+									"isCorrect": false
+								}
+							]
+						},
+						{
+							"questionId": "6",
+							"type": "text_entry",
+							"text": "Who is known as the father of modern physics?",
+							"questionTime": "00:03:00",
+							"feedback": "Correct!",
+							"grade": 20
+						}
+					]
+				},
+				{
+					"pageId": "4",
+					"pageTime": "00:05:00",
+					"questions": [
+						{
+							"questionId": "7",
+							"type": "multiple_choice",
+							"text": "What is the chemical symbol for oxygen?",
+							"questionTime": "00:02:00",
+							"feedback": "You got it!",
+							"grade": 10,
+							"answers": [
+								{
+									"answerId": "1",
+									"text": "O",
+									"isCorrect": true
+								},
+								{
+									"answerId": "2",
+									"text": "O2",
+									"isCorrect": false
+								},
+								{
+									"answerId": "3",
+									"text": "C",
+									"isCorrect": false
+								}
+							]
+						},
+						{
+							"questionId": "8",
+							"type": "text_entry",
+							"text": "What is the process of plants making their own food called?",
+							"questionTime": "00:03:00",
+							"feedback": "Fantastic!",
+							"grade": 20
+						}
+					]
+				}
+			]
+		}
+	]
+}

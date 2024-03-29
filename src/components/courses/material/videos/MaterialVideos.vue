@@ -1,23 +1,7 @@
 <template>
 	<div class="material-videos">
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
-		<MaterialVideo />
+		<MaterialVideo v-for="video in videos" :key="video.id" :id="video.id" :src="video.src" :name="video.name"
+			:cover="video.cover" />
 	</div>
 </template>
 
@@ -34,8 +18,11 @@ export default {
 			// Your data properties go here
 		};
 	},
-	methods: {
-		// Your methods go here
+	props: {
+		videos: {
+			type: Array,
+			required: true
+		}
 	},
 	computed: {
 		// Your computed properties go here
@@ -51,7 +38,7 @@ export default {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: 48px;
+	gap: 32px;
 	margin-top: 24px;
 }
 </style>

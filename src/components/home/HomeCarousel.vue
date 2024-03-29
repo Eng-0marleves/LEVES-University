@@ -1,93 +1,146 @@
 <template>
-	<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-		<div class="carousel-indicators">
-			<button v-for="(item, index) in carouselItems" :key="index" type="button"
-				:data-bs-target="'#carouselExampleDark'" :data-bs-slide-to="index" :class="{ 'active': index === 0 }"
-				aria-current="true" :aria-label="'Slide ' + (index + 1)"></button>
-		</div>
-		<div class="carousel-inner">
-			<div v-for="(item, index) in carouselItems" :key="index" :class="['carousel-item', { 'active': index === 0 }]">
-				<div class="overlay"></div> <!-- Overlay -->
-				<img :src="item.image" class="d-block w-100" :alt="'Slide ' + (index + 1)">
-				<div class="carousel-caption d-none d-md-block">
-					<h5>{{ item.title }}</h5>
-					<p>{{ item.content }}</p>
+	<div class="carousel carousel-dark slide" data-bs-ride="carousel">
+		<swiper :spaceBetween="30" :centeredSlides="true" :autoplay="{
+			delay: 5000,
+			disableOnInteraction: false,
+		}" :pagination="{
+			clickable: true,
+		}" :navigation="true" :modules="modules" @autoplayTimeLeft="onAutoplayTimeLeft" class="mySwiper">
+
+			<swiper-slide>
+				<img src="https://image.cnbcfm.com/api/v1/image/106918576-1627532474886-gettyimages-871203832-pi-1589476.jpeg?v=1627532520&w=1600&h=900"
+					alt="..." />
+				<div class="overlay"></div>
+				<div class="content">
+					<h2>Welcome to Leves University</h2>
+					<p>Access all Courses</p>
+					<button class="btn rounded" @click="console.log('test')">All Courses</button>
 				</div>
-			</div>
-		</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-			<span class="controller" aria-hidden="true"><i class="fa-solid fa-chevron-left"></i></span>
-			<span class="visually-hidden">Previous</span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-			<span class="controller" aria-hidden="true"><i class="fa-solid fa-chevron-right"></i></span>
-			<span class="visually-hidden">Next</span>
-		</button>
+			</swiper-slide>
+			<swiper-slide>
+				<img src="https://agcdn-1d97e.kxcdn.com/wp-content/uploads/2015/12/13-must-attend-business-student-events-in-2016-1024x438.jpg"
+					alt="..." />
+				<div class="overlay"></div>
+				<div class="content">
+					<h2>Welcome to Leves University</h2>
+					<p>Show all Events</p>
+					<button class="btn rounded" @click="console.log('test')">All Events</button>
+				</div>
+			</swiper-slide>
+			<swiper-slide>
+				<img src="https://www.questrade.com/images/learninglibraries/default-album/lessons-content/investing-foundations/data-analysis/technical-analysis/banner-man-checking-charts-on-computer.png?sfvrsn=c24f74bf_4"
+					alt="..." />
+				<div class="overlay"></div>
+				<div class="content">
+					<h2>Welcome to Leves University</h2>
+					<p>Access your info</p>
+					<button class="btn rounded" @click="console.log('test')">Dashboard</button>
+				</div>
+			</swiper-slide>
+			<swiper-slide>
+				<img src="https://blog.efmdglobal.org/wp-content/uploads/2022/07/news-gf4e98bdee_1920-1024x768.jpg"
+					alt="..." />
+				<div class="overlay"></div>
+				<div class="content">
+					<h2>Welcome to Leves University</h2>
+					<p>Show all University News</p>
+					<button class="btn rounded" @click="console.log('test')">All News</button>
+				</div>
+			</swiper-slide>
+
+			<template #container-end>
+				<div class="autoplay-progress">
+					<svg viewBox="0 0 48 48" ref="progressCircle">
+						<circle cx="24" cy="24" r="20"></circle>
+					</svg>
+					<span ref="progressContent"></span>
+				</div>
+			</template>
+		</swiper>
+
+
 	</div>
 </template>
 
 <script>
+import { ref } from 'vue';
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+// Import Swiper styles
+import 'swiper/css';
+
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+import '@/assets/css/swiper.css';
+
+// import required modules
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+
 export default {
 	name: "HomeCarousel",
-	data() {
+	components: {
+		Swiper,
+		SwiperSlide,
+	},
+	setup() {
+		const progressCircle = ref(null);
+		const progressContent = ref(null);
+		const onAutoplayTimeLeft = (s, time, progress) => {
+			progressCircle.value.style.setProperty('--progress', 1 - progress);
+			progressContent.value.textContent = `${Math.ceil(time / 1000)}s`;
+		};
 		return {
-			carouselItems: [
-				{ image: 'https://i.pinimg.com/564x/b6/c3/f4/b6c3f4effb2a1da5b489cf8985fe5884.jpg', title: "First slide label", content: "Some representative placeholder content for the first slide." },
-				{ image: 'https://i.pinimg.com/564x/b6/c3/f4/b6c3f4effb2a1da5b489cf8985fe5884.jpg', title: "Second slide label", content: "Some representative placeholder content for the second slide." },
-				{ image: 'https://i.pinimg.com/564x/b6/c3/f4/b6c3f4effb2a1da5b489cf8985fe5884.jpg', title: "Third slide label", content: "Some representative placeholder content for the third slide." }
-			]
-		}
-	}
+			onAutoplayTimeLeft,
+			progressCircle,
+			progressContent,
+			modules: [Autoplay, Pagination, Navigation],
+		};
+	},
 }
 </script>
 
 <style scoped>
-#carouselExampleDark {
+.carousel {
+	width: 100%;
+	height: calc(100vh - var(--header-height));
+}
+
+.content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.btn.rounded {
+	border-radius: 24px !important;
+	border: 2px solid var(--white-color);
+	color: var(--white-color);
+	font-size: 1.2rem;
+	padding: 8px 32px !important;
+}
+
+.btn.rounded:hover {
+	border-color: var(--secondary-color);
+	background: var(--secondary-color);
+}
+
+.swiper-slide {
 	position: relative;
 }
 
-#carouselExampleDark .carousel-item {
-	position: relative;
-}
-
-#carouselExampleDark .overlay {
+.swiper-slide img {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.1);
 }
 
-#carouselExampleDark .carousel-item img {
-	width: 100%;
-	height: 500px;
-	object-fit: cover;
-}
-
-#carouselExampleDark button {
-	height: fit-content;
-	margin: auto 0;
-}
-
-#carouselExampleDark button .controller {
-	font-size: 48px;
-	color: #fff;
-	background: var(--primary-color);
-	padding: 16px;
-	/* border-radius: 50%; */
-	width: fit-content;
-	height: fit-content;
-	display: flex;
-	justify-content: center;
-}
-
-.carousel-indicators button {
-	z-index: 5;
-	background: #fff !important;
-	margin: 0 16px !important;
-	border-radius: 50%;
-	width: 16px;
-	height: 8px;
+.swiper-slide .content {
+	color: var(--white-color);
+	z-index: 1900;
 }
 </style>

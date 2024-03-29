@@ -1,19 +1,19 @@
 <template>
 	<div class="course-grades">
-		<!-- Edit Button -->
-		<button @click="toggleEdit">Edit</button>
+		<button @click="toggleEdit" class="btn normal me-4 mb-2"><i class="fas fa-pen"></i> Edit</button>
+		<button @click="handleSubmit" class="btn normal me-4 mb-2"><i class="fas fa-paper-plane"></i> Submit</button>
+		<button @click="handleSaveAsImage" class="btn normal me-4 mb-2"><i class="fas fa-download"></i> Save </button>
 
-		<ag-grid-vue :rowData="rowData" :columnDefs="colDefs" :defaultColDef="defaultColDef" style="height: 800px"
-			class="ag-theme-quartz" :editable="isEditEnabled"></ag-grid-vue>
-
-		<!-- Submit Button -->
-		<button @click="handleSubmit">Submit</button>
+		<ag-grid-vue ref="grid" :rowData="rowData" :columnDefs="colDefs" :defaultColDef="defaultColDef"
+			style="height: 800px" class="ag-theme-quartz grades-grid" :editable="isEditEnabled"></ag-grid-vue>
 	</div>
 </template>
 
 <script>
 import { ref, computed } from 'vue';
 import { AgGridVue } from "ag-grid-vue3";
+import "ag-grid-community/styles//ag-grid.css";
+import "ag-grid-community/styles//ag-theme-quartz.css";
 
 export default {
 	name: 'StudentsGrades',
@@ -92,13 +92,26 @@ export default {
 			toggleEdit,
 			handleSubmit,
 		};
+	},
+	methods: {
+		handleSaveAsImage() {
+			console.log("");
+		}
+
 	}
 };
 </script>
 
-<style scoped>
-button {
+<style>
+.course-grades {
+	padding: 16px;
+}
+
+.ag-header-row {
 	background: var(--primary-color);
+}
+
+.ag-header-cell {
 	color: var(--white-color);
 }
 </style>

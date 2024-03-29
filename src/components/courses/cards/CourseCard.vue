@@ -20,8 +20,8 @@ export default {
 	},
 	data() {
 		return {
-			course_code: this.course.code,
-			course_name: this.course.name,
+			course_code: this.course.course_code,
+			course_name: this.course.course_name,
 		}
 	}
 }
@@ -52,7 +52,7 @@ export default {
 	height: 48px;
 	width: 48px;
 	border-radius: 100%;
-	margin: 0 auto 30px;
+	margin: 0 auto 16px;
 	text-align: center;
 	transition: all 0.3s ease;
 }

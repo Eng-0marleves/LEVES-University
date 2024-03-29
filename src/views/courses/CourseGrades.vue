@@ -1,17 +1,19 @@
 <template>
+	<CourseOffCanvas />
 	<div class="grades-view">
-		<h1>For Doctors</h1>
 		<StudentsGrades />
 	</div>
 </template>
 
 <script>
 import StudentsGrades from '@/components/courses/StudentsGrades.vue';
+import CourseOffCanvas from '@/components/courses/CourseOffCanvas.vue';
 
 export default {
 	name: 'CourseGrades',
 	components: {
-		StudentsGrades
+		StudentsGrades,
+		CourseOffCanvas
 	},
 	data() {
 		return {

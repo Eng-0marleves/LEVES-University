@@ -1,29 +1,31 @@
 <template>
-	<div class="courseHome">
-		<PostGenerator />
-
+	<CourseOffCanvas />
+	<div class="courseHome d-flex flex-column gap-5">
+		<!-- <PostGenerator /> -->
 		<HomeContent />
+		<CoursePosts />
 	</div>
 </template>
 
 <script>
-import PostGenerator from '@/components/global/PostGenerator.vue';
+// import PostGenerator from '@/components/global/PostGenerator.vue';
 import HomeContent from '@/components/courses/HomeContent.vue';
+import CourseOffCanvas from '@/components/courses/CourseOffCanvas.vue';
+import CoursePosts from '@/components/courses/CoursePosts.vue';
 
 export default {
-	name: "CourseHome",
+	title: "CourseHome",
 	components: {
-		PostGenerator,
-		HomeContent
+		// PostGenerator,
+		HomeContent,
+		CourseOffCanvas,
+		CoursePosts
 	}
 }
 </script>
 
 <style scoped>
-/* .courseHome {
-	width: 100%;
-	height: 100%;
-	background: red;
-	height: 100vh;
-} */
+.courseHome {
+	padding: 16px;
+}
 </style>

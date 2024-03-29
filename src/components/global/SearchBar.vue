@@ -1,35 +1,42 @@
 <template>
 	<div class="search-wrapper">
-		<input type="text" v-model="search" @input="filterData" placeholder="Search title.." />
+		<input type="text" v-model="search" placeholder="Search..." />
+		<button type="button" class="btn normal" @click="handleSearch">Search</button>
 	</div>
 </template>
 
 <script>
 export default {
 	name: "SearchBar",
-	props: {
-		data: Array // Data to be filtered
-	},
 	data() {
 		return {
-			search: '' // Search query
-		}
+			search: ''
+		};
 	},
 	methods: {
-		filterData() {
-			// Emit an event to pass the filtered data to the parent component
-			this.$emit('filtered', this.filter(this.data, this.search));
-		},
-		filter(data, search) {
-			// Filter the data based on the search query
-			return data.filter(item => {
-				// Use optional chaining to safely access nested properties and methods
-				return item.title?.toLowerCase().includes(search.toLowerCase());
-			});
+		handleSearch() {
+			this.$emit('search', this.search);
 		}
 	}
-}
+};
 </script>
 
+<style scoped>
+.search-wrapper {
+	width: 300px;
+	display: flex;
+	align-items: center;
+	gap: 0px;
+	/* margin: 16px auto; */
+}
 
-<style scoped></style>
+.search-wrapper input {
+	background: var(--white-color);
+	padding: 7px;
+	font-size: 16px;
+}
+
+.search-wrapper button {
+	border-radius: 0px;
+}
+</style>

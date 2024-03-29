@@ -53,15 +53,6 @@ export default {
 	background: url('https://brescia.uwo.ca/communications/img/wallpaper/buc_wallpaper_desktop_01.jpg') center/cover;
 }
 
-.overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
 .content {
 	position: relative;
 	z-index: 1;

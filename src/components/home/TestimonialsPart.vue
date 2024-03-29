@@ -1,20 +1,27 @@
 <template>
 	<div class="testimonials">
+		<div class="title mb-3">
+			<h3>TESTIMONIALS</h3>
+		</div>
 		<div class="testimonials-container">
 			<swiper class="swiper" :modules="modules" :space-between="20" :loop="true" :pagination="{ clickable: true }"
 				:autoplay="{
-					delay: 5000,
-					disableOnIntersection: false,
-					pauseOnMouseEnter: true
-				}">
+				delay: 5000,
+				disableOnIntersection: false,
+				pauseOnMouseEnter: true
+			}">
 				<swiper-slide v-for="(testimonial, i) in testimonials" :key="i">
-					<img :src="testimonial.authorImage" alt="">
+					<div class="author">
+						<div class="img">
+							<img :src="testimonial.authorImage" alt="">
+							<i class="fas fa-quote-left"></i>
+						</div>
+
+						<h5>{{ testimonial.author }}</h5>
+					</div>
 
 					<p class="testimonial">{{ testimonial.testimonial }}</p>
 
-					<i class="fas fa-quote-left"></i>
-
-					<h2>{{ testimonial.author }}</h2>
 				</swiper-slide>
 			</swiper>
 		</div>
@@ -70,29 +77,20 @@ export default {
 
 
 <style>
-.testimonials {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	margin: 0 auto;
-	min-width: 700px;
-	max-width: 900px;
-	padding-bottom: 24px;
-}
-
 .testimonials .testimonials-container {
+	width: 500px;
 	display: flex;
-	justify-content: center;
-	width: 100%;
+	align-items: stretch;
 }
 
 .testimonials .testimonials-container .swiper-slide {
-	width: 100%;
-	min-height: fit-content;
-	padding: 16px;
+	height: auto;
+	min-height: 100%;
+	background: var(--primary-color);
+	color: var(--white-color);
+	padding: 21px;
 	display: flex;
-	justify-content: space-around;
-	align-items: center;
+	justify-content: flex-start;
 	gap: 24px;
 	flex-direction: column;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.01);
@@ -100,36 +98,82 @@ export default {
 }
 
 .testimonials .swiper img {
-	width: 170px;
-	height: 170px;
+	width: 96px;
+	height: 96px;
 	border-radius: 50%;
 	object-fit: cover;
 }
 
-.testimonials .swiper .testimonial {
-	color: var(--primary-color);
-	font-size: 24px;
-	text-align: center;
-}
-
-.testimonials .swiper i {
-	font-size: 64px;
-	color: var(--secondary-color);
-}
-
-.testimonials .swiper h2 {
-	font-style: italic;
+.testimonials .swiper .author {
+	position: relative;
 	width: 100%;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	gap: 20px;
+}
+
+.testimonials .swiper .author .img {
+	position: relative;
+}
+
+.testimonials .swiper .author .img i {
+	position: absolute;
+	bottom: -7px;
+	right: -7px;
+	font-size: 20px;
+	padding: 8px;
+	border-radius: 50%;
+	color: var(--primary-color);
+	background: var(--white-color);
+}
+
+.testimonials .swiper .testimonial {
+	color: var(--white-color);
+	font-size: 16px;
 	text-align: left;
 }
 
+.testimonials .swiper h5 {
+	font-style: italic;
+	text-align: left;
+}
+
+
+
 .testimonials .swiper-pagination-bullet {
-	width: 16px;
-	height: 16px;
+	width: 12px;
+	height: 12px;
+	margin-top: 24px;
 	background-color: var(--primary-color);
 }
 
 .testimonials .swiper-pagination-bullet-active {
 	background-color: var(--secondary-color);
+}
+
+.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+	margin-top: 16px;
+	position: relative !important;
+}
+
+@media (max-width: 768px) {
+	/* .testimonials .testimonials-container {
+		width: 350px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		flex-direction: column;
+	} */
+
+	.testimonials {
+		width: 100%;
+		text-align: center;
+	}
+
+	.testimonials .testimonials-container {
+		width: 100%;
+	}
 }
 </style>

@@ -1,127 +1,151 @@
 <template>
-	<div class="hello">
-		<QuillEditor ref="editor" v-model="delta" :content="content" :toolbar="toolbarSettings" theme="snow"
-			@textChange="onTextChange" @update:content="onContentUpdate" :options="editorOptions">
-		</QuillEditor>
+	<div class="text-editor">
+		<div class="options p-1 d-flex gap-2 flex-wrap">
+			<button class="btn" @click="applyStyle('undo')">
+				<i class="fas fa-undo"></i>
+			</button>
 
-		<!-- Display the content in the test div -->
-		<div ref="test">{{ delta }}</div>
+			<button class="btn" @click="applyStyle('redo')">
+				<i class="fas fa-redo"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('bold')">
+				<i class="fas fa-bold"></i>
+			</button>
+
+			<button class="btn d-flex align-items-center gap-2">
+				<label for="fontColor"><i class="fa-solid fa-font"></i></label>
+				<input type="color" v-model="fontColor" id="fontColor" @change="applyFontColor">
+			</button>
+
+			<button class="btn d-flex align-items-center gap-2">
+				<label for="backColor"><i class="fa-solid fa-highlighter"></i></label>
+				<input type="color" v-model="backColor" id="backColor" @change="applyBackColor">
+			</button>
+
+			<button class="btn" @click="applyStyle('italic')">
+				<i class="fas fa-italic"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('underline')">
+				<i class="fas fa-underline"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('strikethrough')">
+				<i class="fas fa-strikethrough"></i>
+			</button>
+
+			<select class="btn" @change="applyFormat($event.target.value)">
+				<option value="H1" class="text-left text-white">H1</option>
+				<option value="H2">H2</option>
+				<option value="H3">H3</option>
+				<option value="H4">H4</option>
+				<option value="H5">H5</option>
+				<option value="H6">H6</option>
+			</select>
+
+			<button class="btn" @click="applyStyle('superscript')">
+				<i class="fas fa-superscript"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('subscript')">
+				<i class="fas fa-subscript"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('insertOrderedList')">
+				<i class="fas fa-list-ol"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('InsertUnorderedList')">
+				<i class="fas fa-list-ul"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('justifyLeft')">
+				<i class="fas fa-align-left"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('justifyCenter')">
+				<i class="fas fa-align-center"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('justifyRight')">
+				<i class="fas fa-align-right"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('justifyFull')">
+				<i class="fas fa-align-justify"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('insertImage')">
+				<i class="fas fa-images"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('createLink')">
+				<i class="fas fa-link"></i>
+			</button>
+
+			<button class="btn" @click="applyStyle('unlink')">
+				<i class="fas fa-link-slash"></i>
+			</button>
+
+			<!-- <button class="btn" @click="applyStyle('table')">
+									<i class="fas fa-table"></i>
+								</button> -->
+		</div>
 	</div>
 </template>
 
 <script>
-import { QuillEditor } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
-
-const toolbarSettings = {
-	container: [
-		["bold", "italic", "underline", "strike"], // toggled buttons
-		["blockquote", "code-block"],
-		[{ header: 1 }, { header: 2 }], // custom button values
-		[{ list: "ordered" }, { list: "bullet" }],
-		[{ script: "sub" }, { script: "super" }], // superscript/subscript
-		[{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-		[{ direction: "rtl" }], // text direction
-		[{ size: ["small", false, "large", "huge"] }], // custom dropdown
-		[{ header: [1, 2, 3, 4, 5, 6, false] }],
-		[{ color: [] }, { background: [] }], // dropdown with defaults from theme
-		[{ font: [] }],
-		[{ align: [] }],
-		["clean"], // remove formatting button
-		["link", "image", "video"], // add image, video, audio buttons,
-	],
-};
-
 export default {
-	name: "TextEditor",
-	components: { QuillEditor },
+	name: 'TextEditor',
 	data() {
 		return {
-			toolbarSettings,
-			content: "",
-			editorOptions: {
-				// debug: "info",
-				placeholder: "type your text....",
-				readonly: true,
-				theme: "snow",
-			},
-			delta: "<h1>Test</h1>", // Initialize delta as an empty string
+			// Your data goes here
 		};
 	},
-	watch: {
-		content() {
-			// Get the HTML content of the Quill editor
-			this.delta = this.$refs.editor.root.innerHTML;
-			this.$refs.test.root.innerHTML = this.delta;
-			// console.log(this.delta);
+	methods: {
+		applyStyle(style) {
+			if (style === "insertImage" || style === "createLink") {
+				let url = prompt("Insert Link here");
+				document.execCommand(style, false, url);
+			} else {
+				document.execCommand(style, false);
+			}
 		},
+		applyFormat(format) {
+			document.execCommand("formatBlock", false, format);
+		},
+		applyFontColor() {
+			document.execCommand('foreColor', false, this.fontColor);
+		},
+		applyBackColor() {
+			document.execCommand('backColor', false, this.backColor);
+		},
+		applyForeColor() {
+			document.execCommand('foreColor', false, this.foreColor);
+		},
+	},
+	computed: {
+		// Your computed properties go here
 	},
 };
 </script>
 
-<style>
-/* .ql-snow.ql-toolbar button {
-	font-size: 24px;
-	width: 36px;
-	height: 36px;
-  }
-
-  .ql-snow.ql-toolbar button {
-	font-size: 64px;
-	padding: 4px;
-  }
-
-  .ql-snow.ql-toolbar button svg {
-	width: 32px;
-	height: 32px;
-  }
-
-  .ql-toolbar.ql-snow .ql-picker-label {
-	font-size: 32px;
-	margin-right: 8px;
-  } */
-
-/* -------------------------------------------------------- */
-
-.ql-editor {
-	height: 25vw !important;
-	overflow-y: auto;
+<style scoped>
+.text-editor .btn {
+	padding: 4px 8px;
+	background: transparent;
+	border: none;
+	color: var(--primary-color);
+	transition: var(--transition);
 }
 
-.ql-toolbar.ql-snow {
-	min-height: 48px;
-	/* Increase the height of the toolbar */
+.text-editor .btn:hover {
+	background: #ccccccc3;
 }
 
-.ql-toolbar.ql-snow .ql-picker,
-.ql-toolbar.ql-snow .ql-size {
-	/* width: 72px; */
-	/* Increase the width of the dropdowns */
-}
-
-.ql-editor.ql-blank {
-	/* min-height: 200px; */
-	/* Increase the minimum height of the editor */
-}
-
-.ql-snow.ql-toolbar button {
-	font-size: 64px;
-	/* background: red; */
-}
-
-.ql-snow.ql-toolbar button svg {
-	/* transform: scale(2); */
-}
-
-.ql-toolbar.ql-snow .ql-picker-label {
-	/* transform: scale(2); */
-}
-
-.ql-container {
-	font-size: 20px;
-}
-
-.ql-container {
-	font-size: 20px !important;
+.text-editor input,
+.text-editor label {
+	cursor: pointer;
 }
 </style>

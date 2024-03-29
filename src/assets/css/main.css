@@ -23,7 +23,7 @@
 	--white-color: #fff;
 	--light-white-color: #ffffff5f;
 
-	--bg-color: rgba(24, 103, 192, 1);
+	--bg-color: #35495e16;
 	--Black-color-100: rgba(25, 25, 28, 1);
 	--Black-color-75: rgba(25, 25, 28, 75);
 	--Black-color-50: rgba(25, 25, 28, 50);
@@ -32,18 +32,19 @@
 	--Black-color-5: rgba(25, 25, 28, 5);
 	--Black-color-light: #9696962c;
 
-	--navbar-width: calc(8 * 40px);
-	--header-height: calc(8 * 12px);
+	--navbar-width: calc(8 * 30px);
+	--header-height: calc(8 * 8px);
 
 	--transition: all .2s ease-in-out;
 }
 
 ::-webkit-scrollbar {
-	width: 16px;
+	width: 10px;
+	height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-	background: #f1f1f1;
+	background: #99999933;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -55,8 +56,44 @@
 	background: #555;
 }
 
+::selection {
+	color: var(--white-color);
+	background-color: var(--secondary-color);
+}
+
+.small-scrollbar {
+	scroll-behavior: smooth;
+}
+
+.small-scrollbar::-webkit-scrollbar {
+	width: 8px;
+}
+
+.small-scrollbar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
 .container::part(bullet-active) {
 	background-color: red !important;
+}
+
+.btn.fixed {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 1000;
+	background: var(--primary-color);
+	color: var(--white-color);
+	border-radius: 50%;
+	font-size: 16px;
+	line-height: 24px;
+	transition: var(--transition);
+	box-shadow: 0 0 8px #00000096;
+	z-index: 10000;
+}
+
+.btn.fixed:hover {
+	background: var(--secondary-color);
 }
 
 a {
@@ -89,15 +126,17 @@ input[type=number] {
 	-moz-appearance: textfield;
 }
 
-section {
+/* section {
 	padding: 20px;
-}
+} */
 
 body {
 	height: 100vh;
 	padding-left: var(--navbar-width);
 	padding-top: var(--header-height);
 	scroll-behavior: smooth;
+	transition: var(--transition);
+	background: var(--bg-color);
 }
 
 body.menuOpen {
@@ -112,4 +151,56 @@ body.fit {
 	body {
 		padding-left: 0px !important;
 	}
+	body:has(.overlayer) {
+		overflow: hidden;
+	}
+	body:has(.overlayer.hide) {
+		overflow: auto;
+	}
+}
+
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.offcanvas-backdrop.show {
+	z-index: 1000000000 !important;
+}
+
+.btn.normal {
+	background: var(--primary-color);
+	color: var(--white-color);
+	border-radius: 4px;
+	font-size: 16px;
+	line-height: 24px;
+	transition: var(--transition);
+}
+
+.btn.normal:hover {
+	opacity: .9;
+}
+
+.modal {
+	z-index: 100000;
+}
+
+
+
+.swal2-container {
+	z-index: 100000000000000;
+}
+
+.swal2-popup {
+	background: var(--primary-color);
+	color: var(--white-color);
+}
+
+.modal {
+	z-index: 100000000000000000000000000;
 }
