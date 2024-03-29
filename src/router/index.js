@@ -146,6 +146,12 @@ const routes = [
     ]
   },
   {
+    path: '/news',
+    name: 'news',
+    component: () => import('../views/NewsPage.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/articals',
     component: () => import('../views/articals/ArticalsHone.vue'),
   },

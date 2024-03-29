@@ -1,6 +1,9 @@
 <template>
+	<div class="filter">
+		<SearchBar @search="handleSearch" />
+	</div>
 	<div class="articles-home">
-		<div class="article-card" v-for="article in articles" :key="article.id"
+		<div class="article-card" v-for="article in filteredArticles" :key="article.id"
 			:style="{ backgroundImage: 'url(' + article.coverImage + ')' }">
 			<div class="article-overlay"></div>
 			<div class="article-info">
@@ -18,13 +21,33 @@
 </template>
 
 <script>
+import SearchBar from '@/components/global/SearchBar.vue';
 import axios from 'axios';
+
 export default {
 	name: 'ArticlesHome',
 	data() {
 		return {
 			articles: [],
+			searchQuery: '',
 		};
+	},
+	components: {
+		SearchBar,
+	},
+	computed: {
+		filteredArticles() {
+			if (!this.searchQuery) return this.articles;
+			return this.articles.filter(article => {
+				return (
+					article.title.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+					article.author.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+					article.categories.some(category =>
+						category.toLowerCase().includes(this.searchQuery.toLowerCase())
+					)
+				);
+			});
+		},
 	},
 	methods: {
 		async gitArticles() {
@@ -35,16 +58,29 @@ export default {
 				console.log("Error fetching articles");
 			}
 		},
+		handleSearch(query) {
+			this.searchQuery = query;
+		},
 	},
 	mounted() {
 		this.gitArticles();
-	}
+	},
 };
 </script>
+
 <style scoped>
+.filter {
+	margin: 8px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
 .articles-home {
 	display: flex;
+	justify-content: space-around;
 	flex-wrap: wrap;
+	align-items: flex-start;
 	gap: 20px;
 	padding: 8px;
 }
@@ -105,4 +141,11 @@ export default {
 	border: none;
 	cursor: pointer;
 }
+
+/* @media (max-width: 768px) {
+	.articles-home {
+		justify-content: center !important;
+		align-items: center !important;
+	}
+} */
 </style>

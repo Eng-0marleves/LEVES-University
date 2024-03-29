@@ -21,14 +21,15 @@
 		</div>
 
 		<div class="content">
-			<h3>Questions</h3>
-			<div v-for="(question, qIndex) in page.questions" :key="question.questionId" class="question">
-				<div class="question-content">
-					<p>{{ qIndex + 1 }}. {{ question.questionContent }}</p>
+			<div v-for="question in page.questions" :key="question.questionId" class="question">
+				<div class="question-content mb-2">
+					<p class="question">{{ question.questionContent }}</p>
 				</div>
 				<ul>
-					<li v-for="(option, oIndex) in question.options" :key="option.id" class="option">
-						{{ oIndex + 1 }}. {{ option.text }} - Correct: {{ option.correct ? 'Yes' : 'No' }}
+					<li v-for="option in question.options" :key="option.id" class="option mb-1">
+						<input :type="question.type === 'single-choice' ? 'radio' : 'checkbox'"
+							:name="question.questionId" :id="option.id">
+						<label :for="option.id">{{ option.text }}</label>
 					</li>
 				</ul>
 			</div>
@@ -75,6 +76,8 @@
 
 <script>
 import GeneratorQuestion from './GeneratorQuestion.vue';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 export default {
 	name: 'GeneratorPage',
@@ -122,12 +125,32 @@ export default {
 			this.$refs.cancle.click();
 			// this.$emit('save-page', this.Page);
 			console.log(this.Page);
-
 		},
 
+		async handlePrint() {
+			const pagesContent = document.querySelectorAll(".page .content");
+			const pdf = new jsPDF({
+				orientation: 'portrait',
+			});
+
+			for (let i = 0; i < pagesContent.length; i++) {
+				const canvas = await html2canvas(pagesContent[i]);
+				const imgData = canvas.toDataURL('image/png');
+				const imgProps = pdf.getImageProperties(imgData);
+				const pdfWidth = pdf.internal.pageSize.getWidth();
+				const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+				if (i > 0) {
+					pdf.addPage();
+				}
+				pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+			}
+
+			pdf.save(`${document.getElementById("quizzTitle").innerHTML}.pdf`);
+		},
 	},
 	mounted() {
-		// Code to run when the component is mounted
+		document.getElementById("print-btn").addEventListener("click", this.handlePrint);
 	},
 };
 </script>

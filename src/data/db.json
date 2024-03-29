@@ -691,6 +691,15 @@
       "eventTimeTo": "13:00",
       "eventLocation": "location",
       "eventDescription": "Description"
+    },
+    {
+      "id": "4665",
+      "eventName": "Test",
+      "eventDate": "2024-01-01",
+      "eventTimeFrom": "13:00",
+      "eventTimeTo": "01:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
     }
   ],
   "articles": [

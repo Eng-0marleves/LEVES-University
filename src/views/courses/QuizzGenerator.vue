@@ -19,7 +19,7 @@
 			</ul>
 
 			<div class="controllers d-flex flex-row gap-4 align-items-center">
-				<button class="print d-flex gap-2 align-items-center">
+				<button class="print d-flex gap-2 align-items-center" id="print-btn">
 					<i class="fa-solid fa-print"></i>
 					<p>Print</p>
 				</button>
@@ -30,7 +30,8 @@
 			</div>
 		</div>
 
-		<div class="title w-100">Title: {{ quizz.title }}</div>
+		<div class="title w-100 d-flex gap-1">Title: <p id="quizzTitle">{{ quizz.title }}</p>
+		</div>
 
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade show active" id="create-tab-pane" role="tabpanel" aria-labelledby="create-tab"
