@@ -7,7 +7,8 @@
 			<h2 class="book-title">{{ title }}</h2>
 			<p class="book-author">{{ author }}</p>
 		</div>
-		<button class="btn"><router-link class="router" to="">View Book</router-link></button>
+		<button class="btn"><router-link class="router" :to="`library/${$props.bookId}`">View
+				Book</router-link></button>
 	</div>
 </template>
 
@@ -18,6 +19,7 @@ export default {
 		title: String,
 		author: String,
 		cover: String,
+		bookId: String,
 	},
 	data() {
 		return {
@@ -46,7 +48,8 @@ export default {
 
 .book-cover img {
 	width: 100%;
-	height: auto;
+	height: 300px;
+	object-fit: cover;
 }
 
 .book-info {

@@ -5,30 +5,16 @@
 		<div class="new-books mt-5">
 			<h2>New Books</h2>
 			<div class="books-conatiner">
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
+				<BookCard v-for="(book, i) in books.slice(0, 5)" :key="i" :title="book.title" :author="book.author"
+					:cover="book.coverImage" :bookId="book.id" />
 			</div>
 		</div>
 
 		<div class="all-books mt-5">
 			<h2>All Books</h2>
 			<div class="books-conatiner">
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
-				<BookCard title="title" author="author" cover="https://i.huffpost.com/gen/1039678/original.jpg" />
+				<BookCard v-for="(book, i) in books" :key="i" :title="book.title" :author="book.author"
+					:cover="book.coverImage" :bookId="book.id" />
 			</div>
 		</div>
 	</div>
@@ -37,12 +23,13 @@
 <script>
 import HomeCarousel from '@/components/library/HomeCarousel.vue';
 import BookCard from '@/components/library/BookCard.vue';
+import axios from 'axios';
 
 export default {
 	name: 'LibraryHome',
 	data() {
 		return {
-			// Your data goes here
+			books: []
 		};
 	},
 	components: {
@@ -50,13 +37,24 @@ export default {
 		BookCard
 	},
 	methods: {
-		// Your methods go here
+		async getBooks() {
+			try {
+				const res = await axios.get('http://localhost:3000/books');
+
+				if (res.status === 200) {
+					this.books = res.data;
+				}
+
+			} catch (error) {
+				console.error(error);
+			}
+		}
 	},
 	computed: {
 		// Your computed properties go here
 	},
 	created() {
-		// Code to run when the component is created
+		this.getBooks();
 	},
 };
 </script>

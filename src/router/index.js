@@ -150,10 +150,20 @@ const routes = [
     component: () => import('../views/library/LibraryHome.vue'),
   },
   {
+    path: '/library/:bookId',
+    props: true,
+    component: () => import('../views/library/BookPage.vue'),
+  },
+  {
     path: '/news',
     name: 'news',
     component: () => import('../views/NewsPage.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/announcements/:announcementId',
+    props: true,
+    component: () => import('../components/news/AnnouncementPage.vue'),
   },
   {
     path: '/articals',
