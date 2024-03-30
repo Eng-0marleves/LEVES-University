@@ -795,5 +795,175 @@
         "Finance"
       ]
     }
+  ],
+  "books": [
+    {
+      "id": "1",
+      "title": "Book 1",
+      "author": "Author 1",
+      "isbn": "1234567890",
+      "coverImage": "https://www.w3schools.com/css/paris.jpg",
+      "categories": [
+        "Technology",
+        "Innovation"
+      ],
+      "description": "Description of Book 1",
+      "rating": 4.5,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfg"
+    },
+    {
+      "id": "2",
+      "title": "Book 2",
+      "author": "Author 2",
+      "isbn": "2345678901",
+      "coverImage": "https://www.w3schools.com/css/london.jpg",
+      "categories": [
+        "Science",
+        "Education"
+      ],
+      "description": "Description of Book 2",
+      "rating": 4.7,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfpg"
+    },
+    {
+      "id": "3",
+      "title": "Book 3",
+      "author": "Author 3",
+      "isbn": "3456789012",
+      "coverImage": "https://www.w3schools.com/css/newyork.jpg",
+      "categories": [
+        "Business",
+        "Finance"
+      ],
+      "description": "Description of Book 3",
+      "rating": 4.6,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfjpg"
+    },
+    {
+      "id": "4",
+      "title": "Book 4",
+      "author": "Author 4",
+      "isbn": "4567890123",
+      "coverImage": "https://www.w3schools.com/css/sydney.jpg",
+      "categories": [
+        "Lifestyle",
+        "Travel"
+      ],
+      "description": "Description of Book 4",
+      "rating": 4.8,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfpg"
+    },
+    {
+      "id": "5",
+      "title": "Book 5",
+      "author": "Author 5",
+      "isbn": "5678901234",
+      "coverImage": "https://www.w3schools.com/css/tokyo.jpg",
+      "categories": [
+        "Health",
+        "Well-being"
+      ],
+      "description": "Description of Book 5",
+      "rating": 4.9,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfg"
+    },
+    {
+      "id": "6",
+      "title": "Book 6",
+      "author": "Author 6",
+      "isbn": "6789012345",
+      "coverImage": "https://www.w3schools.com/css/rome.jpg",
+      "categories": [
+        "Sports",
+        "Fitness"
+      ],
+      "description": "Description of Book 6",
+      "rating": 4.4,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdf"
+    },
+    {
+      "id": "7",
+      "title": "Book 7",
+      "author": "Author 7",
+      "isbn": "7890123456",
+      "coverImage": "https://www.w3schools.com/css/paris.jpg",
+      "categories": [
+        "Entertainment",
+        "Movies"
+      ],
+      "description": "Description of Book 7",
+      "rating": 4.3,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfg"
+    },
+    {
+      "id": "8",
+      "title": "Book 8",
+      "author": "Author 8",
+      "isbn": "8901234567",
+      "coverImage": "https://www.w3schools.com/css/london.jpg",
+      "categories": [
+        "Technology",
+        "Innovation"
+      ],
+      "description": "Description of Book 8",
+      "rating": 4.2,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfpg"
+    },
+    {
+      "id": "9",
+      "title": "Book 9",
+      "author": "Author 9",
+      "isbn": "9012345678",
+      "coverImage": "https://www.w3schools.com/css/newyork.jpg",
+      "categories": [
+        "Science",
+        "Education"
+      ],
+      "description": "Description of Book 9",
+      "rating": 4.1,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfjpg"
+    },
+    {
+      "id": "10",
+      "title": "Book 10",
+      "author": "Author 10",
+      "isbn": "0123456789",
+      "coverImage": "https://www.w3schools.com/css/sydney.jpg",
+      "categories": [
+        "Business",
+        "Finance"
+      ],
+      "description": "Description of Book 10",
+      "rating": 4.0,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfpg"
+    },
+    {
+      "id": "11",
+      "title": "Book 11",
+      "author": "Author 11",
+      "isbn": "1234567890",
+      "coverImage": "https://www.w3schools.com/css/tokyo.jpg",
+      "categories": [
+        "Lifestyle",
+        "Travel"
+      ],
+      "description": "Description of Book 11",
+      "rating": 3.9,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfg"
+    },
+    {
+      "id": "12",
+      "title": "Book 12",
+      "author": "Author 12",
+      "isbn": "2345678901",
+      "coverImage": "https://www.w3schools.com/css/rome.jpg",
+      "categories": [
+        "Health",
+        "Well-being"
+      ],
+      "description": "Description of Book 12",
+      "rating": 3.8,
+      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdf"
+    }
   ]
 }
