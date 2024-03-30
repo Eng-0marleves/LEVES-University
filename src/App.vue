@@ -11,6 +11,7 @@
       <NavBar />
       <NavHeader />
       <router-view class="main" />
+      <FooterSection />
     </div>
   </div>
 </template>
@@ -18,11 +19,13 @@
 <script>
 import NavBar from './components/global/NavBar.vue'
 import NavHeader from './components/global/NavHeader.vue'
+import FooterSection from './components/global/FooterSection.vue'
 
 export default {
   components: {
     NavBar,
     NavHeader,
+    FooterSection
   },
   data() {
     return {
@@ -64,7 +67,7 @@ export default {
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 100000000000000000000000000000;
+  z-index: 1000000000000000000000000000000000000000000000000000000000000000000000000000;
 }
 
 .loading .content {

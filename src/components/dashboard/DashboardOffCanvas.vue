@@ -39,10 +39,10 @@ export default {
 					title: "Analysis",
 					path: `/dashboard/analysis`,
 				},
-				// {
-				// 	title: "Tasks",
-				// 	path: `/dashboard/`,
-				// },
+				{
+					title: "Students",
+					path: `/dashboard/students`,
+				},
 				// {
 				// 	title: "Notes",
 				// 	path: `/dashboard/`,

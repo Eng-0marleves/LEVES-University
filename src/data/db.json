@@ -24,6 +24,11 @@
       "page": "CSE101",
       "user_id": 123,
       "content": "wwwwwwwwwwwwwwwww"
+    },
+    {
+      "id": "8541",
+      "user_id": 123,
+      "content": "wd"
     }
   ],
   "courses": [
@@ -934,7 +939,7 @@
         "Finance"
       ],
       "description": "Description of Book 10",
-      "rating": 4.0,
+      "rating": 4,
       "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfpg"
     },
     {
