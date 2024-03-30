@@ -970,5 +970,41 @@
       "rating": 3.8,
       "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdf"
     }
+  ],
+  "schedules": [
+    {
+      "id": "33e1",
+      "name": "Test",
+      "dates": [
+        {
+          "date": "2024-01-05",
+          "slots": [
+            {
+              "startTime": "08:00",
+              "endTime": "10:00",
+              "subject": "DS101",
+              "location": "Room 101"
+            },
+            {
+              "startTime": "10:30",
+              "endTime": "12:30",
+              "subject": "GB102",
+              "location": "FA 101"
+            }
+          ]
+        },
+        {
+          "date": "2024-02-05",
+          "slots": [
+            {
+              "startTime": "11:00",
+              "endTime": "13:00",
+              "subject": "MG104",
+              "location": "ef101"
+            }
+          ]
+        }
+      ]
+    }
   ]
 }

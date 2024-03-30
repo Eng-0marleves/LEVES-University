@@ -128,16 +128,16 @@ const routes = [
         component: () => import('../views/schedule/ScheduleHome.vue'),
       },
       {
-        path: '/schedule/exams',
-        component: () => import('../views/schedule/ScheduleHome.vue'),
+        path: '/schedule/schedules',
+        component: () => import('../views/schedule/SchedulesPage.vue'),
       },
       {
         path: '/schedule/automation',
         component: () => import('../views/schedule/ScheduleHome.vue'),
       },
       {
-        path: '/schedule/times',
-        component: () => import('../views/schedule/ScheduleHome.vue'),
+        path: '/schedule/scheduling',
+        component: () => import('../views/schedule/SchedulingPage.vue'),
       },
       {
         path: '/schedule/events',

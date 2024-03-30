@@ -21,8 +21,8 @@ export default {
 					path: `/schedule/scheduleHome`
 				},
 				{
-					title: "Exams",
-					path: `/schedule/exams`
+					title: "Schedules",
+					path: `/schedule/schedules`
 				},
 				{
 					title: "Automation",
