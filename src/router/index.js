@@ -116,6 +116,10 @@ const routes = [
         path: '/dashboard/analysis',
         component: () => import('../views/dashboard/DashboardStudentAnalysis.vue'),
       },
+      {
+        path: '/dashboard/students',
+        component: () => import('../views/dashboard/students/StudentsPage.vue'),
+      },
     ]
   },
   {
