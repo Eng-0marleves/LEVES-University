@@ -43,6 +43,10 @@ export default {
 					title: "Students",
 					path: `/dashboard/students`,
 				},
+				{
+					title: "Library",
+					path: `/dashboard/books`,
+				},
 				// {
 				// 	title: "Notes",
 				// 	path: `/dashboard/`,

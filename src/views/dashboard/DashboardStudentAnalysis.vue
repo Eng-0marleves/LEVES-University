@@ -1,49 +1,116 @@
 <template>
-	<div>
-		<canvas ref="chart"></canvas>
+	<div class="dashboard-student-analysis">
+		<LineChart :chart-data="gpaData" :options="chartOptions" />
+		<BarChart :chart-data="hoursData" :options="chartOptions" />
+		<!-- Removed DoughnutChart for financial data -->
+
+		<!-- <div class="financial-table">
+			<h3>Financial Summary</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Category</th>
+						<th>Amount ($)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(amount, category) in financialData" :key="category">
+						<td>{{ category }}</td>
+						<td>{{ amount }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div> -->
 	</div>
 </template>
 
 <script>
-// import { Chart, registerables } from 'chart.js';
-// import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import { LineChart, BarChart } from 'vue-chart-3';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 export default {
 	name: 'GradeDistributionChart',
-	// setup() {
-	// 	const chartRef = ref(null);
+	components: {
+		LineChart,
+		BarChart,
+	},
+	setup() {
+		const chartOptions = ref({
+			responsive: true,
+			maintainAspectRatio: false,
+		});
 
-	// 	onMounted(() => {
-	// 		// Register the components globally before using them
-	// 		Chart.register(...registerables);
+		// GPA over time
+		const gpaData = ref({
+			labels: ['Semester 1', 'Semester 2', 'Semester 3', 'Semester 4'],
+			datasets: [{
+				label: 'GPA',
+				data: [3.2, 3.5, 3.8, 3.9],
+				fill: false,
+				borderColor: 'rgb(75, 192, 192)',
+				tension: 0.1
+			}]
+		});
 
-	// 		const context = chartRef.value.getContext('2d');
-	// 		new Chart(context, {
-	// 			type: 'bar', // Or any other type
-	// 			data: {
-	// 				labels: ['A', 'B', 'C', 'D', 'F'],
-	// 				datasets: [{
-	// 					label: 'Grade Distribution',
-	// 					backgroundColor: ['#f87979', '#45aaf2', '#fd9644', '#a55eea', '#d1d8e0'],
-	// 					data: [10, 20, 30, 10, 5]
-	// 				}]
-	// 			},
-	// 			options: {
-	// 				responsive: true,
-	// 				maintainAspectRatio: false
-	// 			}
-	// 		});
-	// 	});
+		// Hours completed vs. required
+		const hoursData = ref({
+			labels: ['Completed', 'Required'],
+			datasets: [{
+				label: 'Study Hours',
+				data: [190, 250], // Example data
+				backgroundColor: ['rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+			}]
+		});
 
-	// 	return {
-	// 		chartRef
-	// 	};
-	// }
+		// Adjusted financial data to be suitable for a table
+		// const financialData = ref({
+		// 	Tuition: 5000,
+		// 	Books: 1000,
+		// 	Accommodation: 3000,
+		// 	Miscellaneous: 700,
+		// });
+
+		return {
+			gpaData,
+			hoursData,
+			// financialData,
+			chartOptions,
+		};
+	},
 };
 </script>
 
 <style scoped>
 .dashboard-student-analysis {
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	padding: 20px 0;
 }
+
+.dashboard-student-analysis>div {
+	width: 90%;
+	max-width: 600px;
+	height: auto;
+	/* Adjusted for table */
+}
+
+/* .financial-table table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.financial-table th,
+.financial-table td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+.financial-table th {
+	background-color: #f2f2f2;
+} */
 </style>

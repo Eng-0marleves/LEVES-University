@@ -3,7 +3,7 @@
 		<h1>All Students</h1>
 		<ag-grid-vue class="ag-theme-quartz" :columnDefs="columnDefs" :rowData="paginatedData"
 			:frameworkComponents="frameworkComponents" @grid-ready="onGridReady" rowSelection="multiple"
-			:domLayout="'autoHeight'">
+			:domLayout="'autoHeight'" :context="gridOptions.context">
 		</ag-grid-vue>
 		<div class="pagination-controls">
 			<button @click="prevPage">Previous</button>
@@ -17,7 +17,7 @@
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridVue } from "ag-grid-vue3";
-import ActionRenderer from './ActionRenderer.vue'; // Adjust the path as necessary
+import ActionRenderer from './ActionRenderer.vue';
 
 export default {
 	name: 'AllStudents',
@@ -28,25 +28,31 @@ export default {
 		return {
 			currentPage: 1,
 			pageSize: 25,
-			students: [], // This will hold the fetched students data
+			students: this.loadStudents(),
 			columnDefs: [
-				{ headerName: "Select", checkboxSelection: true, headerCheckboxSelection: true, flex: 2 },
+				{ headerName: "", checkboxSelection: true, headerCheckboxSelection: true, flex: 1 },
 				{ headerName: "Student ID", field: "studentId", flex: 2, filter: 'agTextColumnFilter' },
-				{ headerName: "Name", field: "name", flex: 2 },
-				{ headerName: "Department", field: "department", flex: 2 },
-				{ headerName: "Mobile", field: "mobile", flex: 2, filter: 'agTextColumnFilter' },
-				{ headerName: "Email", field: "email", flex: 2, filter: 'agTextColumnFilter' },
+				{ headerName: "Name", field: "name", flex: 3, filter: 'agTextColumnFilter' },
+				{ headerName: "Department", field: "department", flex: 3 },
+				{ headerName: "Mobile", field: "mobile", flex: 3, filter: 'agTextColumnFilter' },
+				{ headerName: "Email", field: "email", flex: 3, filter: 'agTextColumnFilter' },
 				{
 					headerName: "Actions",
 					cellRenderer: ActionRenderer,
 					editable: false,
-					colId: "action",
+					colId: "actions",
 					width: 150,
-					flex: 2
+					flex: 2,
 				},
 			],
 			frameworkComponents: {
 				actionRenderer: ActionRenderer,
+			},
+			gridOptions: {
+				context: {
+					onEdit: this.onEditStudent,
+					onDelete: this.onDeleteStudent,
+				},
 			},
 		};
 	},
@@ -61,8 +67,9 @@ export default {
 		}
 	},
 	methods: {
-		onGridReady() {
-			this.loadStudents();
+		onGridReady(params) {
+			this.gridApi = params.api;
+			this.gridColumnApi = params.columnApi;
 		},
 		nextPage() {
 			if (this.currentPage < this.totalPages) {
@@ -75,23 +82,42 @@ export default {
 			}
 		},
 		loadStudents() {
-			this.students = new Array(100).fill(null).map((_, index) => ({
+			// Simulate loading data
+			return new Array(100).fill(null).map((_, index) => ({
 				studentId: index + 1,
 				name: `Student ${index + 1}`,
-				department: 'Engineering',
+				department: `Department ${Math.ceil(Math.random() * 5)}`,
 				mobile: `123-456-789${index}`,
-				email: `student${index}@example.com`
+				email: `student${index}@example.com`,
 			}));
+		},
+		onEditStudent(studentData) {
+			console.log("Edit student: ", studentData);
+			// Implement your edit logic here
+		},
+		onDeleteStudent(studentData) {
+			console.log("Delete student: ", studentData);
+			// Implement your delete logic here
 		}
+	},
+	mounted() {
+		console.log(document.querySelectorAll("ag-row"))
+		document.querySelectorAll(".ag-row").forEach(el => {
+			el.addEventListener("click", () => {
+				const selectedRows = this.gridApi.getSelectedRows();
+				console.log("Selected rows: ", selectedRows);
+			}
+			)
+		})
 	}
-};
+}
 </script>
 
 <style scoped>
 .ag-theme-quartz {
 	width: 100%;
-	height: 100%;
-	margin-top: 24px;
+	height: auto;
+
 	--ag-borders: none;
 	--ag-header-background-color: var(--primary-color);
 	--ag-header-foreground-color: white;

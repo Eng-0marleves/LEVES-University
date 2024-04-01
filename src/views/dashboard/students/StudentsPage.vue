@@ -12,11 +12,11 @@
 			</div>
 			<div v-if="currentTab === 'Add Student'">
 				<!-- Add Student Form -->
-				<p>Add a new student form...</p>
+				<AddStudent />
 			</div>
-			<div v-if="currentTab === 'Student Attendance'">
+			<div v-if="currentTab === 'Students Attendance'">
 				<!-- Student Attendance -->
-				<p>Student attendance records...</p>
+				<StudentsAttendance />
 			</div>
 		</div>
 	</div>
@@ -24,17 +24,21 @@
 
 <script>
 import AllStudents from '@/components/dashboard/students/AllStudents.vue';
+import AddStudent from '@/components/dashboard/students/AddStudent.vue';
+import StudentsAttendance from '@/components/dashboard/students/StudentsAttendance.vue';
 
 export default {
 	name: 'StudentsPage',
 	data() {
 		return {
 			currentTab: 'All Students',
-			tabs: ['All Students', 'Add Student', 'Student Attendance']
+			tabs: ['All Students', 'Add Student', 'Students Attendance']
 		};
 	},
 	components: {
-		AllStudents
+		AllStudents,
+		AddStudent,
+		StudentsAttendance
 	}
 };
 </script>

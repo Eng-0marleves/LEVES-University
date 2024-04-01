@@ -803,34 +803,6 @@
   ],
   "books": [
     {
-      "id": "1",
-      "title": "Book 1",
-      "author": "Author 1",
-      "isbn": "1234567890",
-      "coverImage": "https://cdn.myportfolio.com/560d16623f9c2df9615744dfab551b3d/e50c016f-b6a8-4666-8fb8-fe6bd5fd9fec_rw_1920.jpeg?h=dc627898fc5eac88aa791fb2b124ecbd",
-      "categories": [
-        "Technology",
-        "Innovation"
-      ],
-      "description": "Description of Book 1",
-      "rating": 4.5,
-      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfg"
-    },
-    {
-      "id": "2",
-      "title": "Book 2",
-      "author": "Author 2",
-      "isbn": "2345678901",
-      "coverImage": "https://bukovero.com/wp-content/uploads/2016/07/Harry_Potter_and_the_Cursed_Child_Special_Rehearsal_Edition_Book_Cover.jpg",
-      "categories": [
-        "Science",
-        "Education"
-      ],
-      "description": "Description of Book 2",
-      "rating": 4.7,
-      "file": "chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.mta.ca/~rrosebru/oldcourse/263114/Dsa.pdfpg"
-    },
-    {
       "id": "3",
       "title": "Book 3",
       "author": "Author 3",
@@ -1001,6 +973,40 @@
               "endTime": "13:00",
               "subject": "MG104",
               "location": "ef101"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "55df",
+      "name": "Fiinal Exam",
+      "dates": [
+        {
+          "date": "2024-05-25",
+          "slots": [
+            {
+              "startTime": "01:00",
+              "endTime": "12:59",
+              "subject": "wd",
+              "location": "ddd"
+            },
+            {
+              "startTime": "01:00",
+              "endTime": "02:00",
+              "subject": "wd",
+              "location": "wdwd"
+            }
+          ]
+        },
+        {
+          "date": "2024-01-01",
+          "slots": [
+            {
+              "startTime": "01:00",
+              "endTime": "01:00",
+              "subject": "wddw",
+              "location": "wdwdwd"
             }
           ]
         }

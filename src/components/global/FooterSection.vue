@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<div class="footer-bottom">
-			<p>&copy; {{ new Date().getFullYear() }} University Name. All Rights Reserved.</p>
+			<p>&copy; {{ new Date().getFullYear() }} Leves University. All Rights Reserved.</p>
 		</div>
 	</footer>
 </template>

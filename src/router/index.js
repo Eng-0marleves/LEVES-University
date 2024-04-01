@@ -120,6 +120,10 @@ const routes = [
         path: '/dashboard/students',
         component: () => import('../views/dashboard/students/StudentsPage.vue'),
       },
+      {
+        path: '/dashboard/books',
+        component: () => import('../views/dashboard/LibraryDashboard.vue'),
+      },
     ]
   },
   {

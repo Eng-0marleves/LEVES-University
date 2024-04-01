@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj": {}
+    "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj": {}
   },
   "projects": {
-    "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj": {
+    "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
+        "projectUniqueName": "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
         "projectName": "Leves-University",
-        "projectPath": "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
+        "projectPath": "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\Leves-University.csproj",
         "packagesPath": "C:\\Users\\Omar\\.nuget\\packages\\",
-        "outputPath": "C:\\Project\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\obj\\",
+        "outputPath": "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES-University-Backend\\Leves-University\\Leves-University\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Omar\\AppData\\Roaming\\NuGet\\NuGet.Config",
