@@ -47,6 +47,14 @@ export default {
 					title: "Library",
 					path: `/dashboard/books`,
 				},
+				{
+					title: "Buildings",
+					path: `/dashboard/buildings`,
+				},
+				{
+					title: "Semester",
+					path: `/dashboard/semester`,
+				},
 				// {
 				// 	title: "Notes",
 				// 	path: `/dashboard/`,

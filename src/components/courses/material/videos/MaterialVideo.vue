@@ -1,7 +1,7 @@
 <template>
 	<div class="material-video">
 		<!-- Button trigger modal -->
-		<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+		<button type="button" class="btn" data-bs-toggle="modal" :data-bs-target="`#${id}`">
 			<div class="card" style="width: 14rem;">
 				<img :src="$props.cover" class="card-img-top" alt="...">
 				<div class="card-body">
@@ -11,11 +11,11 @@
 		</button>
 
 		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" :id="id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered modal-lg">
 				<div class="modal-content p-0">
 					<div class="modal-body p-0">
-						<video :src="$props.src" width="100%" height="100%" controls></video>
+						<video v-bind:src="url" width="100%" height="100%" controls></video>
 
 						<p>{{ $props.name }}</p>
 					</div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 export default {
 	name: 'MaterialVideo',
 	props: {
@@ -48,6 +49,7 @@ export default {
 	},
 	data() {
 		return {
+			url: '@/assets/videos/video.mp4',
 			video: {
 				title: 'Video Title',
 				thumbnail: 'https://www.keytechinc.com/wp-content/uploads/2022/01/video-thumbnail.jpg',

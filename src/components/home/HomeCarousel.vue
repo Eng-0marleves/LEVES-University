@@ -14,7 +14,7 @@
 				<div class="content">
 					<h2>Welcome to Leves University</h2>
 					<p>Access all Courses</p>
-					<button class="btn rounded" @click="console.log('test')">All Courses</button>
+					<router-link to="courses" class="btn rounded">All Courses</router-link>
 				</div>
 			</swiper-slide>
 			<swiper-slide>
@@ -24,7 +24,7 @@
 				<div class="content">
 					<h2>Welcome to Leves University</h2>
 					<p>Show all Events</p>
-					<button class="btn rounded" @click="console.log('test')">All Events</button>
+					<router-link to="/schedule" class="btn rounded">All Events</router-link>
 				</div>
 			</swiper-slide>
 			<swiper-slide>
@@ -34,7 +34,7 @@
 				<div class="content">
 					<h2>Welcome to Leves University</h2>
 					<p>Access your info</p>
-					<button class="btn rounded" @click="console.log('test')">Dashboard</button>
+					<router-link to="/dashboard" class="btn rounded">Dashboard</router-link>
 				</div>
 			</swiper-slide>
 			<swiper-slide>
@@ -44,7 +44,7 @@
 				<div class="content">
 					<h2>Welcome to Leves University</h2>
 					<p>Show all University News</p>
-					<button class="btn rounded" @click="console.log('test')">All News</button>
+					<router-link to="" class="btn rounded">All News</router-link>
 				</div>
 			</swiper-slide>
 

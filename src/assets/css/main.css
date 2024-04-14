@@ -21,6 +21,7 @@
 	--error-color: crimson;
 
 	--white-color: #fff;
+	--bg-white: #f9f9f9;
 	--light-white-color: #ffffff5f;
 
 	--bg-color: #35495e16;
@@ -134,8 +135,13 @@ input[type=number] {
 	padding: 20px;
 } */
 
-body {
+html {
+	scroll-behavior: smooth;
 	height: 100vh;
+}
+
+body {
+	height: 100%;
 	padding-left: var(--navbar-width);
 	padding-top: var(--header-height);
 	scroll-behavior: smooth;
@@ -207,4 +213,22 @@ body.fit {
 
 .modal {
 	z-index: 100000000000000000000000000;
+}
+
+@media (max-width: 768px) {
+	html {
+		font-size: 8px !important;
+	}
+
+	.ag-theme-quartz {
+		font-size: 8px !important;
+	}
+
+	i {
+		font-size: 16px !important;
+	}
+
+	button {
+		font-size: 12px !important;
+	}
 }

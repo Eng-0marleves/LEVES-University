@@ -51,6 +51,7 @@ export default {
 	flex-direction: column;
 	gap: 20px;
 	padding: 16px;
+
 }
 
 .section-title {

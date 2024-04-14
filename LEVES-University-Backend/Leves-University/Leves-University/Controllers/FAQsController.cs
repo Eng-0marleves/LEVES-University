@@ -1,5 +1,6 @@
 ﻿using Azure;
 using Leves_University.Models;
+using Leves_University.Models.DbContext;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;

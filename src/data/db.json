@@ -438,6 +438,13 @@
       "parent_id": "3",
       "user_id": "1",
       "course_code": "CSE101"
+    },
+    {
+      "id": "31ae",
+      "name": "new",
+      "parent_id": "0",
+      "user_id": "1",
+      "course_code": "CSE101"
     }
   ],
   "Videos": [
@@ -703,6 +710,24 @@
       "eventDate": "2024-01-01",
       "eventTimeFrom": "13:00",
       "eventTimeTo": "01:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "e051",
+      "eventName": "Event",
+      "eventDate": "2024-03-04",
+      "eventTimeFrom": "01:00",
+      "eventTimeTo": "01:00",
+      "eventLocation": "location",
+      "eventDescription": "Description"
+    },
+    {
+      "id": "78f1",
+      "eventName": "Test",
+      "eventDate": "2024-05-04",
+      "eventTimeFrom": "01:00",
+      "eventTimeTo": "02:00",
       "eventLocation": "location",
       "eventDescription": "Description"
     }
@@ -1007,6 +1032,102 @@
               "endTime": "01:00",
               "subject": "wddw",
               "location": "wdwdwd"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "922e",
+      "name": "Final",
+      "dates": [
+        {
+          "date": "2025-01-01",
+          "slots": [
+            {
+              "startTime": "01:00",
+              "endTime": "01:00",
+              "subject": "wd",
+              "location": "wd"
+            }
+          ]
+        },
+        {
+          "date": "2024-01-01",
+          "slots": [
+            {
+              "startTime": "01:00",
+              "endTime": "01:00",
+              "subject": "dwd",
+              "location": "wd"
+            },
+            {
+              "startTime": "01:00",
+              "endTime": "01:00",
+              "subject": "d",
+              "location": "wd"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "buildings": [
+    {
+      "id": "b1",
+      "name": "Engineering Building",
+      "floors": [
+        {
+          "floorNumber": 1,
+          "floorAdministrator": "Dr. John Doe",
+          "rooms": [
+            {
+              "roomCode": "ENG-101",
+              "type": "Lecture Hall",
+              "capacity": 120
+            },
+            {
+              "roomCode": "ENG-102",
+              "type": "Computer Lab",
+              "capacity": 30
+            }
+          ]
+        },
+        {
+          "floorNumber": 2,
+          "floorAdministrator": "Dr. Jane Smith",
+          "rooms": [
+            {
+              "roomCode": "ENG-201",
+              "type": "Lecture Hall",
+              "capacity": 100
+            },
+            {
+              "roomCode": "ENG-202",
+              "type": "Lab",
+              "capacity": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2",
+      "name": "Science Building",
+      "floors": [
+        {
+          "floorNumber": 1,
+          "floorAdministrator": "Dr. Emily White",
+          "rooms": [
+            {
+              "roomCode": "SCI-101",
+              "type": "Lecture Hall",
+              "capacity": 150
+            },
+            {
+              "roomCode": "SCI-102",
+              "type": "Science Lab",
+              "capacity": 40
             }
           ]
         }

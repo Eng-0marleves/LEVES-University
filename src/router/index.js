@@ -124,6 +124,14 @@ const routes = [
         path: '/dashboard/books',
         component: () => import('../views/dashboard/LibraryDashboard.vue'),
       },
+      {
+        path: '/dashboard/buildings',
+        component: () => import('../views/dashboard/BuildingsDashboard.vue'),
+      },
+      {
+        path: '/dashboard/semester',
+        component: () => import('../views/dashboard/semester/semesterDashboard.vue'),
+      },
     ]
   },
   {

@@ -1,6 +1,6 @@
 <template>
 	<div class="latest-events d-flex flex-column gap-3 align-items-center">
-		<h3 class="title">LATEST NEWS</h3>
+		<h3 class="title">LATEST EVENTS</h3>
 		<p class="desctiption">Stay updated with the latest developments.</p>
 		<div class="events-container">
 

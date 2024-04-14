@@ -65,7 +65,6 @@ nav {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	z-index: 100000000;
 }
 
 nav.open {
@@ -126,10 +125,12 @@ nav ul li .router.active {
 	nav.open {
 		transform: translateX(-100%);
 		transition: all .2s ease-in-out;
+		z-index: 100000000;
 	}
 
 	nav {
 		transform: translateX(0%);
+		z-index: 100000000;
 	}
 }
 </style>

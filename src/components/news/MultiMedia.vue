@@ -104,6 +104,7 @@ video {
 .media-item,
 .podcast-item {
 	margin-bottom: 20px;
+	background: #f9f9f9;
 }
 
 video {

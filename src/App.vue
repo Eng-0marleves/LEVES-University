@@ -10,8 +10,10 @@
     <div>
       <NavBar />
       <NavHeader />
-      <router-view class="main" />
-      <FooterSection />
+      <div class="d-flex justify-content-between flex-column">
+        <router-view class="main" />
+        <FooterSection />
+      </div>
     </div>
   </div>
 </template>
@@ -57,6 +59,11 @@ export default {
   flex-direction: column;
   align-items: center;
 } */
+
+.main {
+  min-height: 100vh;
+}
+
 .loading {
   position: fixed;
   top: 0;
