@@ -1,6 +1,6 @@
 <template>
 	<div class="CourseAssignments">
-		<router-link :to="`CourseQuizzes/quizz_generator`" class="btn normal generator">Assignments
+		<router-link :to="`CourseAssignments/generator`" class="btn normal generator">Assignments
 			Generator</router-link>
 
 		<div class="card-body">

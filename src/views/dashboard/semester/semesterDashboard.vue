@@ -41,7 +41,6 @@ import CourseFacultyManagement from './CourseFacultyManagement.vue';
 import EnrollmentStudentManagement from './EnrollmentStudentManagement.vue';
 import AnalyticsReporting from './AnalyticsReporting.vue';
 import SystemAdministration from './SystemAdministration.vue';
-// import { BootstrapVue3, BOffcanvas } from 'bootstrap-vue-3'
 
 export default {
 	name: 'SemesterDashboard',
@@ -54,7 +53,7 @@ export default {
 	},
 	data() {
 		return {
-			currentTab: 'Course and Faculty Management',
+			currentTab: 'Analytics and Reporting',
 			tabs: [
 				'Semester Management',
 				'Course and Faculty Management',

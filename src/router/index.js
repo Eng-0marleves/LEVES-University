@@ -81,6 +81,10 @@ const routes = [
         ]
       },
       {
+        path: ':course_code/CourseAssignments/generator',
+        component: () => import('../views/courses/assignments/AssignmentGenerator.vue')
+      },
+      {
         path: ':course_code/CourseSchedule',
         name: 'CourseSchedule',
         component: () => import('../views/courses/CourseSchedule.vue')
