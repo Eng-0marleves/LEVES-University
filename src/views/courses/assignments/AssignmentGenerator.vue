@@ -17,10 +17,13 @@
 			</div>
 
 			<div class="form-group">
-				<label class="multiselect" for="fileType">Allowed File Types:</label>
-				<multiselect v-model="selectedFileTypes" :options="fileTypes" :multiple="true" :taggable="true"
-					placeholder="Select file types" label="text" track-by="value"></multiselect>
+				<label for="fileType">Allowed File Types:</label>
+				<select :onChange="console.log(selectedFileTypes)" id="fileType" v-model="selectedFileTypes" multiple
+					class="multiselect">
+					<option v-for="(type, i) in fileTypes" :key="i" :value="type.value">{{ type.text }}</option>
+				</select>
 			</div>
+
 
 			<div class="form-group">
 				<label for="fileLimit">File Upload Limit:</label>
@@ -73,6 +76,7 @@
 				</div>
 			</div>
 			<div class="button-group">
+				<button type="button" @click="saveDraft" class="btn btn-danger">Cancle</button>
 				<button type="button" @click="saveDraft" class="btn btn-primary">Save Draft</button>
 				<button type="button" @click="publishAssignment" class="btn btn-success">Publish</button>
 			</div>
@@ -82,8 +86,6 @@
 
 <script>
 import Swal from 'sweetalert2';
-import Multiselect from 'vue-multiselect';
-import 'vue-multiselect/dist/vue-multiselect.min.css';
 
 export default {
 	name: 'AssignmentGenerator',
@@ -97,11 +99,14 @@ export default {
 			},
 			savedDrafts: [],
 			fileTypes: [
+				{ text: 'Text File', value: 'text/plain' },
+				{ text: 'Microsoft Word', value: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' },
+				{ text: 'Microsoft PowerPoint', value: 'application/vnd.openxmlformats-officedocument.presentationml.presentation' },
 				{ text: 'PDF', value: 'application/pdf' },
 				{ text: 'JPEG Image', value: 'image/jpeg' },
 				{ text: 'PNG Image', value: 'image/png' },
 				{ text: 'MP4 Video', value: 'video/mp4' },
-				{ text: 'AVI Video', value: 'video/avi' }
+				{ text: 'AVI Video', value: 'video/avi' },
 			],
 			selectedFileTypes: [],
 			fileLimit: 1,
@@ -112,9 +117,6 @@ export default {
 			},
 			isDraggingOver: false
 		};
-	},
-	components: {
-		Multiselect
 	},
 	methods: {
 		dragEnter(e) {
@@ -239,8 +241,6 @@ export default {
 </script>
 
 <style scoped>
-@import 'vue-multiselect/dist/vue-multiselect.min.css';
-
 .assignment-generator {
 	max-width: 800px;
 	margin: 20px auto;
@@ -497,5 +497,7 @@ export default {
 	display: block;
 	width: 100%;
 	padding: 0.5rem;
+	height: auto;
+	overflow: auto;
 }
 </style>
