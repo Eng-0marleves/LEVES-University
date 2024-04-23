@@ -17,8 +17,11 @@
     "chart.js": "^3.0.0",
     "core-js": "^3.8.3",
     "html2canvas": "^1.4.1",
+    "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
+    "jwt-decode": "^4.0.0",
+    "mitt": "^3.0.1",
     "qrcode.vue": "^3.4.1",
     "sweetalert2": "^11.10.6",
     "swiper": "^11.1.0",
@@ -27,7 +30,8 @@
     "vue-qrcode-reader": "^5.5.3",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^4.3.0",
-    "vuedraggable": "^4.1.0"
+    "vuedraggable": "^4.1.0",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

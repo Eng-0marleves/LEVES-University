@@ -1,19 +1,32 @@
 <template>
 	<div class="dashboard-profile">
-		<img src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg" alt=""
-			class="profile_img">
-		<h2>{{ profile.name }}</h2>
-		<p class="profile-email">{{ profile.email }}</p>
-		<p class="profile-role">{{ profile.role }} - {{ profile.department }}</p>
-		<!-- <div class="recent-activities">
-			<h3>Recent Activities</h3>
-			<ul>
-				<li v-for="(activity, index) in profile.recentActivities" :key="index">
-					{{ activity }}
-				</li>
-			</ul>
-		</div> -->
-		<div class="enrolled-subjects">
+		<div class="profileImageCpntainer">
+			<img :src="userData.image === '' ? profileImage : userData.image" alt="Profile Image" class="profile_img"
+				@click="$refs.viewImage.click()">
+
+			<button class="editProfileImage" @click="$refs.inputImage.click()">
+				<i class="fas fa-pen"></i>
+				<input ref="inputImage" type="file" class="d-none" name="" id="">
+			</button>
+
+			<button ref="viewImage" type="button" class="d-none" data-bs-toggle="modal"
+				data-bs-target="#viewProfileImage"></button>
+		</div>
+		<div class="modal fade" id="viewProfileImage" tabindex="-1" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<img :src="userData.image === '' ? profileImage : userData.image" alt="Profile Image"
+						class="full-image" />
+				</div>
+			</div>
+		</div>
+		<h2>{{ userData.name }}</h2>
+		<p class="profile-email">{{ userData.id }}</p>
+		<p class="profile-role">{{ userData.email }}</p>
+		<!-- <p class="profile-role">{{ userData.role }} - {{ profile.department }}</p> -->
+		<!-- Display enrolled subjects -->
+		<!-- <div class="enrolled-subjects">
 			<h3>Enrolled Subjects</h3>
 			<ul>
 				<li v-for="(course) in profile.enrolledCourses" :key="course.id">
@@ -21,35 +34,45 @@
 						}}</router-link>)
 				</li>
 			</ul>
-		</div>
+		</div> -->
+		<!-- Profile image edit input -->
+		<!-- <input type="file" ref="profileImageInput" @change="handleImageChange">
+		<button @click="updateProfileImage">Update Profile Image</button> -->
 	</div>
 </template>
 
-
 <script>
+import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
+import profile_image from '@/assets/images/profileImage.webp'; ""
+
 export default {
-	name: 'DashboardProfile',
+	name: "LoginView",
 	data() {
 		return {
-			profile: {
-				name: "Alex Johnson",
-				email: "alex.johnson@example.com",
-				role: "Student",
-				department: "Computer Science",
-				// recentActivities: [
-				// 	"Submitted assignment: CS101 - Introduction to Programming",
-				// 	"Attended webinar: Future of AI",
-				// 	"Updated profile picture"
-				// ],
-				enrolledCourses: [
-					{ code: "CSE101", name: "Introduction to Computer Science" },
-					{ code: "MATH301", name: "Discrete Mathematics" },
-					{ code: "AI701", name: "Technical Writing" }
-				]
-			}
+			userData: {},
+			profileImage: profile_image
 		};
+	},
+	methods: {
+		// Method to decode the authentication token and set user data
+		decodeAuthToken() {
+			const authToken = Cookies.get('user-auth-token');
+			if (authToken) {
+				try {
+					const decodedToken = jwtDecode(authToken);
+					this.userData = decodedToken;
+					console.log("Decoded authentication token:", this.userData);
+				} catch (error) {
+					console.error("Error decoding authentication token:", error);
+				}
+			}
+		},
+	},
+	mounted() {
+		this.decodeAuthToken();
 	}
-};
+}
 </script>
 
 
@@ -72,13 +95,71 @@ export default {
 	color: var(--secondary-color);
 }
 
-.dashboard-profile .profile_img {
+.profileImageCpntainer {
+	position: relative;
+	background: red;
 	width: 200px;
 	height: 200px;
 	border-radius: 50%;
-	object-fit: cover;
+	background: rgba(0, 0, 0, 0.4);
 	border: 4px solid var(--secondary-color);
+}
+
+.modal-content {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: transparent;
+	border: none;
+}
+
+.modal-dialog {
+	display: flex;
+	justify-content: center;
+}
+
+.full-image {
+	width: 100%;
+	height: 100%;
+}
+
+.editProfileImage {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: var(--secondary-color);
+
+}
+
+/* .profileImageCpntainer::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background: transparent;
+} */
+
+.profileImageCpntainer:hover::before {
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.dashboard-profile .profile_img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
 	margin-bottom: 20px;
+	cursor: pointer;
+}
+
+.dashboard-profile .profile_img:hover {
+	filter: brightness(50%);
+	transition: var(--transition);
 }
 
 .profile-email,

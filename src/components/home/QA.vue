@@ -9,7 +9,8 @@
 
 <script>
 import QA_Item from './QA_Item.vue';
-import axios from 'axios';
+/* eslint-disable */
+// import axios from 'axios';
 
 export default {
 	components: {
@@ -25,11 +26,10 @@ export default {
 		}
 	},
 	async created() {
-		console.log('Getting FAQs');
-		const res = await axios.get('http://localhost:5062/api/FAQs');
-		if (res.status == 200) {
-			this.accordionItems = res.data.slice(0, 5);
-		}
+		// const res = await axios.get('http://localhost:5062/api/FAQs');
+		// if (res.status == 200) {
+		// 	this.accordionItems = res.data.slice(0, 5);
+		// }
 	}
 }
 </script>

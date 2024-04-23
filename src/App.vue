@@ -9,7 +9,7 @@
     </div>
     <div>
       <NavBar />
-      <NavHeader />
+      <NavHeader :userData="userData" />
       <div class="d-flex justify-content-between flex-column">
         <router-view class="main" />
         <FooterSection />
@@ -22,6 +22,7 @@
 import NavBar from './components/global/NavBar.vue'
 import NavHeader from './components/global/NavHeader.vue'
 import FooterSection from './components/global/FooterSection.vue'
+import Cookies from 'js-cookie';
 
 export default {
   components: {
@@ -32,11 +33,8 @@ export default {
   data() {
     return {
       isLoggedIn: false,
-      isLoading: true, // Added isLoading to manage the loading state
+      isLoading: true,
     }
-  },
-  created() {
-    this.checkLoginStatus();
   },
   methods: {
     checkLoginStatus() {
@@ -46,8 +44,17 @@ export default {
         if (userInfo) {
           this.isLoggedIn = true;
         }
-        this.isLoading = false; // Update isLoading once the check is complete
-      }, 1000); // Simulating async operation with setTimeout
+        this.isLoading = false;
+      }, 1000);
+    }
+  },
+  created() {
+    this.checkLoginStatus();
+
+    const userDataString = Cookies.get('user_data');
+    if (userDataString) {
+      this.userData = JSON.parse(userDataString);
+      console.log(this.userData);
     }
   },
 }

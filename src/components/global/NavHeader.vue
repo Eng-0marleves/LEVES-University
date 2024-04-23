@@ -3,7 +3,7 @@
 		:style="{ width: 'calc(100% - ' + (navOpen ? navWidth : 0) + 'px' + ')' }">
 		<NavbarControllers :navOpen="navOpen" :hidTitle="hidTitle" :toggleNav="toggleNav" :toggleTitle="toggleTitle" />
 		<UserInfo :user_img="user_img" :showNotifications="showNotifications" :toggleNotifications="toggleNotifications"
-			:splitNotification="splitNotification" />
+			:splitNotification="splitNotification" :userData="userData" />
 	</header>
 </template>
 
@@ -17,6 +17,12 @@ export default {
 	components: {
 		NavbarControllers,
 		UserInfo
+	},
+	props: {
+		userData: {
+			type: Object,
+			required: true
+		}
 	},
 	data() {
 		return {

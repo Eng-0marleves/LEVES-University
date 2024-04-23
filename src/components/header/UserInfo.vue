@@ -1,7 +1,7 @@
 <template>
 	<div class="user-info">
-		<router-link to="/dashboard/profile" class="router">
-			<h6 class="title">std.Ahmed AbdElnaser</h6>
+		<router-link :to="`/dashboard/${roleAbbreviation}`" class="router">
+			<h6 class="title">{{ getRoleAbbreviation(userData.role) }}.{{ userData.firstName }}</h6>
 			<img :src="user_img" alt="user profile img">
 		</router-link>
 		<NotificationsButton :notifications="notifications" />
@@ -15,13 +15,17 @@ import NotificationsButton from './NotificationsButton.vue';
 export default {
 	props: {
 		user_img: String,
+		userData: {
+			type: Object,
+			required: true
+		},
 	},
 	components: {
 		NotificationsButton
 	},
 	data() {
 		return {
-			notifications: [] // Initialize notifications as an empty array
+			notifications: [],
 		}
 	},
 	async mounted() {
@@ -32,9 +36,23 @@ export default {
 			console.error("Error fetching notifications:", error);
 		}
 	},
+	methods: {
+		getRoleAbbreviation(role) {
+			console.log(role.toLowerCase());
+			switch (role.toLowerCase()) {
+				case 'student':
+					return 'std';
+				case 'doctor':
+					return 'dr';
+				case 'manager':
+					return 'mg';
+				default:
+					return 'M';
+			}
+		}
+	}
 };
 </script>
-
 
 <style scoped>
 .user-info {

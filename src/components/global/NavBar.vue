@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
+
 export default {
 	name: "NavBar",
 
@@ -40,7 +42,7 @@ export default {
 	},
 	methods: {
 		logout() {
-			localStorage.removeItem("auth-token");
+			Cookies.remove('user-auth-token');
 			this.$router.push({ name: "Login" });
 		},
 	}

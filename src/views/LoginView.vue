@@ -21,8 +21,10 @@
 </template>
 
 <script>
-import axios from 'axios'
-import Swal from 'sweetalert2'
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
 	name: "LoginView",
@@ -30,26 +32,43 @@ export default {
 		return {
 			id: "",
 			password: ""
-		}
+		};
 	},
 	methods: {
 		async login() {
-			const loginData = {
-				id: this.id,
-				password: this.password,
+			let loginData = {
+				id: this.id + "",
+				password: this.password
 			};
-
 			try {
-				const response = await axios.post("http://localhost:5062/api/Auth/login", loginData);
-				const token = response?.data?.token;
+				const response = await axios.post(`https://localhost:44303/api/Auth/login/`, loginData, {
+					withCredentials: true
+				});
+				const { status, data } = response;
 
-				if (response.status === 200 && token) {
-					localStorage.setItem("auth-token", token);
-					this.$router.push({ name: "Home" });
+				if (status == 200 && data) {
+					const authToken = data;
+					if (authToken) {
+						const decodedToken = jwtDecode(authToken);
+						const expirationDate = new Date(decodedToken.exp * 1000);
 
-					document.querySelector("body").classList.remove("full");
-					document.querySelector("nav").style.display = "block";
-					document.querySelector("header").style.display = "flex";
+						Cookies.set('user-auth-token', authToken, {
+							expires: expirationDate
+						});
+
+						document.querySelector("body").classList.remove("full");
+						document.querySelector("nav").style.display = "flex";
+						document.querySelector("header").style.display = "flex";
+						document.querySelector("footer").style.display = "block";
+
+						this.$router.push({ name: "Home" });
+					} else {
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'User authentication failed',
+						});
+					}
 				} else {
 					Swal.fire({
 						icon: 'error',
@@ -71,6 +90,7 @@ export default {
 		document.querySelector("body").classList.add("full");
 		document.querySelector("nav").style.display = "none";
 		document.querySelector("header").style.display = "none";
+		document.querySelector("footer").style.display = "none";
 	}
 }
 </script>

@@ -1,8 +1,6 @@
 <template>
   <section class="home">
 
-    <!-- <HeroPart /> -->
-
     <HomeCarousel />
 
     <OurFutures />
@@ -23,22 +21,11 @@
 
     <LatestEvents />
 
-
-
-
-
-    <!-- <AboutUniversity /> -->
-
-
   </section>
 </template>
 
 <script>
 import HomeCarousel from '@/components/home/HomeCarousel.vue';
-
-// import AboutUniversity from '@/components/home/AboutUniversity.vue';
-// import HeroPart from '@/components/home/HeroPart.vue';
-
 import OurFutures from '@/components/home/OurFutures.vue';
 import AboutVideo from '@/components/home/AboutVideo.vue';
 import QA from '@/components/home/QA.vue';
@@ -46,9 +33,16 @@ import TestimonialsPart from '@/components/home/TestimonialsPart.vue';
 import AboutCounts from '@/components/home/AboutCounts.vue'
 import AboutFutures from '@/components/home/AboutFutures..vue';
 import LatestEvents from '@/components/home/LatestEvents.vue';
+import Cookies from 'js-cookie';
 
 export default {
   name: 'HomeView',
+
+  data() {
+    return {
+      userData: null
+    };
+  },
 
   components: {
     HomeCarousel,
@@ -63,7 +57,13 @@ export default {
     AboutCounts,
     AboutFutures,
     LatestEvents
-  }
+  },
+  created() {
+    const userDataString = Cookies.get('user_data');
+    if (userDataString) {
+      this.userData = JSON.parse(userDataString);
+    }
+  },
 }
 </script>
 
