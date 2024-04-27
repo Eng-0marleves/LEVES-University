@@ -2,26 +2,23 @@
 	<div class="course-catalog">
 		<h2>Semester Course Management</h2>
 
-		<!-- Current Semester Courses -->
 		<div class="current-courses">
 			<h3>Assigned Courses</h3>
 			<ag-grid-vue class="ag-theme-quartz" :columnDefs="currentCourseDefs" :rowData="currentCourses"
-				:gridOptions="currentGridOptions" @grid-ready="onCurrentGridReady" style="width: 100%; height: 300px;">
+				:gridOptions="currentGridOptions" @grid-ready="onCurrentGridReady" style="width: 100%; height: 500px;">
 			</ag-grid-vue>
 		</div>
 
-		<!-- Button to Add Courses -->
 		<button @click="showAddCourses = !showAddCourses" class="btn normal mt-4 mb-2">
 			{{ showAddCourses ? 'Hide Available Courses' : 'Add Courses' }}
 		</button>
 
-		<!-- Available Courses to Add -->
 		<div v-if="showAddCourses" class="available-courses">
 			<h3>Available Courses</h3>
-			<input type="text" v-model="searchQuery" placeholder="Search courses..." class="form-control mb-2">
-			<ag-grid-vue class="ag-theme-quartz" :columnDefs="availableCourseDefs" :rowData="filteredAvailableCourses"
+			<!-- <input type="text" v-model="searchQuery" placeholder="Search courses..." class="form-control mb-2"> -->
+			<ag-grid-vue class="ag-theme-quartz" :columnDefs="availableCourseDefs" :rowData="availableCourses"
 				:gridOptions="availableGridOptions" @grid-ready="onAvailableGridReady"
-				style="width: 100%; height: 300px;">
+				style="width: 100%; height: 500px;">
 			</ag-grid-vue>
 		</div>
 	</div>
@@ -31,6 +28,8 @@
 import { AgGridVue } from 'ag-grid-vue3';
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
 	components: {
@@ -42,80 +41,145 @@ export default {
 			availableCourses: [],
 			showAddCourses: false,
 			searchQuery: '',
+			semester: {},
 			currentCourseDefs: [
-				{ headerName: 'ID', field: 'id', flex: 1 },
-				{ headerName: 'Name', field: 'name', flex: 3 },
-				{ headerName: 'Credits', field: 'credits', flex: 1 },
+				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 1 },
+				{ headerName: 'Course Name', field: 'courseTitle', filter: "PartialMatchFilter", flex: 2 },
+				{ headerName: 'Course Description', field: 'courseDescription', flex: 3 },
+				{ headerName: 'Credit Hours', field: 'creditHours', flex: 2 },
 				{ headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this } }
 			],
 			availableCourseDefs: [
-				{ headerName: 'ID', field: 'id', flex: 1 },
-				{ headerName: 'Name', field: 'name', flex: 3 },
-				{ headerName: 'Credits', field: 'credits', flex: 1 },
+				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 1 },
+				{ headerName: 'Course Name', field: 'courseTitle', filter: "PartialMatchFilter", flex: 2 },
+				{ headerName: 'Course Description', field: 'courseDescription', flex: 3 },
+				{ headerName: 'Credit Hours', field: 'creditHours', flex: 2 },
 				{ headerName: 'Add', field: 'id', cellRenderer: this.renderAddButton, cellRendererParams: { component: this } }
 			],
 			currentGridOptions: null,
 			availableGridOptions: null
 		};
 	},
-	computed: {
-		filteredAvailableCourses() {
-			return this.availableCourses.filter(course => {
-				return course.name.toLowerCase().includes(this.searchQuery.toLowerCase()) &&
-					(this.selectedDepartment ? course.department === this.selectedDepartment : true);
-			});
-		}
-	},
 	methods: {
 		onCurrentGridReady(params) {
 			this.currentGridOptions = params.api;
-			this.loadCurrentCourses();
 		},
 		onAvailableGridReady(params) {
 			this.availableGridOptions = params.api;
-			this.loadAvailableCourses();
-		},
-		loadCurrentCourses() {
-			this.currentCourses = [
-				{ id: 101, name: 'Calculus I', credits: 4 },
-				{ id: 102, name: 'Physics I', credits: 4 }
-			];
-		},
-		loadAvailableCourses() {
-			// Fetch available courses here
-			this.availableCourses = [
-				{ id: 201, name: 'Chemistry I', credits: 4 },
-				{ id: 202, name: 'Biology I', credits: 4 }
-			];
-		},
-		addCourseToSemester(courseId) {
-			const courseToAdd = this.availableCourses.find(course => course.id === courseId);
-			this.currentCourses.push(courseToAdd);
-			this.availableCourses = this.availableCourses.filter(course => course.id !== courseId);
-			this.availableGridOptions.setRowData(this.availableCourses);
-			this.currentGridOptions.setRowData(this.currentCourses);
-		},
-		removeCourseFromSemester(courseId) {
-			const courseToRemove = this.currentCourses.find(course => course.id === courseId);
-			this.availableCourses.push(courseToRemove);
-			this.currentCourses = this.currentCourses.filter(course => course.id !== courseId);
-			this.availableGridOptions.setRowData(this.availableCourses);
-			this.currentGridOptions.setRowData(this.currentCourses);
 		},
 		renderAddButton(params) {
 			const button = document.createElement('button');
 			button.innerText = 'Add';
 			button.classList.add('btn', 'btn-success');
-			button.onclick = () => params.context.component.addCourseToSemester(params.value);
+			button.onclick = () => this.addCourseToSemester(params.data.courseNumber);
+			button.setAttribute('data-course-id', params.value);
 			return button;
 		},
 		renderRemoveButton(params) {
 			const button = document.createElement('button');
 			button.innerText = 'Remove';
 			button.classList.add('btn', 'btn-danger');
-			button.onclick = () => params.context.component.removeCourseFromSemester(params.value);
+			button.onclick = () => this.removeCourseFromSemester(params.data.courseNumber);
 			return button;
-		}
+		},
+		async addCourseToSemester(courseId) {
+			try {
+				const response = await axios.post(`https://localhost:44303/AddSemesterCourse?CourseId=${courseId}`);
+				console.log(courseId);
+				console.log(response.data);
+				if (response.status === 200) {
+					Swal.fire({
+						title: "Success",
+						text: "Course added to semester successfully!",
+						icon: "success",
+						timer: 1500,
+						showConfirmButton: false
+					});
+
+					this.getSemesterCourses();
+					this.GetUnAvilableCourses();
+				} else {
+					Swal.fire({
+						title: "Error",
+						text: "Failed to add course to semester.",
+						icon: "error",
+					});
+				}
+			} catch (error) {
+				Swal.fire({
+					title: "Error",
+					text: "An error occurred while adding the course to semester.",
+					icon: "error",
+				});
+				console.error(error);
+			}
+		},
+		async GetUnAvilableCourses() {
+			try {
+				const response = await axios.get("https://localhost:44303/GetUnAvilableCoursesInSemester");
+				if (response.status === 200) {
+					this.availableCourses = response.data;
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		},
+		async removeCourseFromSemester(courseId) {
+			try {
+				const response = await axios.delete(`https://localhost:44303/DeleteSemesterCourse?id=${courseId}`);
+
+				if (response.status === 200) {
+					Swal.fire({
+						title: "Success",
+						text: "Course removed from semester successfully!",
+						icon: "success",
+						timer: 1500,
+						showConfirmButton: false
+					});
+
+					this.getSemesterCourses();
+					this.GetUnAvilableCourses();
+				} else {
+					Swal.fire({
+						title: "Error",
+						text: "Failed to remove course to semester.",
+						icon: "error",
+					});
+				}
+			} catch (error) {
+				Swal.fire({
+					title: "Error",
+					text: "An error occurred while removing the course to semester.",
+					icon: "error",
+				});
+				console.error(error);
+			}
+		},
+		async getSemester() {
+			try {
+				const response = await axios.get('https://localhost:44303/CurrentSemester');
+				if (response.status === 200) {
+					this.semester = response.data;
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		},
+		async getSemesterCourses() {
+			try {
+				const response = await axios.get("https://localhost:44303/GetSemesterCourses");
+				if (response.status === 200) {
+					this.currentCourses = response.data;
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		},
+	},
+	mounted() {
+		this.getSemester();
+		this.getSemesterCourses();
+		this.GetUnAvilableCourses();
 	}
 };
 </script>
@@ -136,6 +200,13 @@ export default {
 
 	--ag-header-cell-hover-background-color: var(--secondary-color);
 	--ag-header-cell-moving-background-color: white;
+}
+
+.ag-header-cell-label {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .course-catalog h2 {

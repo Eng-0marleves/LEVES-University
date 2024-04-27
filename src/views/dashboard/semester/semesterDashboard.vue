@@ -26,7 +26,7 @@
 		<div class="tab-content">
 			<semester-management v-if="currentTab === 'Semester Management'"
 				@selectedSemesterChanged="handleSemesterChange" />
-			<course-faculty-management v-if="currentTab === 'Course and Faculty Management'"
+			<course-faculty-management v-if="currentTab === 'Course and College Management'"
 				:semester="selectedSemester" />
 			<enrollment-student-management v-if="currentTab === 'Enrollment and Student Management'" />
 			<analytics-reporting v-if="currentTab === 'Analytics and Reporting'" />
@@ -53,10 +53,10 @@ export default {
 	},
 	data() {
 		return {
-			currentTab: 'Analytics and Reporting',
+			currentTab: 'Course and College Management',
 			tabs: [
 				'Semester Management',
-				'Course and Faculty Management',
+				'Course and College Management',
 				'Enrollment and Student Management',
 				'Analytics and Reporting',
 				'System Administration'
@@ -106,7 +106,6 @@ export default {
 	padding: 0;
 	display: flex;
 	margin-bottom: 20px;
-	background: var(--primary-color);
 }
 
 .nav-tabs li {

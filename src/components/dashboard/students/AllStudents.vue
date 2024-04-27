@@ -17,7 +17,7 @@
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import { AgGridVue } from "ag-grid-vue3";
-import ActionRenderer from './ActionRenderer.vue';
+import axios from 'axios';
 
 export default {
 	name: 'AllStudents',
@@ -28,26 +28,17 @@ export default {
 		return {
 			currentPage: 1,
 			pageSize: 25,
-			students: this.loadStudents(),
+			students: [],
 			columnDefs: [
-				{ headerName: "", checkboxSelection: true, headerCheckboxSelection: true, flex: 1 },
-				{ headerName: "Student ID", field: "studentId", flex: 2, filter: 'agTextColumnFilter' },
-				{ headerName: "Name", field: "name", flex: 3, filter: 'agTextColumnFilter' },
-				{ headerName: "Department", field: "department", flex: 3 },
-				{ headerName: "Mobile", field: "mobile", flex: 3, filter: 'agTextColumnFilter' },
-				{ headerName: "Email", field: "email", flex: 3, filter: 'agTextColumnFilter' },
-				{
-					headerName: "Actions",
-					cellRenderer: ActionRenderer,
-					editable: false,
-					colId: "actions",
-					width: 150,
-					flex: 2,
-				},
+				{ field: 'studentId', headerName: 'Student ID', flex: 2 },
+				{ field: 'name', headerName: 'Name', flex: 3 },
+				{ field: 'grade', headerName: 'Grade', flex: 1 },
+				{ field: 'gpa', headerName: 'GPA', flex: 1 },
+				{ field: 'areaOfStudy', headerName: 'Area of Study', flex: 3 },
+				{ field: 'ntid', headerName: 'NTID', flex: 2 },
+				{ field: 'email', headerName: 'Email', flex: 3 },
+				{ field: 'phoneNumber', headerName: 'Phone Number', flex: 2 }
 			],
-			frameworkComponents: {
-				actionRenderer: ActionRenderer,
-			},
 			gridOptions: {
 				context: {
 					onEdit: this.onEditStudent,
@@ -81,15 +72,17 @@ export default {
 				this.currentPage--;
 			}
 		},
-		loadStudents() {
-			// Simulate loading data
-			return new Array(100).fill(null).map((_, index) => ({
-				studentId: index + 1,
-				name: `Student ${index + 1}`,
-				department: `Department ${Math.ceil(Math.random() * 5)}`,
-				mobile: `123-456-789${index}`,
-				email: `student${index}@example.com`,
-			}));
+		async loadStudents() {
+			try {
+				const res = await axios.get('https://localhost:44303/GetAllStudents');
+				if (res.status === 200) {
+					this.students = res.data;
+					console.log("Students: ", res.data);
+					console.log("Students: ", this.students);
+				}
+			} catch (err) {
+				console.error(err);
+			}
 		},
 		onEditStudent(studentData) {
 			console.log("Edit student: ", studentData);
@@ -101,6 +94,7 @@ export default {
 		}
 	},
 	mounted() {
+		this.loadStudents();
 		console.log(document.querySelectorAll("ag-row"))
 		document.querySelectorAll(".ag-row").forEach(el => {
 			el.addEventListener("click", () => {

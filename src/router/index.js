@@ -9,69 +9,102 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: HomeView,
-    meta: { requiresAuth: true }
+    meta: {
+      requiresAuth: true
+    },
   },
   {
     path: '/FAQs',
     name: 'FAQs',
     component: () => import('@/components/home/FAQs.vue'),
-    meta: { requiresAuth: true }
+    meta: { requiresAuth: true },
   },
   {
     path: '/courses',
     name: 'Courses',
     component: () => import('../views/courses/CoursesView.vue'),
-    meta: { requiresAuth: true },
+    meta: {
+      requiresAuth: true,
+      allowedRoles: ['doctor', 'student', 'admin']
+    },
     children: [
       {
         path: '',
         name: 'Courses',
         component: () => import('../views/courses/CoursesHome.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code',
         name: 'Course',
         component: () => import('../views/courses/CourseHome.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseMaterials',
         name: 'CourseMaterials',
         component: () => import('../views/courses/CourseMaterial.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseAttendance',
         name: 'CourseAttendance',
         component: () => import('../views/courses/CourseAttendance.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseGrades',
         name: 'CourseGrades',
-        component: () => import('../views/courses/CourseGrades.vue')
+        component: () => import('../views/courses/CourseGrades.vue'),
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseQuizzes',
         component: () => import('../views/courses/CourseQuizzes.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseQuizzes/quizzDetails/:quiz_id',
         component: () => import('@/components/courses/quizzes/QuizzDetails.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseQuizzes/:quiz_id',
         name: 'quizz',
         component: () => import('../views/courses/CourseQuiz.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseQuizzes/quizz_generator',
         component: () => import('../views/courses/QuizzGenerator.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseAssignments',
@@ -82,7 +115,10 @@ const routes = [
             path: '',
             name: 'Assignments',
             component: () => import('../views/courses/assignments/CourseAssignments.vue'),
-            meta: { requiresAuth: true },
+            meta: {
+              requiresAuth: true,
+              allowedRoles: ['doctor', 'student', 'admin']
+            }
           },
           // {
           //   path: 'assignmentDetails/:assignment_id',
@@ -94,13 +130,19 @@ const routes = [
       {
         path: ':course_code/CourseAssignments/generator',
         component: () => import('../views/courses/assignments/AssignmentGenerator.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
       {
         path: ':course_code/CourseSchedule',
         name: 'CourseSchedule',
         component: () => import('../views/courses/CourseSchedule.vue'),
-        meta: { requiresAuth: true }
+        meta: {
+          requiresAuth: true,
+          allowedRoles: ['doctor', 'student', 'admin']
+        }
       },
     ]
   },
@@ -262,16 +304,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = Cookies.get('user-auth-token');
+  const userRole = Cookies.get('user-role');
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     if (!isAuthenticated) {
       next({ name: 'Login' });
     } else {
-      next();
+      if (checkAuthorization(userRole, to.meta.allowedRoles)) {
+        next();
+      } else {
+        next({ name: 'NotFound' });
+      }
     }
   } else if (to.name === 'Login' && isAuthenticated) {
     next({ name: 'Home' });
@@ -280,5 +327,11 @@ router.beforeEach((to, from, next) => {
   }
 });
 
+function checkAuthorization(userRole, allowedRoles) {
+  if (!allowedRoles) {
+    return true;
+  }
+  return allowedRoles.includes(userRole);
+}
 
-export default router
+export default router;

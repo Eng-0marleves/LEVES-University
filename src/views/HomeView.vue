@@ -33,7 +33,6 @@ import TestimonialsPart from '@/components/home/TestimonialsPart.vue';
 import AboutCounts from '@/components/home/AboutCounts.vue'
 import AboutFutures from '@/components/home/AboutFutures..vue';
 import LatestEvents from '@/components/home/LatestEvents.vue';
-import Cookies from 'js-cookie';
 
 export default {
   name: 'HomeView',
@@ -57,13 +56,7 @@ export default {
     AboutCounts,
     AboutFutures,
     LatestEvents
-  },
-  created() {
-    const userDataString = Cookies.get('user_data');
-    if (userDataString) {
-      this.userData = JSON.parse(userDataString);
-    }
-  },
+  }
 }
 </script>
 

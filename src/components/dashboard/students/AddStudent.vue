@@ -22,12 +22,32 @@
 				<label for="phoneNumber">Phone Number:</label>
 				<input id="phoneNumber" v-model="user.phoneNumber" type="tel" required>
 			</div>
+			<div class="form-group">
+				<label for="ntid">NTID:</label>
+				<input id="ntid" v-model="user.ntid" type="number" required>
+			</div>
+			<div class="form-group">
+				<label for="city">City:</label>
+				<input id="city" v-model="user.city" required>
+			</div>
+			<div class="form-group">
+				<label for="street1">Street 1:</label>
+				<input id="street1" v-model="user.street1" required>
+			</div>
+			<div class="form-group">
+				<label for="street2">Street 2:</label>
+				<input id="street2" v-model="user.street2">
+			</div>
+			<div class="form-group">
+				<label for="zip">Zip Code:</label>
+				<input id="zip" v-model="user.zip" type="text" required>
+			</div>
 			<div class="form-group d-flex gap-2">
-				<label for="userType">User Type:</label>
-				<select id="userType" v-model="user.userType" required>
-					<option value="Student">Student</option>
-					<option value="Teacher" disabled>Teacher</option>
-					<option value="Admin" disabled>Admin</option>
+				<select id="studyArea" v-model="user.areaOfStudy" required>
+					<option value="" disabled selected>Select an area of study</option>
+					<option v-for="(area, i) in areasOfStudy" :key="i" :v:alue="area.studyTitle">{{
+			area.studyTitle }}
+					</option>
 				</select>
 			</div>
 			<button class="btn normal" type="submit">Add User</button>
@@ -36,6 +56,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
 	name: 'AddStudent',
 	data() {
@@ -46,17 +67,30 @@ export default {
 				email: '',
 				dateOfBirth: '',
 				phoneNumber: '',
-				userType: 'Student', // Default to 'Student'
+				ntid: null,
+				areaOfStudy: '',
+				city: '',
+				street1: '',
+				street2: '',
+				zip: '',
 			},
+			areasOfStudy: this.loadAreas()
 		};
 	},
 	methods: {
-		submitStudent() {
-			console.log('Submitting user:', this.user);
-			// Here you would typically send the user data to a server
-			// For now, we'll just log it to the console
-			// After submission, you might want to clear the form or give feedback to the user
-			this.resetForm();
+		async submitStudent() {
+			try {
+				const response = await axios.post('https://localhost:44303/AddStudent', this.user);
+				if (response.status === 200) {
+					console.log('Student added successfully:', response.data);
+					this.resetForm();
+				} else {
+					console.error('Error adding student:', response);
+				}
+			} catch (ex) {
+				console.error(ex);
+				this.resetForm();
+			}
 		},
 		resetForm() {
 			this.user = {
@@ -67,7 +101,24 @@ export default {
 				phoneNumber: '',
 				userType: 'Student',
 			};
-		}
+		},
+		async loadAreas() {
+			try {
+				const response = await axios.get('https://localhost:44303/GetAreasOfStudy');
+				if (response.status == 200) {
+					this.areasOfStudy = response.data;
+					console.log(this.areasOfStudy)
+				} else {
+					console.error('Error loading areas of study:', response);
+				}
+			} catch (ex) {
+				console.error(ex);
+			}
+		},
+	},
+	moutned() {
+		this.loadAreas();
+		console.log("moutned")
 	},
 };
 </script>

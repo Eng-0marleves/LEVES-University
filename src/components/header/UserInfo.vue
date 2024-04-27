@@ -1,8 +1,8 @@
 <template>
 	<div class="user-info">
 		<router-link :to="`/dashboard/${roleAbbreviation}`" class="router">
-			<h6 class="title">{{ getRoleAbbreviation(userData.role) }}.{{ userData.firstName }}</h6>
-			<img :src="user_img" alt="user profile img">
+			<h6 class="title"></h6>
+			<!-- <img :src="user_img" alt="user profile img"> -->
 		</router-link>
 		<NotificationsButton :notifications="notifications" />
 	</div>
@@ -37,19 +37,19 @@ export default {
 		}
 	},
 	methods: {
-		getRoleAbbreviation(role) {
-			console.log(role.toLowerCase());
-			switch (role.toLowerCase()) {
-				case 'student':
-					return 'std';
-				case 'doctor':
-					return 'dr';
-				case 'manager':
-					return 'mg';
-				default:
-					return 'M';
-			}
-		}
+		// getRoleAbbreviation(role) {
+		// 	console.log(role.toLowerCase());
+		// 	switch (role.toLowerCase()) {
+		// 		case 'student':
+		// 			return 'std';
+		// 		case 'doctor':
+		// 			return 'dr';
+		// 		case 'manager':
+		// 			return 'mg';
+		// 		default:
+		// 			return 'M';
+		// 	}
+		// }
 	}
 };
 </script>

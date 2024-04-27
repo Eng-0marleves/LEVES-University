@@ -1,12 +1,12 @@
 <template>
   <div class="app">
     <!-- v-if="isLoading" -->
-    <div v-if="isLoading" class="loading">
+    <!-- <div v-if="isLoading" class="loading">
       <div class="content">
         <img src="@/assets/images/white_logo_full.png" alt="">
         <div class="loader"></div>
       </div>
-    </div>
+    </div> -->
     <div>
       <NavBar />
       <NavHeader :userData="userData" />
@@ -22,7 +22,7 @@
 import NavBar from './components/global/NavBar.vue'
 import NavHeader from './components/global/NavHeader.vue'
 import FooterSection from './components/global/FooterSection.vue'
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 export default {
   components: {
@@ -49,13 +49,13 @@ export default {
     }
   },
   created() {
-    this.checkLoginStatus();
+    // this.checkLoginStatus();
 
-    const userDataString = Cookies.get('user_data');
-    if (userDataString) {
-      this.userData = JSON.parse(userDataString);
-      console.log(this.userData);
-    }
+    // const userDataString = Cookies.get('user_data');
+    // if (userDataString) {
+    //   this.userData = JSON.parse(userDataString);
+    //   console.log(this.userData);
+    // }
   },
 }
 </script>

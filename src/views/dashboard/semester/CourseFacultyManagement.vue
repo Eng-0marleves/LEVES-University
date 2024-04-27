@@ -9,7 +9,7 @@
 			<div v-if="currentTab === 'Course Catalog'">
 				<CourseCatalog />
 			</div>
-			<div v-if="currentTab === 'Faculty Management'">
+			<div v-if="currentTab === 'College Management'">
 				<FacultyManagement />
 			</div>
 			<div v-if="currentTab === 'Analytics'">
@@ -34,7 +34,7 @@ export default {
 	data() {
 		return {
 			currentTab: 'Course Catalog',
-			tabs: ['Course Catalog', 'Faculty Management', 'Analytics']
+			tabs: ['Course Catalog', 'College Management', 'Analytics']
 		};
 	},
 	methods: {
@@ -48,10 +48,14 @@ export default {
 
 <style scoped>
 .nav-tabs {
+	color: var(--white-color);
 	list-style-type: none;
 	padding: 0;
+	padding-top: 16px;
+	padding-left: 8px;
 	display: flex;
 	margin-bottom: 20px;
+	background: var(--primary-color);
 }
 
 .nav-tabs li {

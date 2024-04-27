@@ -1,7 +1,7 @@
 <template>
 	<nav class="open small-scrollbar">
 		<ul>
-			<li v-for="router in routers" :key="router.route">
+			<li v-for="router in filteredRouters" :key="router.route">
 				<router-link :to="router.route" class="router"
 					:class="{ 'active': $route.path.includes(router.route) }">
 					<i :class="'fa-solid ' + router.icon"></i>
@@ -24,27 +24,36 @@ import Cookies from 'js-cookie';
 export default {
 	name: "NavBar",
 
-	data: () => {
+	data() {
 		return {
 			routers: [
-				{ route: "/home", icon: "fa-house", title: "Home" },
-				{ route: "/courses", icon: "fa-book-open", title: "Courses" },
-				{ route: "/dashboard", icon: "fa-chart-simple", title: "Dashboard" },
-				{ route: "/schedule", icon: "fa-calendar-days", title: "Schedule" },
-				{ route: "/library", icon: "fa-book-open-reader", title: "Library" },
-				{ route: "/news", icon: "fa-newspaper", title: "News" },
-				{ route: "/articals", icon: "fa-atom", title: "Articals" },
-				// { route: "/about", icon: "fa-circle-info", title: "About" },
-				{ route: "/support", icon: "fa-brands fa-rocketchat", title: "Support" },
-				// { route: "/AI", icon: "fa-robot", title: "AI" },
-			]
+				{ route: "/home", icon: "fa-house", title: "Home", roles: ["student", "doctor", "manager", "admin", "librarian"] },
+				{ route: "/courses", icon: "fa-book-open", title: "Courses", roles: ["student", "doctor", "admin"] },
+				{ route: "/dashboard", icon: "fa-chart-simple", title: "Dashboard", roles: ["student", "doctor", "manager", "admin", "librarian"] },
+				{ route: "/schedule", icon: "fa-calendar-days", title: "Schedule", roles: ["student", "doctor", "manager", "admin", "librarian"] },
+				{ route: "/library", icon: "fa-book-open-reader", title: "Library", roles: ["student", "doctor", "manager", "admin", "librarian"] },
+				{ route: "/news", icon: "fa-newspaper", title: "News", roles: ["student", "doctor", "manager", "admin", "librarian"] },
+				{ route: "/articles", icon: "fa-atom", title: "Articles", roles: ["student", "doctor", "manager", "admin", "librarian"] },
+				{ route: "/support", icon: "fa-brands fa-rocketchat", title: "Support", roles: ["student", "doctor", "admin", "librarian"] },
+			],
+			userRole: null
 		}
 	},
 	methods: {
 		logout() {
 			Cookies.remove('user-auth-token');
+			Cookies.remove('user-role');
 			this.$router.push({ name: "Login" });
 		},
+	},
+	mounted() {
+		this.userRole = Cookies.get('user-role');
+	},
+	computed: {
+		filteredRouters() {
+			if (!this.userRole) return [];
+			return this.routers.filter(router => router.roles.includes(this.userRole));
+		}
 	}
 }
 </script>

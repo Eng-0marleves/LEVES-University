@@ -51,7 +51,9 @@ export default {
 					if (authToken) {
 						const decodedToken = jwtDecode(authToken);
 						const expirationDate = new Date(decodedToken.exp * 1000);
-
+						Cookies.set('user-role', decodedToken.role, {
+							expires: expirationDate
+						});
 						Cookies.set('user-auth-token', authToken, {
 							expires: expirationDate
 						});

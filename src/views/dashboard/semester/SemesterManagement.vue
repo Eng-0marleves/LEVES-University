@@ -7,7 +7,7 @@
 				<label for="semesterSelect">Select Semester:</label>
 				<select id="semesterSelect" v-model="selectedSemesterId" @change="emitSelectedSemester">
 					<option v-for="semester in semesters" :key="semester.id" :value="semester.id">
-						{{ semester.name }}
+						{{ semester.title }}
 					</option>
 				</select>
 			</div>
@@ -23,7 +23,7 @@
 					<legend>{{ editingSemester ? 'Edit Semester' : 'New Semester Details' }}</legend>
 					<div class="form-group">
 						<label for="semesterName">Name:</label>
-						<input id="semesterName" v-model="newSemester.name" required>
+						<input id="semesterName" v-model="newSemester.title" required>
 					</div>
 					<div class="form-group">
 						<label for="startDate">Start Date:</label>
@@ -36,13 +36,13 @@
 					</div>
 					<div class="form-group">
 						<label for="registrationStart">Registration Start:</label>
-						<input type="date" id="registrationStart" v-model="newSemester.registrationStart"
+						<input type="date" id="registrationStart" v-model="newSemester.enrollmentStartDate"
 							:max="newSemester.startDate" required>
 					</div>
 					<div class="form-group">
 						<label for="registrationEnd">Registration End:</label>
-						<input type="date" id="registrationEnd" v-model="newSemester.registrationEnd"
-							:min="newSemester.registrationStart" :max="newSemester.endDate" required>
+						<input type="date" id="registrationEnd" v-model="newSemester.enrollmentEndDate"
+							:min="newSemester.enrollmentStartDate" :max="newSemester.endDate" required>
 					</div>
 					<div class="form-actions">
 						<button type="submit" class="btn btn-success me-3">Submit</button>
@@ -53,31 +53,31 @@
 		</div>
 
 		<div v-if="selectedSemester" class="semester-details">
-			<h3>{{ selectedSemester.name }}</h3>
-			<p>Start Date: {{ selectedSemester.startDate }}</p>
-			<p>End Date: {{ selectedSemester.endDate }}</p>
-			<p>Registration Start: {{ selectedSemester.registrationStart }}</p>
-			<p>Registration End: {{ selectedSemester.registrationEnd }}</p>
-			<button v-if="!semesterHasEnded(selectedSemester)" @click.stop="editSemester(selectedSemester)"
-				class="btn normal">Edit This Semester</button>
+			<h3>{{ selectedSemester.title }}</h3>
+			<p>Start Date: {{ selectedSemester.startDate.split("T")[0] }}</p>
+			<p>End Date: {{ selectedSemester.endDate.split("T")[0] }}</p>
+			<p>Registration Start: {{ selectedSemester.enrollmentStartDate.split("T")[0] }}</p>
+			<p>Registration End: {{ selectedSemester.enrollmentEndDate.split("T")[0] }}</p>
+			<!-- <button v-if="!semesterHasEnded(selectedSemester)" @click.stop="editSemester(selectedSemester)"
+				class="btn normal">Edit This Semester</button> -->
 		</div>
 	</div>
 </template>
 
 <script>
+import axios from 'axios';
+import Swal from 'sweetalert2';
+
 export default {
 	name: 'SemesterManagement',
 	data() {
 		return {
-			semesters: [
-				{ id: 1, name: 'Fall 2023', startDate: '2023-09-01', endDate: '2023-12-20', registrationStart: '2023-08-01', registrationEnd: '2023-08-31' },
-				{ id: 2, name: 'Spring 2024', startDate: '2024-01-15', endDate: '2024-05-30', registrationStart: '2024-01-01', registrationEnd: '2024-01-14' }
-			],
+			semesters: [],
 			selectedSemesterId: '',
 			showAddSemester: false,
 			editingSemester: false,
 			editingId: null,
-			newSemester: { name: '', startDate: '', endDate: '', registrationStart: '', registrationEnd: '' }
+			newSemester: { title: '', startDate: '', endDate: '', enrollmentStartDate: '', enrollmentEndDate: '' }
 		};
 	},
 	computed: {
@@ -92,19 +92,44 @@ export default {
 	methods: {
 		toggleAddSemester() {
 			this.showAddSemester = !this.showAddSemester;
-			if (!this.showAddSemester) {
-				this.editingSemester = false;
-				this.clearForm();
-			}
 		},
-		submitSemester() {
-			const newId = this.editingId || (this.semesters[this.semesters.length - 1]?.id + 1 || 1);
-			const semester = { id: newId, ...this.newSemester };
+		async submitSemester() {
+			let semester = {
+				title: this.newSemester.title,
+				startDate: this.newSemester.startDate,
+				endDate: this.newSemester.endDate,
+				enrollmentStartDate: this.newSemester.enrollmentStartDate,
+				enrollmentEndDate: this.newSemester.enrollmentEndDate
+			};
+
 			if (this.editingSemester) {
 				const index = this.semesters.findIndex(s => s.id === this.editingId);
 				this.semesters.splice(index, 1, semester);
 			} else {
-				this.semesters.push(semester);
+				try {
+					console.log(semester);
+					let res = await axios.post('https://localhost:44303/AddSemester', semester);
+					if (res.status === 200) {
+						this.semesters.push(semester);
+						Swal.fire({
+							icon: 'success',
+							title: 'Success!',
+							text: 'Semester added successfully.'
+						});
+						this.editingSemester = false;
+						this.clearForm();
+					} else {
+						console.log(res);
+					}
+
+				} catch (ex) {
+					console.log(ex);
+					Swal.fire({
+						icon: 'error',
+						title: 'Error!',
+						text: 'Failed to add semester. Please try again later.'
+					});
+				}
 			}
 			this.toggleAddSemester();
 		},
@@ -125,7 +150,27 @@ export default {
 		clearForm() {
 			this.newSemester = { name: '', startDate: '', endDate: '', registrationStart: '', registrationEnd: '' };
 			this.editingId = null;
+		},
+		async getSemesters() {
+			try {
+				var res = await axios.get('https://localhost:44303/Semesters');
+				this.semesters = res.data;
+				this.selectedSemesterId = this.semesters[0].id.toString();
+				console.log(this.semesters);
+				this.editingSemester = false;
+				this.clearForm();
+			} catch (error) {
+				console.log(error);
+				Swal.fire({
+					icon: 'error',
+					title: 'Error!',
+					text: 'Failed to fetch semesters. Please try again later.'
+				});
+			}
 		}
+	},
+	mounted() {
+		this.getSemesters();
 	},
 	watch: {
 		'selectedSemesterId': {
@@ -134,13 +179,15 @@ export default {
 				if (newVal) {
 					this.emitSelectedSemester();
 				} else {
-					this.selectedSemesterId = this.semesters.length ? this.semesters[this.semesters.length - 1].id.toString() : '';
+					this.selectedSemesterId = this.semesters.length ? this.semesters[0].id.toString() : '';
+					console.log(this.selectedSemesterId);
 				}
 			}
 		}
 	}
 };
 </script>
+
 
 <style scoped>
 /* Add your CSS styling here */

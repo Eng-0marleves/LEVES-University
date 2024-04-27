@@ -3,7 +3,7 @@
 		<h3>Study plan</h3>
 
 		<ag-grid-vue style="width: 100%;" :style="{ height: height + 'px' }" class="ag-theme-quartz"
-			:columnDefs="columnDefs" :rowData="rowData" :domLayout="'autoHeight'" v-if="rowData.length"></ag-grid-vue>
+			:columnDefs="columnDefs" :rowData="rowData" :gridOptions="gridOptions" v-if="rowData.length"></ag-grid-vue>
 	</div>
 </template>
 
@@ -41,6 +41,9 @@ export default {
 			],
 
 			rowData: this.generateRows(), // Use a method to generate rows
+			gridOptions: {
+				headerHeight: 56 // Set fixed header height
+			}
 		};
 	},
 	components: {
@@ -75,7 +78,6 @@ export default {
 		}
 	},
 	computed: {
-		// Your computed properties go here
 	},
 	mounted() {
 		this.gridHeight();
