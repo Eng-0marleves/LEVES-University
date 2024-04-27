@@ -1,0 +1,6 @@
+@LEVES_University_HostAddress = http://localhost:5283
+
+GET {{LEVES_University_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
