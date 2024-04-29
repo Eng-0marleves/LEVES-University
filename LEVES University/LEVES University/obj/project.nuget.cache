@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QWa3FdY1iHnyLACqJekYAbu62ygPoJbrvMqzDzG0YNgcXM1qDG0bRbENa7tXZo0w+NqVxpOcn89J3uKq6KVQew==",
+  "dgSpecHash": "oY4pblhJC0OESmylWH/WHtI6wNUiXL4bfclqfqsh5JajjQGVsg2SXpBJXcJI5bQ2FUYH2ZTL9sraxJtgON0nnQ==",
   "success": true,
-  "projectFilePath": "D:\\Omar Data\\Programing\\C#\\LEVES University\\LEVES University\\LEVES University.csproj",
+  "projectFilePath": "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES University\\LEVES University\\LEVES University.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Omar\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Omar\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

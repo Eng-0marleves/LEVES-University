@@ -2,19 +2,20 @@
 	<div class="library-home">
 		<HomeCarousel />
 
-		<div class="new-books mt-5">
+		<!-- <div class="new-books mt-5">
 			<h2>New Books</h2>
 			<div class="books-conatiner">
 				<BookCard v-for="(book, i) in books.slice(0, 5)" :key="i" :title="book.title" :author="book.author"
 					:cover="book.coverImage" :bookId="book.id" />
 			</div>
-		</div>
+		</div> -->
 
 		<div class="all-books mt-5">
-			<h2>All Books</h2>
+			<!-- <h2>All Books</h2> -->
 			<div class="books-conatiner">
 				<BookCard v-for="(book, i) in books" :key="i" :title="book.title" :author="book.author"
-					:cover="book.coverImage" :bookId="book.id" />
+					:cover="book.coverImage" :bookFile="book.bookFilePath" :description="book.description"
+					:bookId="book.id" />
 			</div>
 		</div>
 	</div>
@@ -39,8 +40,7 @@ export default {
 	methods: {
 		async getBooks() {
 			try {
-				const res = await axios.get('http://localhost:3000/books');
-
+				const res = await axios.get('https://localhost:44303/GetAllBooks');
 				if (res.status === 200) {
 					this.books = res.data;
 				}

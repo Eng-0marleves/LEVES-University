@@ -44,6 +44,10 @@ export default {
 					path: `/dashboard/students`,
 				},
 				{
+					title: "Employeers",
+					path: `/dashboard/employeers`,
+				},
+				{
 					title: "Library",
 					path: `/dashboard/books`,
 				},
@@ -54,11 +58,7 @@ export default {
 				{
 					title: "Semester",
 					path: `/dashboard/semester`,
-				},
-				// {
-				// 	title: "Notes",
-				// 	path: `/dashboard/`,
-				// }
+				}
 			]
 		};
 	},

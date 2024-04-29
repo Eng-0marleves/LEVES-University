@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Omar Data\\Programing\\C#\\LEVES University\\LEVES University\\LEVES University.csproj": {}
+    "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES University\\LEVES University\\LEVES University.csproj": {}
   },
   "projects": {
-    "D:\\Omar Data\\Programing\\C#\\LEVES University\\LEVES University\\LEVES University.csproj": {
+    "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES University\\LEVES University\\LEVES University.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Omar Data\\Programing\\C#\\LEVES University\\LEVES University\\LEVES University.csproj",
+        "projectUniqueName": "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES University\\LEVES University\\LEVES University.csproj",
         "projectName": "LEVES University",
-        "projectPath": "D:\\Omar Data\\Programing\\C#\\LEVES University\\LEVES University\\LEVES University.csproj",
+        "projectPath": "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES University\\LEVES University\\LEVES University.csproj",
         "packagesPath": "C:\\Users\\Omar\\.nuget\\packages\\",
-        "outputPath": "D:\\Omar Data\\Programing\\C#\\LEVES University\\LEVES University\\obj\\",
+        "outputPath": "C:\\Users\\Omar\\Documents\\GitHub\\LEVES-University\\LEVES University\\LEVES University\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Omar\\AppData\\Roaming\\NuGet\\NuGet.Config",

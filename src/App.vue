@@ -1,12 +1,11 @@
 <template>
   <div class="app">
-    <!-- v-if="isLoading" -->
-    <!-- <div v-if="isLoading" class="loading">
+    <div v-if="isLoading" class="loading">
       <div class="content">
         <img src="@/assets/images/white_logo_full.png" alt="">
         <div class="loader"></div>
       </div>
-    </div> -->
+    </div>
     <div>
       <NavBar />
       <NavHeader :userData="userData" />
@@ -22,7 +21,6 @@
 import NavBar from './components/global/NavBar.vue'
 import NavHeader from './components/global/NavHeader.vue'
 import FooterSection from './components/global/FooterSection.vue'
-// import Cookies from 'js-cookie';
 
 export default {
   components: {
@@ -37,36 +35,21 @@ export default {
     }
   },
   methods: {
-    checkLoginStatus() {
-      // Simulate an async operation, like fetching data
-      setTimeout(() => {
-        const userInfo = localStorage.getItem('user-info');
-        if (userInfo) {
-          this.isLoggedIn = true;
-        }
-        this.isLoading = false;
-      }, 1000);
+    handleWindowLoad() {
+      this.isLoading = false;
     }
   },
-  created() {
-    // this.checkLoginStatus();
-
-    // const userDataString = Cookies.get('user_data');
-    // if (userDataString) {
-    //   this.userData = JSON.parse(userDataString);
-    //   console.log(this.userData);
-    // }
+  mounted() {
+    window.addEventListener('load', this.handleWindowLoad);
   },
+  /* eslint-disable */
+  beforeDestroy() {
+    window.removeEventListener('load', this.handleWindowLoad);
+  }
 }
 </script>
 
 <style scoped>
-/* .app {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
 .main {
   min-height: 100vh;
 }

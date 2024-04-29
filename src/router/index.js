@@ -188,6 +188,11 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
+        path: '/dashboard/employeers',
+        component: () => import('../views/dashboard/employeers/EmployeersDashboard.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: '/dashboard/books',
         component: () => import('../views/dashboard/LibraryDashboard.vue'),
         meta: { requiresAuth: true }
