@@ -1,70 +1,80 @@
 <template>
 	<div class="buildings-dashboard">
-		<div class="tabs">
-			<button @click="switchTaps('showBuildings')" :class="{ active: currentTab === 'showBuildings' }">Show
-				Buildings</button>
-			<button @click="switchTaps('editBuilding')" :class="{ active: currentTab === 'editBuilding' }">Edit
-				Building</button>
-			<button @click="switchTaps('timeTable')" :class="{ active: currentTab === 'timeTable' }">Time Table</button>
-		</div>
+		<ul class="nav-tabs">
+			<li v-for="tab in tabs" :key="tab" :class="{ active: currentTab === tab }" @click="currentTab = tab">{{ tab
+				}}</li>
+		</ul>
+
 		<div class="tab-content">
-			<ShowBuildings v-if="currentTab === 'showBuildings'" />
-			<EditBuildings v-if="currentTab === 'editBuilding'" />
-			<TimeTable v-if="currentTab === 'timeTable'" />
+			<div v-if="currentTab === 'Buildings'">
+				<AllBuildings />
+			</div>
+			<div v-if="currentTab === 'Add Building'">
+				<AddBuilding />
+			</div>
+			<div v-if="currentTab === 'Buildings Time Table'">
+				Buildings Time Table
+			</div>
+			<div v-if="currentTab === 'Class Rooms'">
+				<ClassRooms />
+			</div>
+			<div v-if="currentTab === 'Add Class Room'">
+				<AddClassRoom />
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-import ShowBuildings from '@/components/dashboard/buildings/ShowBuildings.vue';
-import EditBuildings from '@/components/dashboard/buildings/EditBuildings.vue';
-import TimeTable from '@/components/dashboard/buildings/TimeTable.vue';
+import AllBuildings from '@/components/dashboard/buildings/AllBuildings.vue';
+import AddBuilding from '@/components/dashboard/buildings/AddBuilding.vue';
+import ClassRooms from '@/components/dashboard/buildings/ClassRooms.vue';
+import AddClassRoom from '@/components/dashboard/buildings/AddClassRoom.vue';
 
 export default {
 	name: 'BuildingsDashboard',
 	components: {
-		ShowBuildings,
-		EditBuildings,
-		TimeTable,
+		AllBuildings,
+		AddBuilding,
+		ClassRooms,
+		AddClassRoom
 	},
 	data() {
 		return {
-			currentTab: 'showBuildings', // Default tab
+			currentTab: 'Class Rooms',
+			tabs: ['Buildings', 'Add Building', 'Buildings Time Table', 'Class Rooms', 'Add Class Room'],
 		};
 	},
 	methods: {
-		switchTaps(tab) {
-			this.currentTab = tab;
-		},
 	},
 };
 </script>
 
 <style scoped>
-.tabs {
-	background: var(--primary-color);
-	padding: 8px;
-	padding-bottom: 0px;
-}
-
-.tabs button {
+.nav-tabs {
 	color: var(--white-color);
-	padding: 10px;
-	margin-right: 5px;
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	margin-bottom: 20px;
+	background: var(--primary-color);
+}
+
+.nav-tabs li {
 	cursor: pointer;
-	background-color: transparent;
-	border: 1px solid #ddd;
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	margin: 0 5px;
+	transition: background-color 0.3s;
 }
 
-.tabs button.active {
-	background-color: var(--secondary-color);
-}
-
-.tabs button:hover {
+.nav-tabs li:hover,
+.nav-tabs li.active {
 	background-color: var(--secondary-color);
 }
 
 .tab-content {
-	margin-top: 20px;
+	border: 1px solid #ccc;
+	padding: 20px;
 }
 </style>
