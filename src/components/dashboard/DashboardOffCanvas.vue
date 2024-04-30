@@ -44,8 +44,8 @@ export default {
 					path: `/dashboard/students`,
 				},
 				{
-					title: "Employeers",
-					path: `/dashboard/employeers`,
+					title: "Employees",
+					path: `/dashboard/employees`,
 				},
 				{
 					title: "Library",

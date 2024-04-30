@@ -188,8 +188,8 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
-        path: '/dashboard/employeers',
-        component: () => import('../views/dashboard/employeers/EmployeersDashboard.vue'),
+        path: '/dashboard/employees',
+        component: () => import('../views/dashboard/employeers/EmployeesDashboard.vue'),
         meta: { requiresAuth: true }
       },
       {
