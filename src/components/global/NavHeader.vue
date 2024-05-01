@@ -3,7 +3,7 @@
 		:style="{ width: 'calc(100% - ' + (navOpen ? navWidth : 0) + 'px' + ')' }">
 		<NavbarControllers :navOpen="navOpen" :hidTitle="hidTitle" :toggleNav="toggleNav" :toggleTitle="toggleTitle" />
 		<UserInfo :user_img="user_img" :showNotifications="showNotifications" :toggleNotifications="toggleNotifications"
-			:splitNotification="splitNotification" :userData="userData" />
+			:splitNotification="splitNotification" :userData="userData" @toggle-notifications="toggleNotifications" />
 	</header>
 </template>
 
@@ -11,18 +11,14 @@
 import NavbarControllers from '@/components/header/NavbarControllers.vue';
 import UserInfo from '@/components/header/UserInfo.vue';
 import userImg from "@/assets/images/user_img.jpg";
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
 	name: "NavHeader",
 	components: {
 		NavbarControllers,
 		UserInfo
-	},
-	props: {
-		userData: {
-			type: Object,
-			required: true
-		}
 	},
 	data() {
 		return {
@@ -32,12 +28,23 @@ export default {
 			isSmallScreen: false,
 			user_img: userImg,
 			showNotifications: false,
+			userData: {}
 		};
 	},
 	mounted() {
 		this.navWidth = document.querySelector("nav").getBoundingClientRect().width;
 		this.isSmallScreen = window.innerWidth <= 768;
 		window.addEventListener("resize", this.updateScreenSize);
+		const authToken = Cookies.get('user-auth-token');
+		if (authToken) {
+			try {
+				const decodedToken = jwtDecode(authToken);
+				this.userData = decodedToken;
+				console.log("Decoded authentication token:", this.userData);
+			} catch (error) {
+				console.error("Error decoding authentication token:", error);
+			}
+		}
 	},
 	methods: {
 		toggleNav() {

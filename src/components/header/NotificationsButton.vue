@@ -1,20 +1,18 @@
 <template>
-	<div class="dropdown">
-
-		<button class="notifications-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="notifications" ref="notificationsRef">
+		<button class="notifications-btn" type="button" @click="toggleNotifications">
 			<i class="fa-regular fa-bell"></i>
 			<span v-if="notifications.length > 0" class="badge bg-success">{{ notifications.length }}</span>
 		</button>
 
-		<ul class="dropdown-menu">
-			<li v-for="(notification, index) in notifications" :key="index">
-				<router-link class="dropdown-item" :to="notification.route">
-					<h6 class="dropdown-title">{{ notification.title }}</h6>
-					<p class="dropdown-message">{{ notification.message }}</p>
+		<ul v-if="showNotifications" class="notifications-list">
+			<li class="notification" v-for="(notification, index) in notifications" :key="index">
+				<router-link :to="notification.route">
+					<h5 class="title">{{ notification.title }}</h5>
+					<p class="date">{{ notification.date }}</p>
 				</router-link>
 			</li>
 		</ul>
-
 	</div>
 </template>
 
@@ -29,14 +27,27 @@ export default {
 			showNotifications: false
 		}
 	},
+	props: {
+		userId: {
+			type: String,
+			required: true
+		}
+	},
 	mounted() {
 		this.fetchNotifications();
+		// document.addEventListener('click', this.handleClickOutside);
+		// console.log("NotificationsButton mounted", this.$props.userId);
+	},
+	/* eslint-disable */
+	beforeDestroy() {
+		// document.removeEventListener('click', this.handleClickOutside);
 	},
 	methods: {
 		async fetchNotifications() {
 			try {
-				const response = await axios.get("http://localhost:3000/notifications");
+				const response = await axios.get(`https://localhost:44303/api/Post/user-notifications?userId=${this.$props.userId}`);
 				this.notifications = response.data;
+				console.log(this.notifications)
 			} catch (error) {
 				console.error("Error fetching notifications:", error);
 			}
@@ -44,13 +55,20 @@ export default {
 		toggleNotifications() {
 			this.showNotifications = !this.showNotifications;
 		},
-		splitNotification(index) {
-			this.$emit('splitNotification', index);
-		}
+		// handleClickOutside(event) {
+		// 	if (this.$refs.notificationsRef && !this.$refs.notificationsRef.contains(event.target)) {
+		// 		this.showNotifications = false;
+		// 	}
+		// },
 	}
 };
 </script>
+
 <style scoped>
+.notifications {
+	position: relative;
+}
+
 .notifications-btn .notifications .notification h3 {
 	color: var(--primary-color) !important;
 }
@@ -90,29 +108,40 @@ export default {
 	font-size: 32px !important;
 }
 
-.notifications-btn .notifications {
+.notifications-list {
 	position: absolute;
 	top: 100%;
-	left: calc(50% + calc(8 * -32px));
-	width: calc(8 * 32px);
-	background: #ccc;
+	left: calc(50% + calc(12 * -32px));
+	width: calc(12 * 32px);
+	background: #fff;
 	box-shadow: 0px 0px 8px 0px #ccc;
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: 8px;
 	height: fit-content;
+	padding: 8px;
+	border-radius: 4px;
 }
 
-.notifications-btn .notifications .notification {
+.notification {
 	width: 100%;
-	background: #fff;
+	background: #fff !important;
 	padding: 8px 16px;
 	text-align: left;
 	color: var(--primary-color);
+	transition: var(--transition);
 }
 
-.notifications-btn .notifications .notification h3,
-.notifications-btn .notifications .notification p {
+.notification:hover {
+	background: #eee !important;
+}
+
+.title {
 	color: var(--primary-color);
+}
+
+.date {
+	color: #666;
+	font-style: italic;
 }
 </style>

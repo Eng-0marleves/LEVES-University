@@ -1,10 +1,10 @@
 <template>
 	<div class="user-info">
 		<router-link :to="`/dashboard/${roleAbbreviation}`" class="router">
-			<h6 class="title"></h6>
-			<!-- <img :src="user_img" alt="user profile img"> -->
+			<h6 class="title">{{ $props.userData.name }}</h6>
+			<img :src="profileImage" alt="user profile img">
 		</router-link>
-		<NotificationsButton :notifications="notifications" />
+		<NotificationsButton :notifications="notifications" :userId="$props.userData.id" />
 	</div>
 </template>
 
@@ -26,7 +26,13 @@ export default {
 	data() {
 		return {
 			notifications: [],
+			defaultProfileImage: require('@/assets/images/profileImage.webp') // Set default profile image path
 		}
+	},
+	computed: {
+		profileImage() {
+			return this.$props.userData.image === '' ? this.defaultProfileImage : this.$props.userData.image;
+		},
 	},
 	async mounted() {
 		try {
@@ -37,20 +43,20 @@ export default {
 		}
 	},
 	methods: {
-		// getRoleAbbreviation(role) {
-		// 	console.log(role.toLowerCase());
-		// 	switch (role.toLowerCase()) {
-		// 		case 'student':
-		// 			return 'std';
-		// 		case 'doctor':
-		// 			return 'dr';
-		// 		case 'manager':
-		// 			return 'mg';
-		// 		default:
-		// 			return 'M';
-		// 	}
-		// }
-	}
+		getRoleAbbreviation(role) {
+			console.log(role.toLowerCase());
+			switch (role.toLowerCase()) {
+				case 'student':
+					return 'std';
+				case 'doctor':
+					return 'dr';
+				case 'manager':
+					return 'mg';
+				default:
+					return 'M';
+			}
+		}
+	},
 };
 </script>
 

@@ -71,9 +71,7 @@ export default {
 			html2canvas(this.$refs["tableContainer"], { allowTaint: true }).then(canvas => {
 				// Convert the canvas to a data URL
 				console.log(this.$refs.tableContainer);
-				console.log(canvas);
 				const imgData = canvas.toDataURL('image/png');
-				console.log(imgData);
 
 				// Create a temporary link element to download the image
 				const link = document.createElement('a');
