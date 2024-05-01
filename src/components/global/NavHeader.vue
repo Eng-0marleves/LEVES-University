@@ -1,5 +1,5 @@
 <template>
-	<header :class="{ fit: navOpen && hidTitle }"
+	<header v-if="isAuthenticated" :class="{ fit: navOpen && hidTitle }"
 		:style="{ width: 'calc(100% - ' + (navOpen ? navWidth : 0) + 'px' + ')' }">
 		<NavbarControllers :navOpen="navOpen" :hidTitle="hidTitle" :toggleNav="toggleNav" :toggleTitle="toggleTitle" />
 		<UserInfo :user_img="user_img" :showNotifications="showNotifications" :toggleNotifications="toggleNotifications"
@@ -28,7 +28,8 @@ export default {
 			isSmallScreen: false,
 			user_img: userImg,
 			showNotifications: false,
-			userData: {}
+			userData: {},
+			isAuthenticated: false
 		};
 	},
 	mounted() {
@@ -37,6 +38,7 @@ export default {
 		window.addEventListener("resize", this.updateScreenSize);
 		const authToken = Cookies.get('user-auth-token');
 		if (authToken) {
+			this.isAuthenticated = true;
 			try {
 				const decodedToken = jwtDecode(authToken);
 				this.userData = decodedToken;

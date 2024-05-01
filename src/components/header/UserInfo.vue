@@ -1,8 +1,8 @@
 <template>
 	<div class="user-info">
-		<router-link :to="`/dashboard/${roleAbbreviation}`" class="router">
+		<router-link to="/dashboard/" class="router">
 			<h6 class="title">{{ $props.userData.name }}</h6>
-			<img :src="profileImage" alt="user profile img">
+			<img :src="getUserImage(userImage)" alt="user profile img">
 		</router-link>
 		<NotificationsButton :notifications="notifications" :userId="$props.userData.id" />
 	</div>
@@ -26,7 +26,8 @@ export default {
 	data() {
 		return {
 			notifications: [],
-			defaultProfileImage: require('@/assets/images/profileImage.webp') // Set default profile image path
+			defaultProfileImage: require('@/assets/images/profileImage.webp'),
+			userImage: ""
 		}
 	},
 	computed: {
@@ -34,15 +35,25 @@ export default {
 			return this.$props.userData.image === '' ? this.defaultProfileImage : this.$props.userData.image;
 		},
 	},
-	async mounted() {
-		try {
-			const response = await axios.get("http://localhost:3000/notifications");
-			this.notifications = response.data;
-		} catch (error) {
-			console.error("Error fetching notifications:", error);
-		}
-	},
 	methods: {
+		getUserImage(userImage) {
+			this.getUserImageAsync();
+			if (userImage) {
+				return require(`@/assets/ProfilePictures/${userImage}`);
+			} else {
+				return require('@/assets/images/profileImage.webp');
+			}
+		},
+		async getUserImageAsync() {
+			try {
+				const response = await axios.get(`https://localhost:44303/GetProfilePicture?userId=${this.$props.userData.id}`);
+				this.userImage = response.data;
+				console.log("User image:", response.data);
+			} catch (error) {
+				console.error("Error fetching notifications:", error);
+				return undefined;
+			}
+		},
 		getRoleAbbreviation(role) {
 			console.log(role.toLowerCase());
 			switch (role.toLowerCase()) {
@@ -57,6 +68,12 @@ export default {
 			}
 		}
 	},
+	mounted() {
+		this.getUserImageAsync();
+	},
+	created() {
+		this.getUserImageAsync();
+	}
 };
 </script>
 

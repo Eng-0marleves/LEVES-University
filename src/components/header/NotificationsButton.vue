@@ -6,10 +6,11 @@
 		</button>
 
 		<ul v-if="showNotifications" class="notifications-list">
-			<li class="notification" v-for="(notification, index) in notifications" :key="index">
+			<li class="notification" v-for="(notification, index) in notifications" :key="index"
+				@click="onClickNotification(notification.id)">
 				<router-link :to="notification.route">
-					<h5 class="title">{{ notification.title }}</h5>
-					<p class="date">{{ notification.date }}</p>
+					<h6 class="title">{{ notification.title }}</h6>
+					<p class="date">{{ formatDate(notification.date) }}</p>
 				</router-link>
 			</li>
 		</ul>
@@ -35,8 +36,7 @@ export default {
 	},
 	mounted() {
 		this.fetchNotifications();
-		// document.addEventListener('click', this.handleClickOutside);
-		// console.log("NotificationsButton mounted", this.$props.userId);
+		console.log(this.notifications)
 	},
 	/* eslint-disable */
 	beforeDestroy() {
@@ -47,6 +47,7 @@ export default {
 			try {
 				const response = await axios.get(`https://localhost:44303/api/Post/user-notifications?userId=${this.$props.userId}`);
 				this.notifications = response.data;
+				console.log("notifications")
 				console.log(this.notifications)
 			} catch (error) {
 				console.error("Error fetching notifications:", error);
@@ -55,6 +56,32 @@ export default {
 		toggleNotifications() {
 			this.showNotifications = !this.showNotifications;
 		},
+		formatDate(dateTimeStr) {
+			const date = new Date(dateTimeStr);
+
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, '0');
+			const day = String(date.getDate()).padStart(2, '0');
+
+			const hours = String(date.getHours()).padStart(2, '0');
+			const minutes = String(date.getMinutes()).padStart(2, '0');
+
+			const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}`;
+
+			return formattedDate;
+		},
+		async deleteNotification(notificationId) {
+			try {
+				await axios.delete(`https://localhost:44303/api/Post/delete-notification?notificationId=${notificationId}`);
+				this.fetchNotifications();
+			} catch (error) {
+				console.error("Error deleting notification:", error);
+			}
+		},
+		onClickNotification(id) {
+			this.toggleNotifications();
+			this.deleteNotification(id);
+		}
 		// handleClickOutside(event) {
 		// 	if (this.$refs.notificationsRef && !this.$refs.notificationsRef.contains(event.target)) {
 		// 		this.showNotifications = false;

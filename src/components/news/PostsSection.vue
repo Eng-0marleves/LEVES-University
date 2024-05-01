@@ -6,24 +6,18 @@
 			<SearchBar @search="handleSearch" />
 		</div>
 		<div class="posts d-flex flex-column gap-4 mt-3">
-
 			<div class="post" v-for="(post, i) in filteredPosts" :key="i">
 				<div class="post-header">
 					<div class="user d-flex align-items-center gap-1">
-
-						<img :src="!post.authorImg ? require('@/assets/images/profileImage.webp') : post.authorImg"
-							alt="">
-
+						<img :src="getAuthorImage(post.authorImg)" alt="">
 						<div>
 							<p>{{ authorName(post.authorRoleName, post.authorName) }}</p>
 							<small style="color: var(--secondary-color);">{{ formatDate(post.postDate) }}</small>
 						</div>
-
 					</div>
 					<div class="settings">
 						<i class="fa-solid fa-ellipsis" @click="toggleMenu(i)"></i>
 						<div class="menu" v-if="showMenu === i">
-							<!-- Add your dropdown menu items here -->
 							<button @click="editPost(post.postContent, post.postId)" class="border-bottom"><i
 									class="fas fa-pen"></i> Edit</button>
 							<button @click="deletePost(post.postId)" class="text-danger"><i class="fas fa-trash"></i>
@@ -34,7 +28,6 @@
 				<div class="content" v-html="post.postContent">
 				</div>
 			</div>
-
 		</div>
 	</div>
 </template>
@@ -66,6 +59,13 @@ export default {
 		};
 	},
 	methods: {
+		getAuthorImage(authorImg) {
+			if (authorImg) {
+				return require(`@/assets/ProfilePictures/${authorImg}`);
+			} else {
+				return require('@/assets/images/profileImage.webp');
+			}
+		},
 		async savePost(postContent, roles) {
 			try {
 				var rolesIds = roles.map(role => role.value);
@@ -125,7 +125,6 @@ export default {
 				confirmButtonText: 'Yes, delete it!'
 			}).then(async (result) => {
 				if (result.isConfirmed) {
-
 					await axios.delete(`https://localhost:44303/delete?postId=${id}`);
 					Swal.fire(
 						'Deleted!',
@@ -223,7 +222,7 @@ export default {
 				return this.posts;
 			}
 			const regex = new RegExp(this.searchQuery, 'i');
-			return this.posts.filter(post => regex.test(post.content));
+			return this.posts.filter(post => regex.test(post.postContent));
 		}
 	},
 	mounted() {

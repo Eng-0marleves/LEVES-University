@@ -1,14 +1,11 @@
 <template>
 	<div class="dashboard-profile">
 		<div class="profileImageCpntainer">
-			<img :src="userData.image === '' ? profileImage : userData.image" alt="Profile Image" class="profile_img"
-				@click="$refs.viewImage.click()">
-
+			<img :src="getUserImage()" alt="Profile Image" class="profile_img" @click="$refs.viewImage.click()">
 			<button class="editProfileImage" @click="$refs.inputImage.click()">
 				<i class="fas fa-pen"></i>
-				<input ref="inputImage" type="file" class="d-none" name="" id="">
+				<input ref="inputImage" type="file" class="d-none" @change="handleImageChange">
 			</button>
-
 			<button ref="viewImage" type="button" class="d-none" data-bs-toggle="modal"
 				data-bs-target="#viewProfileImage"></button>
 		</div>
@@ -16,28 +13,13 @@
 			aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
-					<img :src="userData.image === '' ? profileImage : userData.image" alt="Profile Image"
-						class="full-image" />
+					<img :src="getUserImage()" alt="user profile img">
 				</div>
 			</div>
 		</div>
 		<h2>{{ userData.name }}</h2>
 		<p class="profile-email">{{ userData.id }}</p>
 		<p class="profile-role">{{ userData.email }}</p>
-		<!-- <p class="profile-role">{{ userData.role }} - {{ profile.department }}</p> -->
-		<!-- Display enrolled subjects -->
-		<!-- <div class="enrolled-subjects">
-			<h3>Enrolled Subjects</h3>
-			<ul>
-				<li v-for="(course) in profile.enrolledCourses" :key="course.id">
-					{{ course.name }} (Code: <router-link class="router" :to="`/courses/${course.code}`">{{ course.code
-						}}</router-link>)
-				</li>
-			</ul>
-		</div> -->
-		<!-- Profile image edit input -->
-		<!-- <input type="file" ref="profileImageInput" @change="handleImageChange">
-		<button @click="updateProfileImage">Update Profile Image</button> -->
 	</div>
 </template>
 
@@ -45,17 +27,31 @@
 import { jwtDecode } from 'jwt-decode';
 import Cookies from 'js-cookie';
 import profile_image from '@/assets/images/profileImage.webp'; ""
+import axios from 'axios';
 
 export default {
 	name: "LoginView",
 	data() {
 		return {
 			userData: {},
-			profileImage: profile_image
+			profileImage: profile_image,
+			userImage: undefined,
+			selectedImage: null,
 		};
 	},
 	methods: {
-		// Method to decode the authentication token and set user data
+		getUserImage() {
+			this.getUserImageAsync();
+			if (this.userImage) {
+				console.log(this.userImage)
+				console.log("founded")
+				return require(`@/assets/ProfilePictures/${this.userImage}`);
+			} else {
+				console.log(this.userImage)
+				console.log("not founded")
+				return require('@/assets/images/profileImage.webp');
+			}
+		},
 		decodeAuthToken() {
 			const authToken = Cookies.get('user-auth-token');
 			if (authToken) {
@@ -68,12 +64,44 @@ export default {
 				}
 			}
 		},
+		async getUserImageAsync() {
+			try {
+				const response = await axios.get(`https://localhost:44303/GetProfilePicture?userId=${this.userData.id}`);
+				this.userImage = response.data;
+				console.log("User image:", response.data);
+			} catch (error) {
+				console.error("Error fetching user image:", error);
+			}
+		},
+		handleImageChange(event) {
+			this.selectedImage = event.target.files[0];
+			this.updateProfileImage();
+		},
+		async updateProfileImage() {
+			try {
+				const formData = new FormData();
+				formData.append('userId', this.userData.id);
+				formData.append('image', this.selectedImage);
+
+				await axios.put('https://localhost:44303/api/Auth/update-profile-picture', formData, {
+					headers: {
+						'Content-Type': 'multipart/form-data'
+					}
+				});
+
+				this.getUserImageAsync(); // Update user image after successful upload
+			} catch (error) {
+				console.error("Error updating profile image:", error);
+			}
+		},
 	},
 	mounted() {
 		this.decodeAuthToken();
+		this.getUserImageAsync();
 	}
 }
 </script>
+
 
 
 <style scoped>

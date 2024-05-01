@@ -1,27 +1,26 @@
 <template>
 	<div class="semester-dashboard">
 		<!-- Trigger Button -->
-		<button class="toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#semesterDashboardOffcanvas"
+		<!-- <button class="toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#semesterDashboardOffcanvas"
 			aria-controls="semesterDashboardOffcanvas">
 			<i class="fas fa-angle-down"></i>
-		</button>
+		</button> -->
 
 		<!-- Top Offcanvas -->
-		<div class="offcanvas offcanvas-top" tabindex="-1" id="semesterDashboardOffcanvas"
+		<!-- <div class="offcanvas offcanvas-top" tabindex="-1" id="semesterDashboardOffcanvas"
 			aria-labelledby="offcanvasTopLabel">
 			<div class="offcanvas-header">
 				<h5 class="offcanvas-title" id="offcanvasTopLabel">Semester Dashboard</h5>
 				<button type="button" data-bs-dismiss="offcanvas" ref="close"><i class="fas fa-xmark"></i></button>
 			</div>
 			<div class="offcanvas-body">
-				<!-- Navigation Links -->
 				<ul class="nav flex-column">
 					<li class="nav-item" v-for="tab in tabs" :key="tab" @click="changeTab(tab)">
 						<button class="nav-link active" @click="toggleOffcanvas">{{ tab }}</button>
 					</li>
 				</ul>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="tab-content">
 			<semester-management v-if="currentTab === 'Semester Management'"
