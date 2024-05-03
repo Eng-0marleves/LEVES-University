@@ -9,11 +9,11 @@
 			</ag-grid-vue>
 		</div>
 
-		<button @click="showAddCourses = !showAddCourses" class="btn normal mt-4 mb-2">
+		<button v-if="!isSemesterHasEnded" @click="showAddCourses = !showAddCourses" class="btn normal mt-4 mb-2">
 			{{ showAddCourses ? 'Hide Available Courses' : 'Add Courses' }}
 		</button>
 
-		<div v-if="showAddCourses" class="available-courses">
+		<div v-if="showAddCourses && !isSemesterHasEnded" class="available-courses">
 			<h3>Available Courses</h3>
 			<!-- <input type="text" v-model="searchQuery" placeholder="Search courses..." class="form-control mb-2"> -->
 			<ag-grid-vue class="ag-theme-quartz" :columnDefs="availableCourseDefs" :rowData="availableCourses"
@@ -41,13 +41,14 @@ export default {
 			availableCourses: [],
 			showAddCourses: false,
 			searchQuery: '',
+			isSemesterHasEnded: true,
 			semester: {},
 			currentCourseDefs: [
 				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 1 },
 				{ headerName: 'Course Name', field: 'courseTitle', filter: "PartialMatchFilter", flex: 2 },
 				{ headerName: 'Course Description', field: 'courseDescription', flex: 3 },
 				{ headerName: 'Credit Hours', field: 'creditHours', flex: 2 },
-				{ headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this } }
+				{ headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this }, hide: !this.isSemesterHasEnded }
 			],
 			availableCourseDefs: [
 				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 1 },
@@ -160,6 +161,8 @@ export default {
 				const response = await axios.get('https://localhost:44303/CurrentSemester');
 				if (response.status === 200) {
 					this.semester = response.data;
+					this.isSemesterHasEnded = new Date(this.semester.endDate) > new Date();
+					console.log(new Date(this.semester.endDate) > new Date())
 				}
 			} catch (error) {
 				console.error(error);

@@ -12,12 +12,12 @@
 				</select>
 			</div>
 
-			<button class="btn normal" @click="toggleAddSemester">
+			<button class="btn normal" @click="toggleAddSemester" v-if="isSemesterHasEnded">
 				{{ editingSemester ? 'Editing Semester' : 'Add New Semester' }}
 			</button>
 		</div>
 
-		<div v-if="showAddSemester || editingSemester" class="add-semester-form">
+		<div class="add-semester-form">
 			<form @submit.prevent="submitSemester">
 				<fieldset>
 					<legend>{{ editingSemester ? 'Edit Semester' : 'New Semester Details' }}</legend>
@@ -77,7 +77,9 @@ export default {
 			showAddSemester: false,
 			editingSemester: false,
 			editingId: null,
-			newSemester: { title: '', startDate: '', endDate: '', enrollmentStartDate: '', enrollmentEndDate: '' }
+			newSemester: { title: '', startDate: '', endDate: '', enrollmentStartDate: '', enrollmentEndDate: '' },
+			currentSemester: null,
+			isSemesterHasEnded: false
 		};
 	},
 	computed: {
@@ -144,8 +146,13 @@ export default {
 			this.$emit('selectedSemesterChanged', this.selectedSemester);
 		},
 		semesterHasEnded(semester) {
-			const today = new Date();
-			return new Date(semester.endDate) < today;
+			if (semester && semester.endDate) {
+				const today = new Date();
+				console.log(semester.endDate)
+				console.log(new Date(semester.endDate) < today)
+				this.isSemesterHasEnded = new Date(semester.endDate) > today;
+			}
+			this.isSemesterHasEnded = false;
 		},
 		clearForm() {
 			this.newSemester = { name: '', startDate: '', endDate: '', registrationStart: '', registrationEnd: '' };
@@ -167,10 +174,21 @@ export default {
 					text: 'Failed to fetch semesters. Please try again later.'
 				});
 			}
+		},
+		async getCurrentSemester() {
+			try {
+				const res = await axios.get('https://localhost:44303/CurrentSemester');
+				this.currentSemester = res.data;
+				this.isSemesterHasEnded = new Date(this.semester.endDate) > new Date();
+				console.log(this.currentSemester)
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	},
 	mounted() {
 		this.getSemesters();
+		this.getCurrentSemester();
 	},
 	watch: {
 		'selectedSemesterId': {
@@ -180,14 +198,13 @@ export default {
 					this.emitSelectedSemester();
 				} else {
 					this.selectedSemesterId = this.semesters.length ? this.semesters[0].id.toString() : '';
-					console.log(this.selectedSemesterId);
+					console.log("semster", this.selectedSemesterId);
 				}
 			}
 		}
 	}
 };
 </script>
-
 
 <style scoped>
 /* Add your CSS styling here */
@@ -210,7 +227,6 @@ export default {
 }
 
 h2 {
-	color: #0056b3;
 	margin-bottom: 20px;
 }
 

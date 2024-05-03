@@ -1,66 +1,46 @@
 <template>
 	<div class="semester-dashboard">
-		<!-- Trigger Button -->
-		<!-- <button class="toggle" type="button" data-bs-toggle="offcanvas" data-bs-target="#semesterDashboardOffcanvas"
-			aria-controls="semesterDashboardOffcanvas">
-			<i class="fas fa-angle-down"></i>
-		</button> -->
-
-		<!-- Top Offcanvas -->
-		<!-- <div class="offcanvas offcanvas-top" tabindex="-1" id="semesterDashboardOffcanvas"
-			aria-labelledby="offcanvasTopLabel">
-			<div class="offcanvas-header">
-				<h5 class="offcanvas-title" id="offcanvasTopLabel">Semester Dashboard</h5>
-				<button type="button" data-bs-dismiss="offcanvas" ref="close"><i class="fas fa-xmark"></i></button>
-			</div>
-			<div class="offcanvas-body">
-				<ul class="nav flex-column">
-					<li class="nav-item" v-for="tab in tabs" :key="tab" @click="changeTab(tab)">
-						<button class="nav-link active" @click="toggleOffcanvas">{{ tab }}</button>
-					</li>
-				</ul>
-			</div>
-		</div> -->
+		<ul class="nav-tabs">
+			<li v-for="tab in tabs" :key="tab" :class="{ active: currentTab === tab }" @click="currentTab = tab">{{ tab
+				}}</li>
+		</ul>
 
 		<div class="tab-content">
-			<semester-management v-if="currentTab === 'Semester Management'"
-				@selectedSemesterChanged="handleSemesterChange" />
-			<course-faculty-management v-if="currentTab === 'Course and College Management'"
-				:semester="selectedSemester" />
-			<enrollment-student-management v-if="currentTab === 'Enrollment and Student Management'" />
-			<analytics-reporting v-if="currentTab === 'Analytics and Reporting'" />
-			<system-administration v-if="currentTab === 'System Administration'" />
+			<div v-if="currentTab === 'Semester Information'">
+				<SemesterManagement />
+			</div>
+			<div v-if="currentTab === 'Semester Courses'">
+				<CourseCatalog />
+			</div>
+			<div v-if="currentTab === 'Courses Schedule'">
+				<CoursesSchedule />
+			</div>
+			<div v-if="currentTab === 'Courses Enrollments'">
+				<CoursesEnrollments />
+			</div>
 		</div>
+
 	</div>
 </template>
 
 <script>
 import SemesterManagement from './SemesterManagement.vue';
-import CourseFacultyManagement from './CourseFacultyManagement.vue';
-import EnrollmentStudentManagement from './EnrollmentStudentManagement.vue';
-import AnalyticsReporting from './AnalyticsReporting.vue';
-import SystemAdministration from './SystemAdministration.vue';
+import CourseCatalog from '@/components/dashboard/semester/CourseCatalog.vue';
+import CoursesSchedule from './CoursesSchedule.vue';
+import CoursesEnrollments from './CoursesEnrollments.vue';
 
 export default {
 	name: 'SemesterDashboard',
 	components: {
 		SemesterManagement,
-		CourseFacultyManagement,
-		EnrollmentStudentManagement,
-		AnalyticsReporting,
-		SystemAdministration,
+		CourseCatalog,
+		CoursesSchedule,
+		CoursesEnrollments
 	},
 	data() {
 		return {
-			currentTab: 'Course and College Management',
-			tabs: [
-				'Semester Management',
-				'Course and College Management',
-				'Enrollment and Student Management',
-				'Analytics and Reporting',
-				'System Administration'
-			],
-			selectedSemester: null
+			currentTab: 'Courses Schedule',
+			tabs: ['Semester Information', 'Semester Courses', 'Courses Schedule', 'Courses Enrollments'],
 		};
 	},
 	methods: {
@@ -78,7 +58,7 @@ export default {
 </script>
 
 <style scoped>
-.semester-dashboard {
+/* .semester-dashboard {
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -152,5 +132,35 @@ export default {
 .tab-content {
 	width: 100%;
 	padding: 8px 0;
+} */
+
+
+/* ------------------------------------------------------------------ */
+
+.nav-tabs {
+	color: var(--white-color);
+	list-style-type: none;
+	padding: 0;
+	display: flex;
+	margin-bottom: 20px;
+	background: var(--primary-color);
+}
+
+.nav-tabs li {
+	cursor: pointer;
+	padding: 10px 20px;
+	border: 1px solid #ccc;
+	margin: 0 5px;
+	transition: background-color 0.3s;
+}
+
+.nav-tabs li:hover,
+.nav-tabs li.active {
+	background-color: var(--secondary-color);
+}
+
+.tab-content {
+	border: 1px solid #ccc;
+	padding: 20px;
 }
 </style>
