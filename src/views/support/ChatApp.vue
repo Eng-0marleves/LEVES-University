@@ -10,49 +10,119 @@
 				</div>
 			</div>
 		</div>
-		<div class="controllers">
+
+		<div v-if="userStatus === 'User has an existing ticket.'" class="ex-msg">
+			You can't send messages
+		</div>
+
+		<div v-else class="controllers">
 			<input type="text" v-model="newMessage" @keyup.enter="sendMessage" placeholder="Type a message...">
 			<button @click="sendMessage"><i class="fa-solid fa-paper-plane"></i></button>
+			<button @click="endChat" class="end-chat"></button>
 		</div>
 	</div>
 </template>
 
-
 <script>
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import axios from 'axios';
+
 export default {
 	name: 'ChatApp',
+	props: {
+		userStatus: String
+	},
 	data() {
 		return {
 			messages: [
 				{ id: 1, sender: 'Alice', text: 'Hi there!', time: '10:00 AM' },
 				{ id: 2, sender: 'Alice', text: 'Hello!', time: '10:01 AM' }
 			],
-			newMessage: ''
+			newMessage: '',
+			userData: null,
+			chatId: null,
+			socket: null
 		};
 	},
-	methods: {
-		sendMessage() {
-			if (!this.newMessage.trim()) return;
-
-			const newMsg = {
-				id: this.messages.length + 1,
-				sender: 'You',
-				text: this.newMessage,
-				time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-			};
-
-			this.messages.push(newMsg);
-			this.newMessage = '';
+	computed: {
+		userHasTicket() {
+			return this.userStatus === 'User has an existing ticket.' || this.userStatus === 'User is currently in a chat.';
 		}
-	}
+	},
+	methods: {
+		async sendMessage() {
+			console.log('Sending message:', this.newMessage);
+			if (!this.newMessage.trim() || this.userHasTicket) return;
+
+			this.socket.send(JSON.stringify({
+				type: 'sendMessage',
+				message: {
+					sender: 'You',
+					text: this.newMessage
+				}
+			}));
+
+			this.newMessage = '';
+		},
+		async endChat() {
+			try {
+				if (this.chatId) {
+					const res = await axios.post(`https://localhost:44303/end?chatId=${this.chatId}`);
+					if (res.status === 200) {
+						const socket = new WebSocket('ws://localhost:8080');
+						socket.onopen = () => {
+							socket.send(JSON.stringify({ type: 'statusUpdate' }));
+						};
+						this.$emit('chatEnded'); // Emit event to indicate chat ended
+					}
+				} else {
+					console.log('No chat in progress');
+				}
+			} catch (error) {
+				console.error('Failed to end chat:', error);
+			}
+		},
+		async getUserData() {
+			const token = Cookies.get('user-auth-token');
+			const decodedToken = jwtDecode(token);
+			this.userData = decodedToken;
+		},
+		setupWebSocket() {
+			this.socket = new WebSocket('ws://localhost:8080');
+			this.socket.onmessage = (event) => {
+				const data = JSON.parse(event.data);
+				if (data.type === 'newMessage') {
+					this.messages.push(data.message);
+				}
+			};
+		}
+	},
+	async mounted() {
+		this.getUserData();
+		try {
+			const token = Cookies.get('user-auth-token');
+			const decodedToken = jwtDecode(token);
+			const userId = decodedToken.id;
+			const response = await axios.get(`https://localhost:44303/api/Chat/api/Chat/InProgressChatId?userId=${userId}`);
+			if (response.status === 200) {
+				this.chatId = response.data;
+				this.setupWebSocket();
+			}
+		} catch (error) {
+			console.error('Failed to fetch chat ID:', error);
+		}
+	},
 };
 </script>
+
+
 
 <style scoped>
 .chat-app {
 	display: flex;
 	flex-direction: column;
-	height: 89vh;
+	height: 90vh;
 	padding: 0 8px;
 }
 
@@ -118,5 +188,21 @@ input::placeholder {
 
 .fa-paper-plane {
 	color: #fff;
+}
+
+.end-chat {
+	height: 24px;
+	width: 24px;
+	border-radius: 50%;
+	background: crimson;
+	margin-left: 16px;
+}
+
+.ex-msg {
+	width: 100%;
+	padding: 4px;
+	text-align: center;
+	background: var(--primary-color);
+	color: var(--white-color);
 }
 </style>

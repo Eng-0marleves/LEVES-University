@@ -279,19 +279,10 @@ const routes = [
   {
     path: '/support',
     component: () => import('../views/support/SupportChat.vue'),
-    redirect: '/Support/inpox',
-    children: [
-      {
-        path: '/Support/inpox',
-        component: () => import('../views/support/ChatInbox.vue'),
-        meta: { requiresAuth: true }
-      },
-      {
-        path: '/Support/chat',
-        component: () => import('../views/support/ChatApp.vue'),
-        meta: { requiresAuth: true }
-      },
-    ]
+    meta: {
+      requiresAuth: true,
+      allowedRoles: ['student', 'admin']
+    },
   },
   {
     path: '/login',

@@ -34,7 +34,7 @@ export default {
 				{ route: "/library", icon: "fa-book-open-reader", title: "Library", roles: ["student", "doctor", "manager", "admin", "librarian"] },
 				{ route: "/news", icon: "fa-newspaper", title: "News", roles: ["student", "doctor", "manager", "admin", "librarian"] },
 				{ route: "/articles", icon: "fa-atom", title: "Articles", roles: ["student", "doctor", "manager", "admin", "librarian"] },
-				{ route: "/support", icon: "fa-brands fa-rocketchat", title: "Support", roles: ["student", "doctor", "admin", "librarian"] },
+				{ route: "/support", icon: "fa-brands fa-rocketchat", title: "Support", roles: ["student", "admin"] },
 			],
 			userRole: null
 		}

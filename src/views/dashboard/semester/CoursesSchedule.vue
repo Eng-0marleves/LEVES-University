@@ -93,13 +93,13 @@ export default {
 				day: ""
 			},
 			daysOfWeek: [
-				{ label: 'Sunday', value: 0 },
-				{ label: 'Monday', value: 1 },
-				{ label: 'Tuesday', value: 2 },
-				{ label: 'Wednesday', value: 3 },
-				{ label: 'Thursday', value: 4 },
-				{ label: 'Friday', value: 5 },
-				{ label: 'Saturday', value: 6 }
+				{ label: 'Sunday', value: "Sunday" },
+				{ label: 'Monday', value: "Monday" },
+				{ label: 'Tuesday', value: "Tuesday" },
+				{ label: 'Wednesday', value: "Wednesday" },
+				{ label: 'Thursday', value: "Thursday" },
+				{ label: 'Friday', value: "Friday" },
+				{ label: 'Saturday', value: "Saturday" }
 			]
 		};
 	},
