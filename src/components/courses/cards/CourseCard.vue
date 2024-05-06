@@ -20,8 +20,8 @@ export default {
 	},
 	data() {
 		return {
-			course_code: this.course.course_code,
-			course_name: this.course.course_name,
+			course_code: this.course.courseCode,
+			course_name: this.course.courseTitle,
 		}
 	}
 }

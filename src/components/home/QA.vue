@@ -11,6 +11,7 @@
 import QA_Item from './QA_Item.vue';
 /* eslint-disable */
 // import axios from 'axios';
+import qa from './QA.json'
 
 export default {
 	components: {
@@ -18,7 +19,7 @@ export default {
 	},
 	data() {
 		return {
-			accordionItems: []
+			accordionItems: qa.slice(0, 5)
 		};
 	},
 	methods: {

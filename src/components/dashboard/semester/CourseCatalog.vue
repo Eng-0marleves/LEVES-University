@@ -9,11 +9,12 @@
 			</ag-grid-vue>
 		</div>
 
-		<button v-if="!isSemesterHasEnded" @click="showAddCourses = !showAddCourses" class="btn normal mt-4 mb-2">
+		<button v-if="isSemesterHasEnded && semester" @click="showAddCourses = !showAddCourses"
+			class="btn normal mt-4 mb-2">
 			{{ showAddCourses ? 'Hide Available Courses' : 'Add Courses' }}
 		</button>
 
-		<div v-if="showAddCourses && !isSemesterHasEnded" class="available-courses">
+		<div v-if="showAddCourses && isSemesterHasEnded && semester" class="available-courses">
 			<h3>Available Courses</h3>
 			<!-- <input type="text" v-model="searchQuery" placeholder="Search courses..." class="form-control mb-2"> -->
 			<ag-grid-vue class="ag-theme-quartz" :columnDefs="availableCourseDefs" :rowData="availableCourses"
@@ -44,17 +45,17 @@ export default {
 			isSemesterHasEnded: true,
 			semester: {},
 			currentCourseDefs: [
-				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 1 },
-				{ headerName: 'Course Name', field: 'courseTitle', filter: "PartialMatchFilter", flex: 2 },
+				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 2 },
+				{ headerName: 'Course Name', field: 'courseTitle', filter: "PartialMatchFilter", flex: 3 },
 				{ headerName: 'Course Description', field: 'courseDescription', flex: 3 },
-				{ headerName: 'Credit Hours', field: 'creditHours', flex: 2 },
-				{ headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this }, hide: !this.isSemesterHasEnded }
+				{ headerName: 'Credit Hours', field: 'creditHours', flex: 1 },
+				{ headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this } }
 			],
 			availableCourseDefs: [
-				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 1 },
-				{ headerName: 'Course Name', field: 'courseTitle', filter: "PartialMatchFilter", flex: 2 },
+				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 2 },
+				{ headerName: 'Course Name', field: 'courseTitle', filter: "PartialMatchFilter", flex: 3 },
 				{ headerName: 'Course Description', field: 'courseDescription', flex: 3 },
-				{ headerName: 'Credit Hours', field: 'creditHours', flex: 2 },
+				{ headerName: 'Credit Hours', field: 'creditHours', flex: 1 },
 				{ headerName: 'Add', field: 'id', cellRenderer: this.renderAddButton, cellRendererParams: { component: this } }
 			],
 			currentGridOptions: null,
@@ -81,6 +82,13 @@ export default {
 			button.innerText = 'Remove';
 			button.classList.add('btn', 'btn-danger');
 			button.onclick = () => this.removeCourseFromSemester(params.data.courseNumber);
+
+			if (this.semester && this.semester.endDate) {
+				button.disabled = new Date(this.semester.endDate) > new Date();
+			} else {
+				button.disabled = true;
+			}
+
 			return button;
 		},
 		async addCourseToSemester(courseId) {
@@ -161,8 +169,8 @@ export default {
 				const response = await axios.get('https://localhost:44303/CurrentSemester');
 				if (response.status === 200) {
 					this.semester = response.data;
-					this.isSemesterHasEnded = new Date(this.semester.endDate) > new Date();
-					console.log(new Date(this.semester.endDate) > new Date())
+					this.isSemesterHasEnded = new Date(this.semester.endDate) < new Date();
+					console.log(this.semester)
 				}
 			} catch (error) {
 				console.error(error);
@@ -179,7 +187,7 @@ export default {
 			}
 		},
 	},
-	mounted() {
+	created() {
 		this.getSemester();
 		this.getSemesterCourses();
 		this.GetUnAvilableCourses();

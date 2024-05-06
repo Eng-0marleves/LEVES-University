@@ -5,7 +5,7 @@
 				}}</li>
 		</ul>
 
-		<h1>Library Dashboard</h1>
+		<h2 class="mb-4 text-center">Library Dashboard</h2>
 
 		<div class="tab-content">
 			<div v-if="currentTab === 'Books'">
@@ -14,12 +14,12 @@
 			<div v-if="currentTab === 'Add Book'">
 				<LibrearyAddBook />
 			</div>
-			<div v-if="currentTab === 'Articals'">
+			<!-- <div v-if="currentTab === 'Articals'">
 				<LibraryArticals />
 			</div>
 			<div v-if="currentTab === 'Add Artical'">
 				<LibraryAddArtical />
-			</div>
+			</div> -->
 		</div>
 	</div>
 </template>
@@ -27,21 +27,21 @@
 <script>
 import LibraryBooks from '@/components/dashboard/Library/LibraryBooks.vue';
 import LibrearyAddBook from '@/components/dashboard/Library/LibrearyAddBook.vue';
-import LibraryArticals from '@/components/dashboard/Library/LibraryArticals.vue';
-import LibraryAddArtical from '@/components/dashboard/Library/LibraryAddArtical.vue';
+// import LibraryArticals from '@/components/dashboard/Library/LibraryArticals.vue';
+// import LibraryAddArtical from '@/components/dashboard/Library/LibraryAddArtical.vue';
 
 export default {
 	name: 'LibraryDashboard',
 	components: {
 		LibraryBooks,
 		LibrearyAddBook,
-		LibraryArticals,
-		LibraryAddArtical
+		// LibraryArticals,
+		// LibraryAddArtical
 	},
 	data() {
 		return {
 			currentTab: 'Books',
-			tabs: ['Books', 'Add Book', 'Articals', 'Add Artical'],
+			tabs: ['Books', 'Add Book'],
 		};
 	},
 };

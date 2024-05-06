@@ -9,8 +9,8 @@
 		</div>
 
 		<div class="controllers d-flex justify-content-between align-center w-100">
-			<button type="button" class="btn normal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add
-				Item</button>
+			<!-- <button type="button" class="btn normal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add
+				Item</button> -->
 
 
 			<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -44,7 +44,7 @@
 			</div>
 
 
-			<SearchBar @search="handleSearch" />
+			<SearchBar class="searchBar" @search="handleSearch" />
 		</div>
 
 		<QA_Item class="items" :items="filteredItems" :all="true" />
@@ -54,7 +54,8 @@
 <script>
 import QA_Item from '@/components/home/QA_Item.vue';
 import SearchBar from '../global/SearchBar.vue';
-import axios from 'axios';
+// import axios from 'axios';
+import qa from './QA.json'
 
 export default {
 	name: 'FAQs',
@@ -64,7 +65,7 @@ export default {
 	},
 	data() {
 		return {
-			accordionItems: [],
+			accordionItems: qa,
 			searchQuery: '',
 			header: '',
 			content: ''
@@ -85,29 +86,29 @@ export default {
 		handleSearch(query) {
 			this.searchQuery = query;
 		},
-		async save() {
-			const newItem = {
-				header: this.header,
-				content: this.content
-			};
+		// async save() {
+		// 	const newItem = {
+		// 		header: this.header,
+		// 		content: this.content
+		// 	};
 
-			const res = await axios.post('http://localhost:5062/api/FAQs', newItem);
-			if (res.status == 201) {
-				this.accordionItems.push(res.data);
-				this.header = '';
-				this.content = '';
-				document.querySelector('.modal').classList.remove('show');
-				document.querySelector('.modal-backdrop').remove();
-			}
-		}
+		// 	const res = await axios.post('http://localhost:5062/api/FAQs', newItem);
+		// 	if (res.status == 201) {
+		// 		this.accordionItems.push(res.data);
+		// 		this.header = '';
+		// 		this.content = '';
+		// 		document.querySelector('.modal').classList.remove('show');
+		// 		document.querySelector('.modal-backdrop').remove();
+		// 	}
+		// }
 	},
-	async created() {
-		console.log('Getting FAQs');
-		const res = await axios.get('http://localhost:5062/api/FAQs');
-		if (res.status == 200) {
-			this.accordionItems = res.data;
-		}
-	}
+	// async created() {
+	// 	console.log('Getting FAQs');
+	// 	const res = await axios.get('http://localhost:5062/api/FAQs');
+	// 	if (res.status == 200) {
+	// 		this.accordionItems = res.data;
+	// 	}
+	// }
 };
 </script>
 
@@ -118,5 +119,10 @@ export default {
 
 .accordion-btn {
 	width: 100% !important;
+}
+
+.searchBar {
+	float: right;
+	margin-left: auto;
 }
 </style>

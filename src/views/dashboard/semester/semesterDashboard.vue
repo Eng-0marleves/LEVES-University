@@ -7,7 +7,7 @@
 
 		<div class="tab-content">
 			<div v-if="currentTab === 'Semester Information'">
-				<SemesterManagement />
+				<SemesterManagement v-model:isSemesterHasEnded="isSemesterHasEnded" />
 			</div>
 			<div v-if="currentTab === 'Semester Courses'">
 				<CourseCatalog />
@@ -28,6 +28,7 @@ import SemesterManagement from './SemesterManagement.vue';
 import CourseCatalog from '@/components/dashboard/semester/CourseCatalog.vue';
 import CoursesSchedule from './CoursesSchedule.vue';
 import CoursesEnrollments from './CoursesEnrollments.vue';
+import axios from 'axios';
 
 export default {
 	name: 'SemesterDashboard',
@@ -39,8 +40,10 @@ export default {
 	},
 	data() {
 		return {
-			currentTab: 'Courses Schedule',
+			currentTab: 'Semester Information',
 			tabs: ['Semester Information', 'Semester Courses', 'Courses Schedule', 'Courses Enrollments'],
+			currentSemester: {},
+			isSemesterHasEnded: false
 		};
 	},
 	methods: {
@@ -52,6 +55,17 @@ export default {
 		},
 		handleSemesterChange(selectedSemester) {
 			this.selectedSemester = selectedSemester;
+		},
+		async getCurrentSemester() {
+			try {
+				const res = await axios.get('https://localhost:44303/CurrentSemester');
+				this.currentSemester = res.data;
+				console.log(this.currentSemester.endDate > new Date())
+				this.isSemesterHasEnded = new Date(this.semester.endDate) > new Date();
+				console.log(this.currentSemester)
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	}
 };

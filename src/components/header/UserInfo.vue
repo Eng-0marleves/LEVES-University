@@ -1,10 +1,10 @@
 <template>
 	<div class="user-info">
 		<router-link to="/dashboard/" class="router">
-			<h6 class="title">{{ $props.userData.name }}</h6>
+			<h6 class="title">{{ getTitlePrefix(userData.role) }} {{ userData.name }}</h6>
 			<img :src="getUserImage(userImage)" alt="user profile img">
 		</router-link>
-		<NotificationsButton :notifications="notifications" :userId="$props.userData.id" />
+		<NotificationsButton :notifications="notifications" :userId="userData.id" />
 	</div>
 </template>
 
@@ -32,7 +32,7 @@ export default {
 	},
 	computed: {
 		profileImage() {
-			return this.$props.userData.image === '' ? this.defaultProfileImage : this.$props.userData.image;
+			return this.userData.image === '' ? this.defaultProfileImage : this.userData.image;
 		},
 	},
 	methods: {
@@ -46,7 +46,7 @@ export default {
 		},
 		async getUserImageAsync() {
 			try {
-				const response = await axios.get(`https://localhost:44303/GetProfilePicture?userId=${this.$props.userData.id}`);
+				const response = await axios.get(`https://localhost:44303/GetProfilePicture?userId=${this.userData.id}`);
 				this.userImage = response.data;
 				console.log("User image:", response.data);
 			} catch (error) {
@@ -55,7 +55,6 @@ export default {
 			}
 		},
 		getRoleAbbreviation(role) {
-			console.log(role.toLowerCase());
 			switch (role.toLowerCase()) {
 				case 'student':
 					return 'std';
@@ -66,6 +65,10 @@ export default {
 				default:
 					return 'M';
 			}
+		},
+		getTitlePrefix(role) {
+			const abbreviation = this.getRoleAbbreviation(role);
+			return abbreviation ? `${abbreviation}.` : '';
 		}
 	},
 	mounted() {

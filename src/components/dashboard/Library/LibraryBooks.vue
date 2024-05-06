@@ -18,7 +18,7 @@ import { AgGridVue } from "ag-grid-vue3";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-quartz.css";
 import axios from 'axios';
-import EditButton from './EditButton.vue';
+import Swal from 'sweetalert2';
 
 export default {
 	name: 'LibraryBooks',
@@ -33,41 +33,14 @@ export default {
 			columnDefs: [
 				{ headerName: "Title", field: "title", flex: 1, filter: 'agTextColumnFilter' },
 				{ headerName: "Author", field: "author", flex: 1, filter: 'agTextColumnFilter' },
-				{ headerName: "Description", field: "description", flex: 3, filter: 'agTextColumnFilter' },
 				{
 					headerName: "Image",
 					field: "coverImage",
 					cellRenderer: params => `<img src="${require('@/assets/Library/Covers/' + params.value)}" alt="${params.data.title}" style="width: 25px; height: auto; object-fit: cover;">`,
 					flex: 1
 				},
-				// {
-				// 	headerName: "Edit",
-				// 	cellRenderer: params => {
-				// 		return `<button class="edit-btn btn btn-primary me-2" onclick="onEditBook(${params.data.id})">Edit</button>`;
-				// 	},
-				// 	width: 200,
-				// },
-				{
-					headerName: 'Edit',
-					cellRendererSelector: () => {
-						return { component: EditButton, props: { bookId: 5515 } }
-					}
-				},
-				{
-					field: 'id',
-					resizable: true,
-					sortable: true,
-					headerName: 'Delete',
-					cellRendererFramework: {
-						template: `<button @click="onDeleteBook(params.data.id)" type="button">Delete</button>`,
-						methods: {
-							onDeleteBook(bookId) {
-								this.$parent.onDeleteBook(bookId);
-							}
-						}
-					}
-				}
-
+				{ headerName: "Description", field: "description", flex: 3, filter: 'agTextColumnFilter' },
+				{ headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this } },
 			],
 			gridOptions: {
 				context: {
@@ -132,13 +105,37 @@ export default {
 				});
 			});
 		},
-		onEditBook(bookId) {
-			console.log("Edit Book ID:", bookId);
-			// Implement edit logic here
+
+
+		renderRemoveButton(params) {
+			const button = document.createElement('button');
+			button.innerText = 'Remove';
+			button.classList.add('btn', 'btn-danger');
+			button.onclick = () => this.onDeleteBook(params.data.id);
+			return button;
 		},
-		onDeleteBook(bookId) {
-			console.log("Delete Book ID:", bookId);
-			// Implement delete logic here
+		async onDeleteBook(bookId) {
+			try {
+				var res = await axios.delete("https://localhost:44303/DeleteBook?id=" + bookId);
+				if (res.status === 200) {
+					Swal.fire({
+						title: "Success",
+						text: "Book deleted successfully!",
+						icon: "success",
+						timer: 1500,
+						showConfirmButton: false
+					});
+					this.loadBooks();
+				} else {
+					Swal.fire({
+						title: "Error",
+						text: "Failed to delete book.",
+						icon: "error",
+					});
+				}
+			} catch (e) {
+				console.error('Error deleting book:', e);
+			}
 		},
 	},
 	mounted() {

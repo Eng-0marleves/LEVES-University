@@ -12,12 +12,13 @@
 				</select>
 			</div>
 
-			<button class="btn normal" @click="toggleAddSemester" v-if="isSemesterHasEnded">
+			<button class="btn normal" @click="toggleAddSemester"
+				v-if="selectedSemester && new Date(selectedSemester.endDate) < new Date()">
 				{{ editingSemester ? 'Editing Semester' : 'Add New Semester' }}
 			</button>
 		</div>
 
-		<div class="add-semester-form">
+		<div v-if="showAddSemester" class="add-semester-form">
 			<form @submit.prevent="submitSemester">
 				<fieldset>
 					<legend>{{ editingSemester ? 'Edit Semester' : 'New Semester Details' }}</legend>
@@ -81,6 +82,12 @@ export default {
 			currentSemester: null,
 			isSemesterHasEnded: false
 		};
+	},
+	props: {
+		// isSemesterHasEnded: {
+		// 	type: Boolean,
+		// 	required: true
+		// }
 	},
 	computed: {
 		minDate() {
@@ -146,13 +153,12 @@ export default {
 			this.$emit('selectedSemesterChanged', this.selectedSemester);
 		},
 		semesterHasEnded(semester) {
+			let hasEnded = false;
 			if (semester && semester.endDate) {
 				const today = new Date();
-				console.log(semester.endDate)
-				console.log(new Date(semester.endDate) < today)
-				this.isSemesterHasEnded = new Date(semester.endDate) > today;
+				hasEnded = new Date(semester.endDate) > today;
 			}
-			this.isSemesterHasEnded = false;
+			this.$emit('update:isSemesterHasEnded', hasEnded);
 		},
 		clearForm() {
 			this.newSemester = { name: '', startDate: '', endDate: '', registrationStart: '', registrationEnd: '' };
@@ -179,6 +185,7 @@ export default {
 			try {
 				const res = await axios.get('https://localhost:44303/CurrentSemester');
 				this.currentSemester = res.data;
+				console.log(this.currentSemester.endDate > new Date())
 				this.isSemesterHasEnded = new Date(this.semester.endDate) > new Date();
 				console.log(this.currentSemester)
 			} catch (error) {

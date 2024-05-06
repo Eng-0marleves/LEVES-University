@@ -5,7 +5,7 @@
 				:class="{ 'my-message': message.sender === 'You', 'other-message': message.sender !== 'You' }">
 				<div class="sender">{{ message.sender }}</div>
 				<div class="msg">
-					<div class="text">{{ message.text }}</div>
+					<div class="text">{{ message.content }}</div>
 					<div class="time w-100">{{ message.time }}</div>
 				</div>
 			</div>
@@ -35,52 +35,41 @@ export default {
 	},
 	data() {
 		return {
-			messages: [
-				{ id: 1, sender: 'Alice', text: 'Hi there!', time: '10:00 AM' },
-				{ id: 2, sender: 'Alice', text: 'Hello!', time: '10:01 AM' }
-			],
+			messages: [],
 			newMessage: '',
 			userData: null,
 			chatId: null,
 			socket: null
 		};
 	},
-	computed: {
-		userHasTicket() {
-			return this.userStatus === 'User has an existing ticket.' || this.userStatus === 'User is currently in a chat.';
-		}
-	},
 	methods: {
-		async sendMessage() {
-			console.log('Sending message:', this.newMessage);
-			if (!this.newMessage.trim() || this.userHasTicket) return;
-
-			this.socket.send(JSON.stringify({
-				type: 'sendMessage',
-				message: {
-					sender: 'You',
-					text: this.newMessage
-				}
-			}));
-
-			this.newMessage = '';
-		},
-		async endChat() {
+		async getMessages(chatId) {
 			try {
-				if (this.chatId) {
-					const res = await axios.post(`https://localhost:44303/end?chatId=${this.chatId}`);
-					if (res.status === 200) {
-						const socket = new WebSocket('ws://localhost:8080');
-						socket.onopen = () => {
-							socket.send(JSON.stringify({ type: 'statusUpdate' }));
-						};
-						this.$emit('chatEnded'); // Emit event to indicate chat ended
-					}
-				} else {
-					console.log('No chat in progress');
+				const response = await axios.get(`https://localhost:44303/messages?chatId=${chatId}`);
+				if (response.status === 200) {
+					this.messages = response.data;
 				}
 			} catch (error) {
-				console.error('Failed to end chat:', error);
+				console.error('Failed to fetch messages:', error);
+			}
+		},
+		async sendMessage() {
+			if (!this.newMessage.trim()) return;
+			console.log('Sending message:', this.newMessage);
+
+			try {
+				await axios.post(`https://localhost:44303/api/Chat/message`, {
+					chatId: this.chatId,
+					content: this.newMessage,
+					fromId: this.userData.id
+				});
+				this.newMessage = '';
+			} catch (error) {
+				console.error('Failed to send message:', error);
+				if (error.response && error.response.status === 400) {
+					console.log('Bad request. Reloading page.');
+					window.location.reload();
+				}
 			}
 		},
 		async getUserData() {
@@ -89,13 +78,7 @@ export default {
 			this.userData = decodedToken;
 		},
 		setupWebSocket() {
-			this.socket = new WebSocket('ws://localhost:8080');
-			this.socket.onmessage = (event) => {
-				const data = JSON.parse(event.data);
-				if (data.type === 'newMessage') {
-					this.messages.push(data.message);
-				}
-			};
+			// WebSocket setup code
 		}
 	},
 	async mounted() {
@@ -107,6 +90,7 @@ export default {
 			const response = await axios.get(`https://localhost:44303/api/Chat/api/Chat/InProgressChatId?userId=${userId}`);
 			if (response.status === 200) {
 				this.chatId = response.data;
+				this.getMessages(this.chatId); // Fetch messages when chat ID is retrieved
 				this.setupWebSocket();
 			}
 		} catch (error) {
@@ -115,6 +99,7 @@ export default {
 	},
 };
 </script>
+
 
 
 

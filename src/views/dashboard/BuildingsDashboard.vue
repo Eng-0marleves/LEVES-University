@@ -13,7 +13,7 @@
 				<AddBuilding />
 			</div>
 			<div v-if="currentTab === 'Buildings Time Table'">
-				Buildings Time Table
+				<BuildingsSchedule />
 			</div>
 			<div v-if="currentTab === 'Class Rooms'">
 				<ClassRooms />
@@ -28,6 +28,7 @@
 <script>
 import AllBuildings from '@/components/dashboard/buildings/AllBuildings.vue';
 import AddBuilding from '@/components/dashboard/buildings/AddBuilding.vue';
+import BuildingsSchedule from './BuildingsSchedule.vue';
 import ClassRooms from '@/components/dashboard/buildings/ClassRooms.vue';
 import AddClassRoom from '@/components/dashboard/buildings/AddClassRoom.vue';
 
@@ -37,11 +38,12 @@ export default {
 		AllBuildings,
 		AddBuilding,
 		ClassRooms,
-		AddClassRoom
+		AddClassRoom,
+		BuildingsSchedule
 	},
 	data() {
 		return {
-			currentTab: 'Class Rooms',
+			currentTab: 'Buildings',
 			tabs: ['Buildings', 'Add Building', 'Buildings Time Table', 'Class Rooms', 'Add Class Room'],
 		};
 	},

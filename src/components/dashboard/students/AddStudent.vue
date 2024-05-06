@@ -1,6 +1,6 @@
 <template>
 	<div class="add-student-form">
-		<h2>Add New User</h2>
+		<h2 class="mb-4 text-center">Add New User</h2>
 		<form @submit.prevent="submitStudent">
 			<div class="form-group">
 				<label for="firstName">First Name:</label>

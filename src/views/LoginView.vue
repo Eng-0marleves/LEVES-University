@@ -60,7 +60,7 @@ export default {
 
 						document.querySelector("body").classList.remove("full");
 						document.querySelector("nav").style.display = "flex";
-						document.querySelector("header").style.display = "flex";
+						// document.querySelector("header").style.display = "flex";
 						document.querySelector("footer").style.display = "block";
 
 						this.$router.push({ name: "Home" });

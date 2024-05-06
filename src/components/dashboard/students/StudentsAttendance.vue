@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>All Students Attendance</h1>
+		<h2 class="mb-4 text-center">All Students Attendance</h2>
 		<ag-grid-vue class="ag-theme-quartz" :columnDefs="columnDefs" :rowData="paginatedData" @grid-ready="onGridReady"
 			rowSelection="multiple" :domLayout="'autoHeight'">
 		</ag-grid-vue>

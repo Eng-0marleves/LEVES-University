@@ -31,6 +31,7 @@
 
 <script>
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default {
 	name: 'LibrearyAddBook',
@@ -60,8 +61,19 @@ export default {
 				if (response.status === 200) {
 					console.log('book added successfully:', response.data);
 					this.resetForm();
+					Swal.fire({
+						title: 'Success',
+						text: 'Book added successfully',
+						icon: 'success',
+						confirmButtonText: 'OK'
+					});
 				} else {
-					console.error('Error adding book:', response);
+					Swal.fire({
+						title: 'Error',
+						text: 'Failed to add book',
+						icon: 'error',
+						confirmButtonText: 'OK'
+					});
 				}
 			} catch (ex) {
 				console.error(ex);

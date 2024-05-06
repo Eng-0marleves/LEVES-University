@@ -1,6 +1,6 @@
 <template>
 	<div class="search-wrapper">
-		<input type="text" v-model="search" placeholder="Search..." />
+		<input type="text" v-model="search" placeholder="Search..." @keyup.enter="handleSearch" />
 		<button type="button" class="btn normal" @click="handleSearch">Search</button>
 	</div>
 </template>

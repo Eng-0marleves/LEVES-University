@@ -10,6 +10,8 @@ import CardsContainer from '../../components/courses/cards/CardsContainer.vue';
 import SearchBar from '@/components/global/SearchBar.vue';
 import axios from 'axios';
 import { ref } from 'vue';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
 	name: "CoursesHome",
@@ -21,9 +23,13 @@ export default {
 		const courses = ref([]);
 		const filteredCourses = ref([]);
 
+		var token = Cookies.get('user-auth-token');
+		var decodedToken = jwtDecode(token);
+		var userData = decodedToken;
+
 		const getCourses = async () => {
 			try {
-				const response = await axios.get("http://localhost:3000/courses");
+				const response = await axios.get(`https://localhost:44303/api/Courses/user/courses?userId=${userData.id}`);
 				courses.value = response.data;
 				// Initialize filteredCourses with all courses
 				filteredCourses.value = response.data;
@@ -39,7 +45,7 @@ export default {
 				// Filter courses based on search input
 				filteredCourses.value = courses.value.filter(course => {
 					const lowerCaseSearchInput = searchInput.toLowerCase().trim();
-					return course.course_name.toLowerCase().includes(lowerCaseSearchInput) || course.course_code.toLowerCase().includes(lowerCaseSearchInput);
+					return course.courseTitle.toLowerCase().includes(lowerCaseSearchInput) || course.courseCode.toLowerCase().includes(lowerCaseSearchInput);
 				});
 			}
 		};

@@ -9,12 +9,12 @@
 			</ag-grid-vue>
 		</div>
 
-
-		<button v-if="!isSemesterHasEnded" @click="showAddCourses = !showAddCourses" class="btn normal mt-4 mb-2">
+		<button v-if="semester && isSemesterHasEnded" @click="showAddCourses = !showAddCourses"
+			class="btn normal mt-4 mb-2">
 			{{ showAddCourses ? 'Hide Form' : 'Add Course Lecture' }}
 		</button>
 
-		<div v-if="showAddCourses && !isSemesterHasEnded" class="schedule-form">
+		<div v-if="showAddCourses && isSemesterHasEnded" class="schedule-form">
 			<form @submit.prevent="submitCourseSchedule">
 				<fieldset>
 					<legend>{{ editingSemester ? 'Edit Semester' : 'New Semester Details' }}</legend>
@@ -41,6 +41,7 @@
 					<div class="form-group">
 						<label for="day">Day:</label>
 						<select id="day" v-model="newSchedule.day" required>
+							<option value="" disabled selected>Select Day</option>
 							<option v-for="(day, index) in daysOfWeek" :key="index" :value="day.value">{{ day.label }}
 							</option>
 						</select>
@@ -78,9 +79,10 @@ export default {
 				{ headerName: 'Course Code', field: 'courseCode', filter: "PartialMatchFilter", flex: 1 },
 				{ headerName: 'Doctor Name', field: 'doctorName', filter: "PartialMatchFilter", flex: 1 },
 				{ headerName: 'Room Code', field: 'roomCode', filter: "PartialMatchFilter", flex: 1 },
+				{ headerName: 'Day', field: 'day', filter: "PartialMatchFilter", flex: 1 },
 				{ headerName: 'From', field: 'from', flex: 1 },
 				{ headerName: 'To', field: 'to', flex: 1 },
-				// { headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this }, hide: !this.isSemesterHasEnded }
+				// { headerName: 'Remove', field: 'id', cellRenderer: this.renderRemoveButton, cellRendererParams: { component: this }, hide: new Date(this.smester.endDate) < new Date() }
 			],
 			currentGridOptions: null,
 			availableGridOptions: null,
@@ -124,11 +126,11 @@ export default {
 		},
 		async getSemester() {
 			try {
-				const response = await axios.get('https://localhost:44303/CurrentSemester');
+				const response = await axios.get('https://localhost:44303/GetAllCourseSchedules');
 				if (response.status === 200) {
-					this.semester = response.data;
-					this.isSemesterHasEnded = new Date(this.semester.enrollmentEndDate) > new Date();
-					console.log(new Date(this.semester.enrollmentEndDate) > new Date())
+					return response.data;
+					// this.isSemesterHasEnded = new Date(this.semester.enrollmentEndDate) > new Date();
+					// console.log(new Date(this.semester.enrollmentEndDate) > new Date())
 				}
 			} catch (error) {
 				console.error(error);
@@ -136,10 +138,10 @@ export default {
 		},
 		async getSemesterCoursesSchedules() {
 			try {
-				const response = await axios.get("https://localhost:44303/api/CourseSchedule");
+				const response = await axios.get("https://localhost:44303/GetAllCourseSchedules");
 				if (response.status === 200) {
 					this.currentCoursesSchedules = response.data;
-					console.log(this.currentCoursesSchedules)
+					console.log(this.currentCoursesSchedules);
 				}
 			} catch (error) {
 				console.error(error);
@@ -158,7 +160,7 @@ export default {
 			try {
 				console.log(newSchedule)
 				const response = await axios.post('https://localhost:44303/api/CourseSchedule', newSchedule);
-				if (response.status === 201) {
+				if (response.status === 200) {
 					Swal.fire({
 						icon: 'success',
 						title: 'Success!',
@@ -173,14 +175,14 @@ export default {
 						to: '',
 						day: ''
 					};
-					// Refresh course schedules after adding a new one
+					this.showAddCourses = false;
 					this.getSemesterCoursesSchedules();
 				}
 			} catch (error) {
 				Swal.fire({
 					icon: 'error',
 					title: 'Error!',
-					text: 'Failed to add course schedule. Please try again later.'
+					text: error.response.data
 				});
 				console.error(error);
 			}

@@ -215,6 +215,12 @@ body.fit {
 	z-index: 100000000000000000000000000;
 }
 
+.nav-tabs {
+	position: sticky;
+	top: 64px;
+	z-index: 1000;
+}
+
 @media (max-width: 768px) {
 	html {
 		font-size: 8px !important;

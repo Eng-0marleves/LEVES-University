@@ -11,7 +11,6 @@
 			</div>
 			<div class="form-group">
 				<select id="buildingId" v-model="classRoom.building" required>
-					<option value="" disabled selected>Select Building</option>
 					<option v-for="(building, i) in buildings" :key="i" :value="building">
 						{{ building.buildingName }}
 					</option>

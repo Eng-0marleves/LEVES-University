@@ -6,6 +6,8 @@
 
 <script>
 import OffCanvas from '@/components/global/OffCanvas.vue';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
 	name: 'DashboardOffCanvas',
@@ -20,24 +22,12 @@ export default {
 					path: `/dashboard/profile`,
 				},
 				{
-					title: "Time Table",
-					path: `/dashboard/time_table`,
-				},
-				{
 					title: "Register",
 					path: `/dashboard/register`,
 				},
 				{
-					title: "Financials",
-					path: `/dashboard/financials`,
-				},
-				{
 					title: "Report",
 					path: `/dashboard/report`,
-				},
-				{
-					title: "Analysis",
-					path: `/dashboard/analysis`,
 				},
 				{
 					title: "Students",
@@ -59,17 +49,37 @@ export default {
 					title: "Semester",
 					path: `/dashboard/semester`,
 				}
-			]
+			],
+			userData: {}
 		};
 	},
 	methods: {
 		// Your methods go here
+		filterRouters(role) {
+			// Define router titles for each role
+			const roleRouters = {
+				student: ["Profile", "Register", "Report"],
+				doctor: ["Profile"],
+				manager: ["Profile", "Students", "Employees", "Buildings", "Semester"],
+				admin: ["Profile", "Students", "Employees"],
+				librarian: ["Profile", "Library"]
+			};
+
+			// Get allowed router titles based on the user's role
+			const allowedRouters = roleRouters[role] || [];
+
+			// Filter the routers array based on allowed titles
+			return this.routers.filter(router => allowedRouters.includes(router.title));
+		}
 	},
 	computed: {
 		// Your computed properties go here
 	},
 	mounted() {
-		// Code to run when the component is mounted
+		const authToken = Cookies.get('user-auth-token');
+		const decodedToken = jwtDecode(authToken);
+		this.userData = decodedToken;
+		this.routers = this.filterRouters(this.userData.role); // Filter routers based on user's role
 	},
 };
 </script>
