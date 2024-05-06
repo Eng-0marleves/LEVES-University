@@ -5,18 +5,17 @@
 				<div class="left d-flex flex-column gap-3">
 					<p><i class="fa-solid fa-angles-right"></i> Course Code</p>
 					<p><i class="fa-solid fa-angles-right"></i> Course Name</p>
+					<p><i class="fa-solid fa-angles-right"></i> Credit Hours</p>
+					<p><i class="fa-solid fa-angles-right"></i> Course Description</p>
 					<p v-for="(grade, key) in course.grades" :Key="key"><i class="fa-solid fa-angles-right"></i> {{ key
 						}}</p>
 				</div>
 				<div class="right d-flex flex-column gap-3">
-					<p>{{ course.course_code }}</p>
-					<p>{{ course.course_name }}</p>
-					<p v-for="(grade, key) in course.grades" :Key="key">{{ grade }} marks</p>
+					<p>{{ course.courseCode }}</p>
+					<p>{{ course.courseTitle }}</p>
+					<p>{{ course.creditHours }}</p>
+					<p>{{ course.courseDescription }}</p>
 				</div>
-			</div>
-			<div class="discription">
-				<p class="title mb-1"><i class="fa-solid fa-angles-right"></i> Description</p>
-				<p>{{ course.description }}</p>
 			</div>
 		</div>
 		<div v-else>
@@ -38,10 +37,9 @@ export default {
 	async mounted() {
 		const courseCode = this.$route.params.course_code;
 		try {
-			const response = await axios.get(`http://localhost:3000/courses`);
+			const response = await axios.get(`https://localhost:44303/api/Courses/getcourse?courseCode=${courseCode}`);
 			if (response.status === 200) {
-				const courses = response.data;
-				this.course = courses.find(course => course.course_code === courseCode);
+				this.course = response.data;
 			} else {
 				console.error('Failed to fetch course data:', response.statusText);
 			}

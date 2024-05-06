@@ -12,7 +12,7 @@
 					<div class="user d-flex align-items-center gap-1">
 						<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Outdoors-man-portrait_%28cropped%29.jpg/1200px-Outdoors-man-portrait_%28cropped%29.jpg"
 							alt="">
-						<p>Dr.Ahmed</p>
+						<p>{{ post.name }}</p>
 					</div>
 					<div class="settings">
 						<i class="fa-solid fa-ellipsis" @click="toggleMenu(i)"></i>
@@ -38,6 +38,8 @@ import ContentGenerator from '@/components/global/ContentGenerator.vue';
 import SearchBar from '../global/SearchBar.vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
 	name: 'CoursePosts',
@@ -51,25 +53,16 @@ export default {
 			searchQuery: '',
 			showMenu: false,
 			saveType: "new",
-			postId: 0
+			postId: 0,
+			userData: {}
 		};
 	},
 	methods: {
 		async save(postContent, id) {
 			if (this.saveType === "new") {
-				const data = {
-					"page": this.$route.params.course_code,
-					"user_id": 123,
-					"content": postContent
-				}
-				await axios.post("http://localhost:3000/posts", data);
+				await axios.post(`https://localhost:44303/api/Courses/add/course/post?courseCode=${this.$route.params.course_code}&content=${postContent}&userId=${this.userData.id}`);
 			} else {
-				const data = {
-					"page": "CSE101",
-					"user_id": 123,
-					"content": postContent
-				}
-				await axios.put(`http://localhost:3000/posts/${id}`, data);
+				await axios.put(`https://localhost:44303/api/Courses/edit/course/post?postId=${id}&content=${postContent}`);
 				this.saveType = "new";
 			}
 		},
@@ -84,7 +77,7 @@ export default {
 				confirmButtonText: 'Yes, delete it!'
 			}).then(async (result) => {
 				if (result.isConfirmed) {
-					await axios.delete(`http://localhost:3000/posts/${id}`);
+					await axios.delete(`https://localhost:44303/api/Courses/delete/course/post?postId=${id}`);
 					Swal.fire(
 						'Deleted!',
 						'Your post has been deleted.',
@@ -116,7 +109,7 @@ export default {
 		},
 		async getPosts() {
 			try {
-				const response = await axios.get(`http://localhost:3000/posts?page=${this.$route.params.course_code}`);
+				const response = await axios.get(`https://localhost:44303/api/Courses/course/posts?courseCode=${this.$route.params.course_code}`);
 				this.posts = response.data;
 			} catch (error) {
 				console.error('Error fetching posts:', error);
@@ -142,6 +135,9 @@ export default {
 		}
 	},
 	mounted() {
+		var token = Cookies.get('user-auth-token');
+		var decodedToken = jwtDecode(token);
+		this.userData = decodedToken;
 		this.getPosts();
 	},
 	watch: {
